@@ -6,8 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="opssys" />
+        <module name="ops_common" />
+        <module name="ops_dao" />
+        <module name="ops_model" />
+        <module name="ops_service" />
+        <module name="ops_web" />
+        <module name="ops_zybd_dao" />
+        <module name="ops_zybd_model" />
+        <module name="ops_zybd_service" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="PREFER_TARGET_JDK_COMPILER" value="false" />
   </component>
 </project>
