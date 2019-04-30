@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyou.ops.mapper.ServerIpMapper">
+    <resultMap type="ServerIp" id="ExceptServerMap">
+    <id column="sv_id" property="sv_id" />
+    <result column="sv_ip" property="sv_ip"/>
+
+    </resultMap>
+
+
+
+    <insert id="insert" parameterType="ServerIp" useGeneratedKeys="true" keyProperty="sv_id">
+     insert into t_server_ip(sv_ip,sv_ip_private,sv_os,sv_cpu,sv_memory,sv_disk,sv_bandwidth,sv_detail,sv_create_time,sv_update_time)
+      values(#{sv_ip},#{sv_ip_private},#{sv_os},#{sv_cpu},#{sv_memory},#{sv_disk},#{sv_bandwidth},#{sv_detail},NOW(),NOW())
+
+    </insert>
+
+
+    <delete id="delByIds">
+        DELETE FROM t_server_ip WHERE sv_id IN
+        <foreach collection="array" item="sv_id" open="(" separator="," close=")">
+            #{sv_id}
+        </foreach>
+
+
+    </delete>
+
+    <select id="selectAll" resultType="ServerIp">
+        select * from t_server_ip;
+    </select>
+
+    <select id="selectById" parameterType="Integer" resultType="ServerIp">
+        select * from t_server_ip where t_server_ip.sv_id=#{sv_id};
+    </select>
+    <select id="selectServerExcpet" parameterType="Integer" resultMap="ExceptServerMap">
+      SELECT sv_id,sv_ip FROM t_server_ip WHERE sv_id!=#{sv_id};
+    </select>
+
+    <select id="getAllByPage" resultType="ServerIp" parameterType="java.util.Map">
+        SELECT * FROM t_server_ip
+        <if test="null !=beginNumber and null !=limit">
+            LIMIT #{beginNumber},#{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+  	SELECT COUNT(1) FROM t_server_ip
+  </select>
+
+    <update id="update" parameterType="ServerIp" >
+        UPDATE t_server_ip
+
+        <set>
+            <if test="sv_ip !=null and sv_ip != ''">
+                sv_ip=#{sv_ip},
+            </if>
+            <if test="sv_ip_private !=null and sv_ip_private !=''">
+                sv_ip_private=#{sv_ip_private},
+            </if>
+            <if test="sv_os !=null and sv_os !=''">
+                sv_os=#{sv_os},
+            </if>
+            <if test="sv_cpu !=null and sv_cpu !=''">
+                sv_cpu=#{sv_cpu},
+            </if>
+            <if test="sv_memory !=null and sv_memory !=''">
+                sv_memory=#{sv_memory},
+            </if>
+            <if test="sv_disk !=null and sv_disk !=''">
+                sv_disk=#{sv_disk},
+            </if>
+            <if test="sv_bandwidth !=null and sv_bandwidth !=''">
+                sv_bandwidth=#{sv_bandwidth},
+            </if>
+            <if test="sv_detail !=null and sv_detail !=''">
+                sv_detail=#{sv_detail}
+            </if>
+
+        </set>
+        WHERE sv_id=#{sv_id}
+
+    </update>
+</mapper>

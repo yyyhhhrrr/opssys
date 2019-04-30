@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyou.ops.zybd.mapper.biz.StudentReportMapper" >
+  <resultMap id="BaseResultMap" type="com.zyou.ops.zybd.entity.biz.StudentReport" >
+    <id column="ss_id" property="ssId" jdbcType="INTEGER" />
+    <result column="ss_Date" property="ssDate" jdbcType="VARCHAR" />
+    <result column="ss_companyId" property="ssCompanyid" jdbcType="VARCHAR" />
+    <result column="ss_companyName" property="ssCompanyname" jdbcType="VARCHAR" />
+    <result column="ss_classId" property="ssClassid" jdbcType="INTEGER" />
+    <result column="ss_className" property="ssClassname" jdbcType="VARCHAR" />
+    <result column="ss_studentId" property="ssStudentid" jdbcType="VARCHAR" />
+    <result column="ss_studentName" property="ssStudentname" jdbcType="VARCHAR" />
+    <result column="ss_goodMood" property="ssGoodmood" jdbcType="INTEGER" />
+    <result column="ss_badMood" property="ssBadmood" jdbcType="INTEGER" />
+    <result column="ss_water" property="ssWater" jdbcType="INTEGER" />
+    <result column="ss_dinner" property="ssDinner" jdbcType="INTEGER" />
+    <result column="ss_sleep" property="ssSleep" jdbcType="INTEGER" />
+    <result column="ss_wash" property="ssWash" jdbcType="INTEGER" />
+    <result column="ss_shit" property="ssShit" jdbcType="INTEGER" />
+    <result column="ss_urine" property="ssUrine" jdbcType="INTEGER" />
+    <result column="ss_leave" property="ssLeave" jdbcType="INTEGER" />
+    <result column="ss_create_date" property="ssCreateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ss_id, ss_Date, ss_companyId, ss_companyName, ss_classId, ss_className, ss_studentId, 
+    ss_studentName, ss_goodMood, ss_badMood, ss_water, ss_dinner, ss_sleep, ss_wash, 
+    ss_shit, ss_urine, ss_leave, ss_create_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sta_studentreport
+    where ss_id = #{ssId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sta_studentreport
+    where ss_id = #{ssId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zyou.ops.zybd.entity.biz.StudentReport" >
+    insert into sta_studentreport (ss_id, ss_Date, ss_companyId, 
+      ss_companyName, ss_classId, ss_className, 
+      ss_studentId, ss_studentName, ss_goodMood, 
+      ss_badMood, ss_water, ss_dinner, 
+      ss_sleep, ss_wash, ss_shit, 
+      ss_urine, ss_leave, ss_create_date
+      )
+    values (#{ssId,jdbcType=INTEGER}, #{ssDate,jdbcType=VARCHAR}, #{ssCompanyid,jdbcType=VARCHAR}, 
+      #{ssCompanyname,jdbcType=VARCHAR}, #{ssClassid,jdbcType=INTEGER}, #{ssClassname,jdbcType=VARCHAR}, 
+      #{ssStudentid,jdbcType=VARCHAR}, #{ssStudentname,jdbcType=VARCHAR}, #{ssGoodmood,jdbcType=INTEGER}, 
+      #{ssBadmood,jdbcType=INTEGER}, #{ssWater,jdbcType=INTEGER}, #{ssDinner,jdbcType=INTEGER}, 
+      #{ssSleep,jdbcType=INTEGER}, #{ssWash,jdbcType=INTEGER}, #{ssShit,jdbcType=INTEGER}, 
+      #{ssUrine,jdbcType=INTEGER}, #{ssLeave,jdbcType=INTEGER}, #{ssCreateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyou.ops.zybd.entity.biz.StudentReport" >
+    insert into sta_studentreport
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ssId != null" >
+        ss_id,
+      </if>
+      <if test="ssDate != null" >
+        ss_Date,
+      </if>
+      <if test="ssCompanyid != null" >
+        ss_companyId,
+      </if>
+      <if test="ssCompanyname != null" >
+        ss_companyName,
+      </if>
+      <if test="ssClassid != null" >
+        ss_classId,
+      </if>
+      <if test="ssClassname != null" >
+        ss_className,
+      </if>
+      <if test="ssStudentid != null" >
+        ss_studentId,
+      </if>
+      <if test="ssStudentname != null" >
+        ss_studentName,
+      </if>
+      <if test="ssGoodmood != null" >
+        ss_goodMood,
+      </if>
+      <if test="ssBadmood != null" >
+        ss_badMood,
+      </if>
+      <if test="ssWater != null" >
+        ss_water,
+      </if>
+      <if test="ssDinner != null" >
+        ss_dinner,
+      </if>
+      <if test="ssSleep != null" >
+        ss_sleep,
+      </if>
+      <if test="ssWash != null" >
+        ss_wash,
+      </if>
+      <if test="ssShit != null" >
+        ss_shit,
+      </if>
+      <if test="ssUrine != null" >
+        ss_urine,
+      </if>
+      <if test="ssLeave != null" >
+        ss_leave,
+      </if>
+      <if test="ssCreateDate != null" >
+        ss_create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ssId != null" >
+        #{ssId,jdbcType=INTEGER},
+      </if>
+      <if test="ssDate != null" >
+        #{ssDate,jdbcType=VARCHAR},
+      </if>
+      <if test="ssCompanyid != null" >
+        #{ssCompanyid,jdbcType=VARCHAR},
+      </if>
+      <if test="ssCompanyname != null" >
+        #{ssCompanyname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssClassid != null" >
+        #{ssClassid,jdbcType=INTEGER},
+      </if>
+      <if test="ssClassname != null" >
+        #{ssClassname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssStudentid != null" >
+        #{ssStudentid,jdbcType=VARCHAR},
+      </if>
+      <if test="ssStudentname != null" >
+        #{ssStudentname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssGoodmood != null" >
+        #{ssGoodmood,jdbcType=INTEGER},
+      </if>
+      <if test="ssBadmood != null" >
+        #{ssBadmood,jdbcType=INTEGER},
+      </if>
+      <if test="ssWater != null" >
+        #{ssWater,jdbcType=INTEGER},
+      </if>
+      <if test="ssDinner != null" >
+        #{ssDinner,jdbcType=INTEGER},
+      </if>
+      <if test="ssSleep != null" >
+        #{ssSleep,jdbcType=INTEGER},
+      </if>
+      <if test="ssWash != null" >
+        #{ssWash,jdbcType=INTEGER},
+      </if>
+      <if test="ssShit != null" >
+        #{ssShit,jdbcType=INTEGER},
+      </if>
+      <if test="ssUrine != null" >
+        #{ssUrine,jdbcType=INTEGER},
+      </if>
+      <if test="ssLeave != null" >
+        #{ssLeave,jdbcType=INTEGER},
+      </if>
+      <if test="ssCreateDate != null" >
+        #{ssCreateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyou.ops.zybd.entity.biz.StudentReport" >
+    update sta_studentreport
+    <set >
+      <if test="ssDate != null" >
+        ss_Date = #{ssDate,jdbcType=VARCHAR},
+      </if>
+      <if test="ssCompanyid != null" >
+        ss_companyId = #{ssCompanyid,jdbcType=VARCHAR},
+      </if>
+      <if test="ssCompanyname != null" >
+        ss_companyName = #{ssCompanyname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssClassid != null" >
+        ss_classId = #{ssClassid,jdbcType=INTEGER},
+      </if>
+      <if test="ssClassname != null" >
+        ss_className = #{ssClassname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssStudentid != null" >
+        ss_studentId = #{ssStudentid,jdbcType=VARCHAR},
+      </if>
+      <if test="ssStudentname != null" >
+        ss_studentName = #{ssStudentname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssGoodmood != null" >
+        ss_goodMood = #{ssGoodmood,jdbcType=INTEGER},
+      </if>
+      <if test="ssBadmood != null" >
+        ss_badMood = #{ssBadmood,jdbcType=INTEGER},
+      </if>
+      <if test="ssWater != null" >
+        ss_water = #{ssWater,jdbcType=INTEGER},
+      </if>
+      <if test="ssDinner != null" >
+        ss_dinner = #{ssDinner,jdbcType=INTEGER},
+      </if>
+      <if test="ssSleep != null" >
+        ss_sleep = #{ssSleep,jdbcType=INTEGER},
+      </if>
+      <if test="ssWash != null" >
+        ss_wash = #{ssWash,jdbcType=INTEGER},
+      </if>
+      <if test="ssShit != null" >
+        ss_shit = #{ssShit,jdbcType=INTEGER},
+      </if>
+      <if test="ssUrine != null" >
+        ss_urine = #{ssUrine,jdbcType=INTEGER},
+      </if>
+      <if test="ssLeave != null" >
+        ss_leave = #{ssLeave,jdbcType=INTEGER},
+      </if>
+      <if test="ssCreateDate != null" >
+        ss_create_date = #{ssCreateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ss_id = #{ssId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyou.ops.zybd.entity.biz.StudentReport" >
+    update sta_studentreport
+    set ss_Date = #{ssDate,jdbcType=VARCHAR},
+      ss_companyId = #{ssCompanyid,jdbcType=VARCHAR},
+      ss_companyName = #{ssCompanyname,jdbcType=VARCHAR},
+      ss_classId = #{ssClassid,jdbcType=INTEGER},
+      ss_className = #{ssClassname,jdbcType=VARCHAR},
+      ss_studentId = #{ssStudentid,jdbcType=VARCHAR},
+      ss_studentName = #{ssStudentname,jdbcType=VARCHAR},
+      ss_goodMood = #{ssGoodmood,jdbcType=INTEGER},
+      ss_badMood = #{ssBadmood,jdbcType=INTEGER},
+      ss_water = #{ssWater,jdbcType=INTEGER},
+      ss_dinner = #{ssDinner,jdbcType=INTEGER},
+      ss_sleep = #{ssSleep,jdbcType=INTEGER},
+      ss_wash = #{ssWash,jdbcType=INTEGER},
+      ss_shit = #{ssShit,jdbcType=INTEGER},
+      ss_urine = #{ssUrine,jdbcType=INTEGER},
+      ss_leave = #{ssLeave,jdbcType=INTEGER},
+      ss_create_date = #{ssCreateDate,jdbcType=TIMESTAMP}
+    where ss_id = #{ssId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectReturnVisitReport" resultType="map">
+select
+
+ c3.sa_name as 'province_name',
+ c2.sa_name as 'city_name',
+ c1.sa_name as 'area_name',
+ dd.bc_name as 'company_name',
+ cc.bc_name as 'class_name',
+  xx.`心情打卡次数` as 'happy_count',
+ xx.`平均心情打卡次/人`as 'happy_avg',
+ xx.`饮水打卡次数` as 'water_count',
+ xx.`平均饮水打卡次/人`as 'water_avg',
+ xx.`吃饭打卡次数`as 'food_count',
+ xx.`平均吃饭打卡次/人`as 'food_avg',
+ xx.`睡觉打卡次数`as 'sleep_count',
+  xx.`平均睡觉打卡次/人`as 'sleep_avg',
+  xx.`大便打卡次数`as 'shit_count',
+ xx.`平均大便打卡次/人`as 'shit_avg',
+   xx.`小便打卡次数`as 'urinate_count',
+   xx.`平均小便打卡次/人`as 'urinate_avg',
+xx.`洗手打卡次数`as 'wash_count',
+   xx.`平均洗手打卡次/人`as 'wash_avg',
+   xx.`离园打卡次数`as 'leave_count',
+   xx.`平均离园打卡次/人`as 'leave_avg',
+ xx.`实际打卡人数` as 'people_count',
+  xx.`总次数` as 'count',
+  xx.`平均次数/人`as 'count_avg',
+  if(xx.`平均次数/人`>=10,'合格',null) as 'status'
+from
+
+(SELECT
+  c3.sa_name as province,
+  c2.sa_name as city,
+  c1.sa_name as area,
+	a.ss_companyName AS companyName,
+	c.bc_name AS className,
+  a.ss_classId as classId,
+  a.ss_companyId as companyId,
+	SUM(a.ss_goodMood) + SUM(a.ss_badMood) AS '心情打卡次数',
+	FORMAT(
+		(
+			SUM(a.ss_goodMood) + SUM(a.ss_badMood)
+		) / COUNT(a.ss_id),
+		2
+	) AS '平均心情打卡次/人',
+	SUM(a.ss_water) AS '饮水打卡次数',
+	FORMAT(
+		SUM(a.ss_water) / COUNT(a.ss_water),
+		2
+	) AS '平均饮水打卡次/人',
+	SUM(a.ss_dinner) AS '吃饭打卡次数',
+	FORMAT(
+		SUM(a.ss_dinner) / COUNT(a.ss_dinner),
+		2
+	) AS '平均吃饭打卡次/人',
+	SUM(a.ss_sleep) AS '睡觉打卡次数',
+	FORMAT(
+		SUM(a.ss_sleep) / COUNT(a.ss_sleep),
+		2
+	) AS '平均睡觉打卡次/人',
+
+	SUM(a.ss_shit) AS '大便打卡次数',
+	FORMAT(
+		SUM(a.ss_shit) / COUNT(a.ss_shit),
+		2
+	) AS '平均大便打卡次/人',
+	SUM(a.ss_urine) AS '小便打卡次数',
+	FORMAT(
+		SUM(a.ss_urine) / COUNT(a.ss_urine),
+		2
+	) AS '平均小便打卡次/人',
+SUM(a.ss_wash) AS '洗手打卡次数',
+	FORMAT(
+		SUM(a.ss_wash) / COUNT(a.ss_wash),
+		2
+	) AS '平均洗手打卡次/人',
+	SUM(a.ss_leave) AS '离园打卡次数',
+	FORMAT(
+		SUM(a.ss_leave) / COUNT(a.ss_leave),
+		2
+	) AS '平均离园打卡次/人',
+SUM(a.ss_goodMood) + SUM(a.ss_badMood) AS '实际打卡人数',
+sum(a.ss_goodMood+a.ss_water+a.ss_dinner+a.ss_sleep+a.ss_wash+a.ss_shit+a.ss_urine+a.ss_leave) as '总次数',
+	FORMAT(
+		(
+			SUM(a.ss_goodMood) + SUM(a.ss_badMood)
+		) / (COUNT(a.ss_id)
+    ) + (
+			SUM(a.ss_water) / COUNT(a.ss_water)
+		) + (
+			SUM(a.ss_dinner) / COUNT(a.ss_dinner)
+		) + (
+			SUM(a.ss_sleep) / COUNT(a.ss_sleep)
+		) + (
+			SUM(a.ss_wash) / COUNT(a.ss_wash)
+		) + (
+			SUM(a.ss_shit) / COUNT(a.ss_shit)
+		) + (
+			SUM(a.ss_urine) / COUNT(a.ss_urine)
+		) + (
+			SUM(a.ss_leave) / COUNT(a.ss_leave)
+		),
+		2
+	) AS '平均次数/人'
+FROM
+	sta_studentreport a
+LEFT JOIN base_company b ON a.ss_companyId = b.bc_id
+AND b.bc_isDel = 0
+LEFT JOIN base_classes c ON a.ss_classId = c.bc_id
+AND c.bc_isDel = 0 and c.bc_graduated=0
+LEFT JOIN sys_area c1 on b.bc_areaId = c1.sa_id
+AND c1.sa_isDel=0
+LEFT JOIN sys_area c2 on c1.sa_parentId = c2.sa_id
+AND c2.sa_isDel=0
+LEFT JOIN sys_area c3 on c2.sa_parentId =c3.sa_Id
+AND c3.sa_isDel=0
+WHERE
+	a.ss_Date BETWEEN #{startDate}
+AND #{endDate}
+
+
+GROUP BY
+	a.ss_classId
+ORDER BY
+  b.bc_provinceId,
+	a.ss_companyName)xx
+
+right join base_classes cc on cc.bc_id=xx.classId
+right join base_company dd on cc.bc_companyId=dd.bc_id
+and dd.bc_isDel=0
+LEFT JOIN sys_area c1 on dd.bc_areaId = c1.sa_id
+AND c1.sa_isDel=0
+LEFT JOIN sys_area c2 on c1.sa_parentId = c2.sa_id
+AND c2.sa_isDel=0
+LEFT JOIN sys_area c3 on c2.sa_parentId =c3.sa_Id
+AND c3.sa_isDel=0
+where dd.bc_id in(687,715,31,714,683,204,195,158,784,74,902,806,810,37,704)
+and cc.bc_isDel=0
+order by
+dd.bc_provinceId,
+cc.bc_companyId,
+case cc.bc_name
+WHEN '大八班' THEN
+	8
+WHEN '大七班' THEN
+	7
+WHEN '大六班' THEN
+	6
+WHEN '大五班' THEN
+	5
+WHEN '大四班' THEN
+	4
+WHEN '大三班' THEN
+	3
+WHEN '大二班' THEN
+	2
+WHEN '大一班' THEN
+	1
+WHEN '蒙氏二班' THEN
+	35
+WHEN '蒙氏一班' THEN
+	34
+WHEN '综合三班' THEN
+	33
+WHEN '综合二班' THEN
+	32
+WHEN '综合一班' THEN
+	31
+WHEN '中十一班' THEN
+	19
+WHEN '中十班' THEN
+	18
+WHEN '中九班' THEN
+	17
+WHEN '中八班' THEN
+	16
+WHEN '中七班' THEN
+	15
+WHEN '中六班' THEN
+	14
+WHEN '中五班' THEN
+	13
+WHEN '中四班' THEN
+	12
+WHEN '中三班' THEN
+	11
+WHEN '中二班' THEN
+	10
+WHEN '中一班' THEN
+	9
+WHEN '小十一班' THEN
+	30
+WHEN '小十班' THEN
+	29
+WHEN '小九班' THEN
+	28
+WHEN '小八班' THEN
+	27
+WHEN '小七班' THEN
+	26
+WHEN '小六班' THEN
+	25
+WHEN '小五班' THEN
+	24
+WHEN '小四班' THEN
+	23
+WHEN '小三班' THEN
+	22
+WHEN '小二班' THEN
+	21
+WHEN '小一班' THEN
+	20
+END
+
+  </select>
+</mapper>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyou.ops.mapper.TaskMapper">
+    <resultMap type="Task" id="taskMap">
+    <id column="tsk_id" property="tsk_id" />
+        <result column="tsk_pm_method" property="tsk_pm_method"/>
+        <result column="tsk_pm_header" property="tsk_pm_header"/>
+        <result column="tsk_pm_json" property="tsk_pm_json"/>
+        <result column="tsk_pm_result" property="tsk_pm_result"/>
+        <result column="tsk_time" property="tsk_time"/>
+        <result column="tsk_detail" property="tsk_detail"/>
+        <result column="tsk_create_time" property="tsk_create_time"/>
+        <result column="tsk_update_time" property="tsk_update_time"/>
+        <association property="serverIp" javaType="ServerIp" >
+              <id column="sv_id" property="sv_id" />
+                   <result column="sv_ip" property="sv_ip"/>
+        </association>
+        <association property="anInterface" javaType="Interface">
+              <id column="it_id" property="it_id" />
+                   <result column="it_port" property="it_port"/>
+                   <result column="it_address" property="it_address"/>
+        </association>
+
+
+    </resultMap>
+
+    <delete id="delByIds">
+        DELETE FROM t_task WHERE tsk_id IN
+        <foreach collection="array" item="tsk_id" open="(" separator="," close=")">
+            #{tsk_id}
+        </foreach>
+
+
+    </delete>
+
+
+
+    <insert id="insert" parameterType="Task" useGeneratedKeys="true" keyProperty="tsk_id">
+      INSERT INTO t_task(tsk_ip_id,tsk_it_id,tsk_pm_method,tsk_pm_header,tsk_pm_json,tsk_pm_result,tsk_time,tsk_detail,tsk_create_time,tsk_update_time)
+	  VALUES (#{tsk_ip_id},#{tsk_it_id},#{tsk_pm_method},#{tsk_pm_header},#{tsk_pm_json},#{tsk_pm_result},#{tsk_time},#{tsk_detail},now(),now())
+    </insert>
+
+
+    <select id="selectAll" resultMap="taskMap">
+      select * from t_task;
+
+    </select>
+
+    <select id="selectExcpetSelf" resultMap="taskMap">
+      select * from t_task;
+
+    </select>
+
+    <select id="getAllByPage" resultMap="taskMap" parameterType="java.util.Map">
+       select
+        tsk_id,tsk_pm_method, tsk_pm_header, tsk_pm_json,
+        tsk_pm_result, tsk_time,
+        tsk_detail, tsk_create_time, tsk_update_time,
+        sv_id,sv_ip,it_id,it_port, it_address from t_task
+         left join t_server_ip tsi on t_task.tsk_ip_id = tsi.sv_id
+         left join t_interface ti on t_task.tsk_it_id = ti.it_id
+        <if test="null !=beginNumber and null !=limit">
+            LIMIT #{beginNumber},#{limit};
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+  	SELECT COUNT(1) FROM t_task
+  </select>
+
+    <select id="selectById" parameterType="Integer" resultMap="taskMap">
+        select
+        tsk_id,tsk_pm_method, tsk_pm_header, tsk_pm_json,
+        tsk_pm_result, tsk_time,
+        tsk_detail, tsk_create_time, tsk_update_time,
+        sv_id,sv_ip,it_id,it_port, it_address from t_task
+         left join t_server_ip tsi on t_task.tsk_ip_id = tsi.sv_id
+         left join t_interface ti on t_task.tsk_it_id = ti.it_id
+         where tsk_id=#{tsk_id};
+    </select>
+
+    <update id="update" parameterType="Task" >
+        UPDATE t_task
+
+        <set>
+            <if test="tsk_ip_id !=null and tsk_ip_id != ''">
+                tsk_ip_id=#{tsk_ip_id},
+            </if>
+            <if test="tsk_it_id !=null and tsk_it_id !=''">
+                tsk_it_id=#{tsk_it_id},
+            </if>
+            <if test="tsk_pm_method !=null and tsk_pm_method !=''">
+                tsk_pm_method=#{tsk_pm_method},
+            </if>
+            <if test="tsk_pm_header !=null and tsk_pm_header !=''">
+                tsk_pm_header=#{tsk_pm_header},
+            </if>
+            <if test="tsk_pm_json !=null and tsk_pm_json !=''">
+                tsk_pm_json=#{tsk_pm_json},
+            </if>
+            <if test="tsk_pm_result !=null and tsk_pm_result !=''">
+                tsk_pm_result=#{tsk_pm_result},
+            </if>
+            <if test="tsk_time !=null and tsk_time !=''">
+                tsk_time=#{tsk_time},
+            </if>
+            <if test="tsk_detail !=null and tsk_detail !=''">
+                tsk_detail=#{tsk_detail}
+            </if>
+
+        </set>
+        WHERE tsk_id=#{tsk_id}
+
+    </update>
+</mapper>

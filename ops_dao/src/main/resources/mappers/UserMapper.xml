@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyou.ops.mapper.UserMapper">
+    <!--<resultMap type="Interface" id="tinterfaceResultMap">-->
+        <!--<id column="us_id" property="usId" />-->
+        <!--<result column="id_address" property="itAddress"/>-->
+        <!--<result column="id_detail" property="itDetail"/>-->
+    <!---->
+    <!--</resultMap>-->
+
+
+
+
+    <select id="selectAll" resultType="User">
+
+        select * from t_user;
+
+
+    </select>
+
+    <select id="selectByUsername"  parameterType="java.lang.String"  resultType="User">
+
+
+       select * from t_user where us_username=#{username}
+
+    </select>
+
+
+    <select id="selectUser" resultType="User" statementType="CALLABLE" >
+            {call selectUser}
+    </select>
+
+    <insert id="insertUser" parameterType="User" statementType="CALLABLE">
+     {call insertUser(
+           #{us_username,mode=IN},
+           #{us_password,mode=IN})}
+    </insert>
+
+</mapper>

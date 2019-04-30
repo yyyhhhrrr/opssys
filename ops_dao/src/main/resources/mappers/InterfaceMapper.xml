@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyou.ops.mapper.InterfaceMapper">
+    <resultMap type="Interface" id="interfaceExceptMap">
+        <id column="it_id" property="it_id" />
+        <result column="id_port" property="it_port"/>
+        <result column="id_address" property="it_address"/>
+
+    </resultMap>
+
+
+
+
+    <insert id="insert" parameterType="Interface" useGeneratedKeys="true" keyProperty="it_id">
+      INSERT INTO t_interface(it_port,it_address,it_detail,it_create_time,it_update_time)
+	  VALUES (#{it_port},#{it_address},#{it_detail},now(),now())
+    </insert>
+
+    <delete id="delByIds">
+        DELETE FROM t_interface WHERE it_id IN
+        <foreach collection="array" item="it_id" open="(" separator="," close=")">
+            #{it_id}
+        </foreach>
+
+
+    </delete>
+
+
+    <select id="selectAll" resultType="interface">
+            SELECT * FROM t_interface
+    </select>
+
+    <select id="selectById" parameterType="Integer" resultType="interface">
+         SELECT * from t_interface WHERE it_id=#{it_id}
+    </select>
+
+    <select id="selectInterfaceExcpet" parameterType="Integer" resultMap="interfaceExceptMap">
+     SELECT it_id,it_port,it_address FROM t_interface WHERE it_id!=#{it_id};
+    </select>
+
+
+    <select id="getAllByPage" resultType="Interface" parameterType="java.util.Map">
+           SELECT * FROM t_interface
+           <if test="null !=beginNumber and null !=limit">
+                 LIMIT #{beginNumber},#{limit}
+           </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+  	SELECT COUNT(1) FROM t_interface
+  </select>
+
+
+
+    <update id="update" parameterType="Interface" >
+         UPDATE t_interface
+
+         <set>
+            <if test="it_port !=null and it_port != ''">
+                it_port=#{it_port},
+            </if>
+            <if test="it_address !=null and it_address !=''">
+                it_address=#{it_address},
+            </if>
+             <if test="it_detail !=null and it_detail !=''">
+                 it_detail=#{it_detail}
+             </if>
+         </set>
+         WHERE it_id=#{it_id}
+
+    </update>
+</mapper>

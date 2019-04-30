@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyou.ops.zybd.mapper.biz.CardRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.zyou.ops.zybd.entity.biz.CardRecord" >
+    <id column="bc_id" property="bcId" jdbcType="BIGINT" />
+    <result column="bc_companyId" property="bcCompanyid" jdbcType="BIGINT" />
+    <result column="bc_classId" property="bcClassid" jdbcType="BIGINT" />
+    <result column="bc_studentId" property="bcStudentid" jdbcType="BIGINT" />
+    <result column="bc_actionId" property="bcActionid" jdbcType="BIGINT" />
+    <result column="bc_actionType" property="bcActiontype" jdbcType="VARCHAR" />
+    <result column="bc_deviceId" property="bcDeviceid" jdbcType="VARCHAR" />
+    <result column="bc_timestamp" property="bcTimestamp" jdbcType="VARCHAR" />
+    <result column="bc_endDate" property="bcEnddate" jdbcType="VARCHAR" />
+    <result column="bc_isDel" property="bcIsdel" jdbcType="BIT" />
+    <result column="bc_createDate" property="bcCreatedate" jdbcType="TIMESTAMP" />
+    <result column="bc_updateDate" property="bcUpdatedate" jdbcType="TIMESTAMP" />
+    <result column="bc_reserved1" property="bcReserved1" jdbcType="VARCHAR" />
+    <result column="bc_reserved2" property="bcReserved2" jdbcType="VARCHAR" />
+    <result column="bc_recordTime" property="bcRecordtime" jdbcType="VARCHAR" />
+    <result column="bc_waterIntake" property="bcWaterintake" jdbcType="INTEGER" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    bc_id, bc_companyId, bc_classId, bc_studentId, bc_actionId, bc_actionType, bc_deviceId, 
+    bc_timestamp, bc_endDate, bc_isDel, bc_createDate, bc_updateDate, bc_reserved1, bc_reserved2, 
+    bc_recordTime, bc_waterIntake
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from biz_cardrecord
+    where bc_id = #{bcId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from biz_cardrecord
+    where bc_id = #{bcId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zyou.ops.zybd.entity.biz.CardRecord" >
+    insert into biz_cardrecord (bc_id, bc_companyId, bc_classId, 
+      bc_studentId, bc_actionId, bc_actionType, 
+      bc_deviceId, bc_timestamp, bc_endDate, 
+      bc_isDel, bc_createDate, bc_updateDate, 
+      bc_reserved1, bc_reserved2, bc_recordTime, 
+      bc_waterIntake)
+    values (#{bcId,jdbcType=BIGINT}, #{bcCompanyid,jdbcType=BIGINT}, #{bcClassid,jdbcType=BIGINT}, 
+      #{bcStudentid,jdbcType=BIGINT}, #{bcActionid,jdbcType=BIGINT}, #{bcActiontype,jdbcType=VARCHAR}, 
+      #{bcDeviceid,jdbcType=VARCHAR}, #{bcTimestamp,jdbcType=VARCHAR}, #{bcEnddate,jdbcType=VARCHAR}, 
+      #{bcIsdel,jdbcType=BIT}, #{bcCreatedate,jdbcType=TIMESTAMP}, #{bcUpdatedate,jdbcType=TIMESTAMP}, 
+      #{bcReserved1,jdbcType=VARCHAR}, #{bcReserved2,jdbcType=VARCHAR}, #{bcRecordtime,jdbcType=VARCHAR}, 
+      #{bcWaterintake,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyou.ops.zybd.entity.biz.CardRecord" >
+    insert into biz_cardrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bcId != null" >
+        bc_id,
+      </if>
+      <if test="bcCompanyid != null" >
+        bc_companyId,
+      </if>
+      <if test="bcClassid != null" >
+        bc_classId,
+      </if>
+      <if test="bcStudentid != null" >
+        bc_studentId,
+      </if>
+      <if test="bcActionid != null" >
+        bc_actionId,
+      </if>
+      <if test="bcActiontype != null" >
+        bc_actionType,
+      </if>
+      <if test="bcDeviceid != null" >
+        bc_deviceId,
+      </if>
+      <if test="bcTimestamp != null" >
+        bc_timestamp,
+      </if>
+      <if test="bcEnddate != null" >
+        bc_endDate,
+      </if>
+      <if test="bcIsdel != null" >
+        bc_isDel,
+      </if>
+      <if test="bcCreatedate != null" >
+        bc_createDate,
+      </if>
+      <if test="bcUpdatedate != null" >
+        bc_updateDate,
+      </if>
+      <if test="bcReserved1 != null" >
+        bc_reserved1,
+      </if>
+      <if test="bcReserved2 != null" >
+        bc_reserved2,
+      </if>
+      <if test="bcRecordtime != null" >
+        bc_recordTime,
+      </if>
+      <if test="bcWaterintake != null" >
+        bc_waterIntake,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bcId != null" >
+        #{bcId,jdbcType=BIGINT},
+      </if>
+      <if test="bcCompanyid != null" >
+        #{bcCompanyid,jdbcType=BIGINT},
+      </if>
+      <if test="bcClassid != null" >
+        #{bcClassid,jdbcType=BIGINT},
+      </if>
+      <if test="bcStudentid != null" >
+        #{bcStudentid,jdbcType=BIGINT},
+      </if>
+      <if test="bcActionid != null" >
+        #{bcActionid,jdbcType=BIGINT},
+      </if>
+      <if test="bcActiontype != null" >
+        #{bcActiontype,jdbcType=VARCHAR},
+      </if>
+      <if test="bcDeviceid != null" >
+        #{bcDeviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="bcTimestamp != null" >
+        #{bcTimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="bcEnddate != null" >
+        #{bcEnddate,jdbcType=VARCHAR},
+      </if>
+      <if test="bcIsdel != null" >
+        #{bcIsdel,jdbcType=BIT},
+      </if>
+      <if test="bcCreatedate != null" >
+        #{bcCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bcUpdatedate != null" >
+        #{bcUpdatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bcReserved1 != null" >
+        #{bcReserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="bcReserved2 != null" >
+        #{bcReserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="bcRecordtime != null" >
+        #{bcRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="bcWaterintake != null" >
+        #{bcWaterintake,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyou.ops.zybd.entity.biz.CardRecord" >
+    update biz_cardrecord
+    <set >
+      <if test="bcCompanyid != null" >
+        bc_companyId = #{bcCompanyid,jdbcType=BIGINT},
+      </if>
+      <if test="bcClassid != null" >
+        bc_classId = #{bcClassid,jdbcType=BIGINT},
+      </if>
+      <if test="bcStudentid != null" >
+        bc_studentId = #{bcStudentid,jdbcType=BIGINT},
+      </if>
+      <if test="bcActionid != null" >
+        bc_actionId = #{bcActionid,jdbcType=BIGINT},
+      </if>
+      <if test="bcActiontype != null" >
+        bc_actionType = #{bcActiontype,jdbcType=VARCHAR},
+      </if>
+      <if test="bcDeviceid != null" >
+        bc_deviceId = #{bcDeviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="bcTimestamp != null" >
+        bc_timestamp = #{bcTimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="bcEnddate != null" >
+        bc_endDate = #{bcEnddate,jdbcType=VARCHAR},
+      </if>
+      <if test="bcIsdel != null" >
+        bc_isDel = #{bcIsdel,jdbcType=BIT},
+      </if>
+      <if test="bcCreatedate != null" >
+        bc_createDate = #{bcCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bcUpdatedate != null" >
+        bc_updateDate = #{bcUpdatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bcReserved1 != null" >
+        bc_reserved1 = #{bcReserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="bcReserved2 != null" >
+        bc_reserved2 = #{bcReserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="bcRecordtime != null" >
+        bc_recordTime = #{bcRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="bcWaterintake != null" >
+        bc_waterIntake = #{bcWaterintake,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bc_id = #{bcId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyou.ops.zybd.entity.biz.CardRecord" >
+    update biz_cardrecord
+    set bc_companyId = #{bcCompanyid,jdbcType=BIGINT},
+      bc_classId = #{bcClassid,jdbcType=BIGINT},
+      bc_studentId = #{bcStudentid,jdbcType=BIGINT},
+      bc_actionId = #{bcActionid,jdbcType=BIGINT},
+      bc_actionType = #{bcActiontype,jdbcType=VARCHAR},
+      bc_deviceId = #{bcDeviceid,jdbcType=VARCHAR},
+      bc_timestamp = #{bcTimestamp,jdbcType=VARCHAR},
+      bc_endDate = #{bcEnddate,jdbcType=VARCHAR},
+      bc_isDel = #{bcIsdel,jdbcType=BIT},
+      bc_createDate = #{bcCreatedate,jdbcType=TIMESTAMP},
+      bc_updateDate = #{bcUpdatedate,jdbcType=TIMESTAMP},
+      bc_reserved1 = #{bcReserved1,jdbcType=VARCHAR},
+      bc_reserved2 = #{bcReserved2,jdbcType=VARCHAR},
+      bc_recordTime = #{bcRecordtime,jdbcType=VARCHAR},
+      bc_waterIntake = #{bcWaterintake,jdbcType=INTEGER}
+    where bc_id = #{bcId,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectStudentReport" resultType="map">
+     SELECT
+	yy.`幼儿园` as 'company_name',
+	yy.`班级名称` as 'class_name',
+    yy.`出勤人数` as 'people_count',
+	yy.`总次数` as 'count',
+	yy.`饮水` as 'water_count',
+	round(yy.`平均饮水（次/人）`,2) AS 'water_avg',
+	yy.`饮食` as 'food_count',
+	round(yy.`平均饮食（次/人）`,2) AS 'food_avg',
+	yy.`睡觉` as 'sleep_count',
+  round(yy.`平均睡觉（次/人）`,2) AS 'sleep_avg',
+	yy.`大便` as 'shit_count',
+	round(yy.`平均大便（次/人）`,2) AS 'shit_avg',
+	yy.`小便` as 'urinate_count',
+	round(yy.`平均小便（次/人）`,2) AS 'urinate_avg',
+	yy.`洗手` as 'wash_count',
+	round(yy.`平均洗手（次/人）`,2) AS 'wash_avg',
+	yy.`离园` as 'leave_count',
+	round(yy.`平均离园（次/人）`,2) AS 'leave_avg',
+  yy.`入园心情` as 'happy'
+FROM
+	(
+		SELECT
+			xx.`幼儿园`,
+			xx.bc_name AS '班级名称',
+			xx.`出勤人数`,
+			xx.`总次数`,
+			xx.`饮水`,
+			xx.`饮水` / xx.`出勤人数` AS '平均饮水（次/人）',
+			xx.`饮食`,
+			xx.`饮食` / xx.`出勤人数` AS '平均饮食（次/人）',
+			xx.`睡觉`,
+			xx.`睡觉` / xx.`出勤人数` AS '平均睡觉（次/人）',
+			xx.`大便`,
+			xx.`大便` / xx.`出勤人数` AS '平均大便（次/人）',
+			xx.`小便`,
+			xx.`小便` / xx.`出勤人数` AS '平均小便（次/人）',
+			xx.`入园心情`,
+			xx.`洗手`,
+			xx.`洗手`/ xx.`出勤人数` AS '平均洗手（次/人）',
+			xx.`离园`,
+			xx.`离园` / xx.`出勤人数` AS '平均离园（次/人）'
+		FROM
+			(
+				SELECT
+					o.bc_name AS '幼儿园',
+					c.bc_id,
+					o.bc_id AS id,
+					c.bc_name,
+					ry.num AS '出勤人数',
+					cc.num AS '总次数',
+					ys.num AS '饮水',
+					cf.num AS '饮食',
+					sj.num AS '睡觉',
+					db.num AS '大便',
+					xb.num AS '小便',
+					xs.num AS '洗手',
+					ry.num AS '入园心情',
+					ly.num AS '离园'
+				FROM
+					base_company o
+				LEFT JOIN base_classes c ON o.bc_id = c.bc_companyId
+				AND c.bc_isDel = 0
+				LEFT JOIN (
+					SELECT
+						COUNT(bc_id) AS num,
+						bc_classId AS classId
+					FROM
+						biz_cardrecord card
+					WHERE
+						card.bc_endDate BETWEEN #{startDate} and #{endDate}
+					GROUP BY
+						card.bc_classId
+				) cc ON cc.classId = c.bc_id
+				LEFT JOIN (
+					SELECT
+						COUNT(bc_id) AS num,
+						bc_classId AS classId
+					FROM
+						biz_cardrecord card
+					WHERE
+							card.bc_endDate BETWEEN #{startDate} and #{endDate}
+					AND card.bc_actionId = 0
+					GROUP BY
+						card.bc_classId
+				) ys ON ys.classId = c.bc_id
+				LEFT JOIN (
+					SELECT
+						COUNT(bc_id) AS num,
+						bc_classId AS classId
+					FROM
+						biz_cardrecord card
+					WHERE
+							card.bc_endDate BETWEEN #{startDate} and #{endDate}
+					AND card.bc_actionId = 1
+					GROUP BY
+						card.bc_classId
+				) cf ON cf.classId = c.bc_id
+				LEFT JOIN (
+					SELECT
+						COUNT(bc_id) AS num,
+						bc_classId AS classId
+					FROM
+						biz_cardrecord card
+					WHERE
+					card.bc_endDate BETWEEN #{startDate} and #{endDate}
+					AND card.bc_actionId = 2
+					GROUP BY
+						card.bc_classId
+				) sj ON sj.classId = c.bc_id
+				LEFT JOIN (
+					SELECT
+						COUNT(bc_id) AS num,
+						bc_classId AS classId
+					FROM
+						biz_cardrecord card
+					WHERE
+			card.bc_endDate BETWEEN #{startDate} and #{endDate}
+					AND card.bc_actionId = 3
+					GROUP BY
+						card.bc_classId
+				) db ON db.classId = c.bc_id
+				LEFT JOIN (
+					SELECT
+						COUNT(bc_id) AS num,
+						bc_classId AS classId
+					FROM
+						biz_cardrecord card
+					WHERE
+	card.bc_endDate BETWEEN #{startDate} and #{endDate}
+					AND card.bc_actionId = 4
+					GROUP BY
+						card.bc_classId
+				) xb ON xb.classId = c.bc_id
+				LEFT JOIN (
+					SELECT
+						COUNT(bc_id) AS num,
+						bc_classId AS classId
+					FROM
+						biz_cardrecord card
+					WHERE
+				card.bc_endDate BETWEEN #{startDate} and #{endDate}
+					AND (
+						card.bc_actionId = 5
+						OR card.bc_actionId = 6
+					)
+					GROUP BY
+						card.bc_classId
+				) ry ON ry.classId = c.bc_id
+				LEFT JOIN (
+					SELECT
+						COUNT(bc_id) AS num,
+						bc_classId AS classId
+					FROM
+						biz_cardrecord card
+					WHERE
+						card.bc_endDate BETWEEN #{startDate} and #{endDate}
+					AND card.bc_actionId = 7
+					GROUP BY
+						card.bc_classId
+				) xs ON xs.classId = c.bc_id
+				LEFT JOIN (
+					SELECT
+						COUNT(bc_id) AS num,
+						bc_classId AS classId
+					FROM
+						biz_cardrecord card
+					WHERE
+							card.bc_endDate BETWEEN #{startDate} and #{endDate}
+					AND card.bc_actionId = 8
+					GROUP BY
+						card.bc_classId
+				) ly ON ly.classId = c.bc_id
+				WHERE
+      o.bc_provinceId = #{companyId}
+				AND cc.num > 0
+				AND o.bc_isDel = 0
+			) xx
+		ORDER BY
+			id,
+			CASE bc_name
+		WHEN '大八班' THEN
+			8
+		WHEN '大七班' THEN
+			7
+		WHEN '大六班' THEN
+			6
+		WHEN '大五班' THEN
+			5
+		WHEN '大四班' THEN
+			4
+		WHEN '大三班' THEN
+			3
+		WHEN '大二班' THEN
+			2
+		WHEN '大一班' THEN
+			1
+    WHEN '蒙氏二班' THEN
+			35
+    WHEN '蒙氏一班' THEN
+			34
+    WHEN '综合三班' THEN
+      33
+    WHEN '综合二班' THEN
+      32
+    WHEN '综合一班' THEN
+      31
+    WHEN '中十一班' THEN
+			19
+    WHEN '中十班' THEN
+      18
+    WHEN '中九班' THEN
+      17
+		WHEN '中八班' THEN
+			16
+		WHEN '中七班' THEN
+			15
+		WHEN '中六班' THEN
+			14
+		WHEN '中五班' THEN
+			13
+		WHEN '中四班' THEN
+			12
+		WHEN '中三班' THEN
+			11
+		WHEN '中二班' THEN
+			10
+		WHEN '中一班' THEN
+			9
+    WHEN '小十一班' THEN
+			30
+    WHEN '小十班' THEN
+			29
+    WHEN '小九班' THEN
+			28
+		WHEN '小八班' THEN
+			27
+		WHEN '小七班' THEN
+			26
+		WHEN '小六班' THEN
+			25
+		WHEN '小五班' THEN
+			24
+		WHEN '小四班' THEN
+			23
+		WHEN '小三班' THEN
+			22
+		WHEN '小二班' THEN
+			21
+		WHEN '小一班' THEN
+			20
+		END
+	) yy
+  </select>
+
+    <select id="selectSelfSupportReport" resultType="map">
+
+        SELECT
+        zz.`幼儿园` as 'company_name',
+        zz.`班级名称`as 'class_name',
+        zz.`心情` as 'happy_count',
+        zz.`平均心情`as 'happy_avg',
+        zz.`饮水` as 'water_count',
+        zz.`平均饮水`as 'water_avg',
+        zz.`饮食` as 'food_count',
+        zz.`平均饮食`as 'food_avg',
+        zz.`睡觉` as 'sleep_count',
+        zz.`平均睡觉`as 'sleep_avg',
+        zz.`大便` as 'shit_count',
+        zz.`平均大便` as 'shit_avg',
+        zz.`小便` as 'urinate_count',
+        zz.`平均小便`as 'urinate_avg',
+        zz.`洗手` as 'wash_count',
+        zz.`平均洗手`as 'wash_avg',
+        zz.`总次数` as 'sum',
+        zz.`实际打卡`as 'card_time',
+        (zz.`平均心情`+zz.`平均饮水`+zz.`平均大便`+zz.`平均小便`+zz.`平均洗手`+zz.`平均睡觉`+zz.`平均饮食`) as 'avg'
+
+        from(SELECT
+        yy.`幼儿园`,
+        yy.`班级名称`,
+        yy.`入园心情` as '心情',
+        ifnull(round(yy.`入园心情`/yy.`出勤人数`,2),0) as '平均心情',
+        ifnull(yy.`饮水`,0) as '饮水',
+        ifnull(round(yy.`平均饮水（次/人）`,2),0) AS '平均饮水',
+        ifnull(yy.`饮食`,0) as '饮食',
+        ifnull(round(yy.`平均饮食（次/人）`,2),0) AS '平均饮食',
+        ifnull(yy.`睡觉`,0) as '睡觉',
+        ifnull(round(yy.`平均睡觉（次/人）`,2),0) AS '平均睡觉',
+        ifnull(yy.`大便`,0) as '大便',
+        ifnull(round(yy.`平均大便（次/人）`,2),0) AS '平均大便',
+        ifnull(yy.`小便`,0) as '小便',
+        ifnull(round(yy.`平均小便（次/人）`,2),0) AS '平均小便',
+        ifnull(yy.`洗手`,0) as '洗手',
+        ifnull(round(yy.`平均洗手（次/人）`,2),0) AS '平均洗手',
+        yy.`离园`,
+        yy.`总次数`,
+        yy.`出勤人数` as '实际打卡'
+
+        FROM
+        (
+        SELECT
+        xx.`幼儿园`,
+        xx.bc_name AS '班级名称',
+        xx.`出勤人数`,
+        xx.`总次数`,
+        xx.`饮水`,
+        xx.`饮水` / xx.`出勤人数` AS '平均饮水（次/人）',
+        xx.`饮食`,
+        xx.`饮食` / xx.`出勤人数` AS '平均饮食（次/人）',
+        xx.`睡觉`,
+        xx.`睡觉` / xx.`出勤人数` AS '平均睡觉（次/人）',
+        xx.`大便`,
+        xx.`大便` / xx.`出勤人数` AS '平均大便（次/人）',
+        xx.`小便`,
+        xx.`小便` / xx.`出勤人数` AS '平均小便（次/人）',
+        xx.`入园心情`,
+        xx.`洗手`,
+        xx.`洗手` / xx.`出勤人数` AS '平均洗手（次/人）',
+        xx.`离园`,
+        xx.`离园` / xx.`出勤人数` AS '平均离园（次/人）'
+        FROM
+        (
+        SELECT
+        o.bc_name AS '幼儿园',
+        c.bc_id,
+        o.bc_id AS id,
+        c.bc_name,
+        ry.num AS '出勤人数',
+        cc.num AS '总次数',
+        ys.num AS '饮水',
+        cf.num AS '饮食',
+        sj.num AS '睡觉',
+        db.num AS '大便',
+        xb.num AS '小便',
+        xs.num AS '洗手',
+        ry.num AS '入园心情',
+        ly.num AS '离园'
+        FROM
+        base_company o
+        LEFT JOIN base_classes c ON o.bc_id = c.bc_companyId
+        AND c.bc_isDel = 0
+        LEFT JOIN (
+        SELECT
+        COUNT(bc_id) AS num,
+        bc_classId AS classId
+        FROM
+        biz_cardrecord card
+        WHERE
+        card.bc_endDate  BETWEEN #{startDate} and #{endDate}
+        AND card.bc_actionId != 8
+        -- AND card.bc_companyId = '302'
+        GROUP BY
+        card.bc_classId
+        ) cc ON cc.classId = c.bc_id
+        LEFT JOIN (
+        SELECT
+        COUNT(bc_id) AS num,
+        bc_classId AS classId
+        FROM
+        biz_cardrecord card
+        WHERE
+        card.bc_endDate  BETWEEN #{startDate} and #{endDate}
+        AND card.bc_actionId = 0
+        GROUP BY
+        card.bc_classId
+        ) ys ON ys.classId = c.bc_id
+        LEFT JOIN (
+        SELECT
+        COUNT(bc_id) AS num,
+        bc_classId AS classId
+        FROM
+        biz_cardrecord card
+        WHERE
+        card.bc_endDate  BETWEEN #{startDate} and #{endDate}
+        AND card.bc_actionId = 1
+        GROUP BY
+        card.bc_classId
+        ) cf ON cf.classId = c.bc_id
+        LEFT JOIN (
+        SELECT
+        COUNT(bc_id) AS num,
+        bc_classId AS classId
+        FROM
+        biz_cardrecord card
+        WHERE
+        card.bc_endDate  BETWEEN #{startDate} and #{endDate}
+        AND card.bc_actionId = 2
+        GROUP BY
+        card.bc_classId
+        ) sj ON sj.classId = c.bc_id
+        LEFT JOIN (
+        SELECT
+        COUNT(bc_id) AS num,
+        bc_classId AS classId
+        FROM
+        biz_cardrecord card
+        WHERE
+        card.bc_endDate  BETWEEN #{startDate} and #{endDate}
+        AND card.bc_actionId = 3
+        GROUP BY
+        card.bc_classId
+        ) db ON db.classId = c.bc_id
+        LEFT JOIN (
+        SELECT
+        COUNT(bc_id) AS num,
+        bc_classId AS classId
+        FROM
+        biz_cardrecord card
+        WHERE
+        card.bc_endDate BETWEEN #{startDate} and #{endDate}
+        AND card.bc_actionId = 4
+        GROUP BY
+        card.bc_classId
+        ) xb ON xb.classId = c.bc_id
+        LEFT JOIN (
+        SELECT
+        COUNT(bc_id) AS num,
+        bc_classId AS classId
+        FROM
+        biz_cardrecord card
+        WHERE
+        card.bc_endDate  BETWEEN #{startDate} and #{endDate}
+        AND (
+        card.bc_actionId = 5
+        OR card.bc_actionId = 6
+        )
+        GROUP BY
+        card.bc_classId
+        ) ry ON ry.classId = c.bc_id
+        LEFT JOIN (
+        SELECT
+        COUNT(bc_id) AS num,
+        bc_classId AS classId
+        FROM
+        biz_cardrecord card
+        WHERE
+        card.bc_endDate  BETWEEN #{startDate} and #{endDate}
+        AND card.bc_actionId = 7
+        GROUP BY
+        card.bc_classId
+        ) xs ON xs.classId = c.bc_id
+        LEFT JOIN (
+        SELECT
+        COUNT(bc_id) AS num,
+        bc_classId AS classId
+        FROM
+        biz_cardrecord card
+        WHERE
+        card.bc_endDate  BETWEEN #{startDate} and #{endDate}
+        AND card.bc_actionId = 8
+        GROUP BY
+        card.bc_classId
+        ) ly ON ly.classId = c.bc_id
+        WHERE
+        o.bc_id in (687,181,5,327,292,286)
+        and c.bc_id !=1641
+        AND cc.num > 0
+        AND o.bc_isDel = 0
+        ) xx
+        ORDER BY
+        id,
+        CASE bc_name
+        WHEN '大八班' THEN
+        8
+        WHEN '大七班' THEN
+        7
+        WHEN '大六班' THEN
+        6
+        WHEN '大五班' THEN
+        5
+        WHEN '大四班' THEN
+        4
+        WHEN '大三班' THEN
+        3
+        WHEN '大二班' THEN
+        2
+        WHEN '大一班' THEN
+        1
+        WHEN '蒙氏二班' THEN
+        35
+        WHEN '蒙氏一班' THEN
+        34
+        WHEN '综合三班' THEN
+        33
+        WHEN '综合二班' THEN
+        32
+        WHEN '综合一班' THEN
+        31
+        WHEN '中十一班' THEN
+        19
+        WHEN '中十班' THEN
+        18
+        WHEN '中九班' THEN
+        17
+        WHEN '中八班' THEN
+        16
+        WHEN '中七班' THEN
+        15
+        WHEN '中六班' THEN
+        14
+        WHEN '中五班' THEN
+        13
+        WHEN '中四班' THEN
+        12
+        WHEN '中三班' THEN
+        11
+        WHEN '中二班' THEN
+        10
+        WHEN '中一班' THEN
+        9
+        WHEN '小十一班' THEN
+        30
+        WHEN '小十班' THEN
+        29
+        WHEN '小九班' THEN
+        28
+        WHEN '小八班' THEN
+        27
+        WHEN '小七班' THEN
+        26
+        WHEN '小六班' THEN
+        25
+        WHEN '小五班' THEN
+        24
+        WHEN '小四班' THEN
+        23
+        WHEN '小三班' THEN
+        22
+        WHEN '小二班' THEN
+        21
+        WHEN '小一班' THEN
+        20
+        END
+        ) yy)zz where zz.`班级名称` not in("唷唷2班","唷唷班","测试班")
+
+    </select>
+
+</mapper>

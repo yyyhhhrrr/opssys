@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyou.ops.zybd.mapper.bizbase.ClassesMapper" >
+  <resultMap id="BaseResultMap" type="com.zyou.ops.zybd.entity.bizbase.Classes" >
+    <id column="bc_id" property="bcId" jdbcType="BIGINT" />
+    <result column="bc_companyId" property="bcCompanyid" jdbcType="BIGINT" />
+    <result column="bc_name" property="bcName" jdbcType="VARCHAR" />
+    <result column="bc_grade" property="bcGrade" jdbcType="INTEGER" />
+    <result column="bc_type" property="bcType" jdbcType="INTEGER" />
+    <result column="bc_isDel" property="bcIsdel" jdbcType="BIT" />
+    <result column="bc_createDate" property="bcCreatedate" jdbcType="TIMESTAMP" />
+    <result column="bc_updateDate" property="bcUpdatedate" jdbcType="TIMESTAMP" />
+    <result column="bc_reserved1" property="bcReserved1" jdbcType="VARCHAR" />
+    <result column="bc_reserved2" property="bcReserved2" jdbcType="VARCHAR" />
+    <result column="bc_graduated" property="bcGraduated" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bc_id, bc_companyId, bc_name, bc_grade, bc_type, bc_isDel, bc_createDate, bc_updateDate, 
+    bc_reserved1, bc_reserved2, bc_graduated
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from base_classes
+    where bc_id = #{bcId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from base_classes
+    where bc_id = #{bcId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zyou.ops.zybd.entity.bizbase.Classes" >
+    insert into base_classes (bc_id, bc_companyId, bc_name, 
+      bc_grade, bc_type, bc_isDel, 
+      bc_createDate, bc_updateDate, bc_reserved1, 
+      bc_reserved2, bc_graduated)
+    values (#{bcId,jdbcType=BIGINT}, #{bcCompanyid,jdbcType=BIGINT}, #{bcName,jdbcType=VARCHAR}, 
+      #{bcGrade,jdbcType=INTEGER}, #{bcType,jdbcType=INTEGER}, #{bcIsdel,jdbcType=BIT}, 
+      #{bcCreatedate,jdbcType=TIMESTAMP}, #{bcUpdatedate,jdbcType=TIMESTAMP}, #{bcReserved1,jdbcType=VARCHAR}, 
+      #{bcReserved2,jdbcType=VARCHAR}, #{bcGraduated,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyou.ops.zybd.entity.bizbase.Classes" >
+    insert into base_classes
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bcId != null" >
+        bc_id,
+      </if>
+      <if test="bcCompanyid != null" >
+        bc_companyId,
+      </if>
+      <if test="bcName != null" >
+        bc_name,
+      </if>
+      <if test="bcGrade != null" >
+        bc_grade,
+      </if>
+      <if test="bcType != null" >
+        bc_type,
+      </if>
+      <if test="bcIsdel != null" >
+        bc_isDel,
+      </if>
+      <if test="bcCreatedate != null" >
+        bc_createDate,
+      </if>
+      <if test="bcUpdatedate != null" >
+        bc_updateDate,
+      </if>
+      <if test="bcReserved1 != null" >
+        bc_reserved1,
+      </if>
+      <if test="bcReserved2 != null" >
+        bc_reserved2,
+      </if>
+      <if test="bcGraduated != null" >
+        bc_graduated,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bcId != null" >
+        #{bcId,jdbcType=BIGINT},
+      </if>
+      <if test="bcCompanyid != null" >
+        #{bcCompanyid,jdbcType=BIGINT},
+      </if>
+      <if test="bcName != null" >
+        #{bcName,jdbcType=VARCHAR},
+      </if>
+      <if test="bcGrade != null" >
+        #{bcGrade,jdbcType=INTEGER},
+      </if>
+      <if test="bcType != null" >
+        #{bcType,jdbcType=INTEGER},
+      </if>
+      <if test="bcIsdel != null" >
+        #{bcIsdel,jdbcType=BIT},
+      </if>
+      <if test="bcCreatedate != null" >
+        #{bcCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bcUpdatedate != null" >
+        #{bcUpdatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bcReserved1 != null" >
+        #{bcReserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="bcReserved2 != null" >
+        #{bcReserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="bcGraduated != null" >
+        #{bcGraduated,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyou.ops.zybd.entity.bizbase.Classes" >
+    update base_classes
+    <set >
+      <if test="bcCompanyid != null" >
+        bc_companyId = #{bcCompanyid,jdbcType=BIGINT},
+      </if>
+      <if test="bcName != null" >
+        bc_name = #{bcName,jdbcType=VARCHAR},
+      </if>
+      <if test="bcGrade != null" >
+        bc_grade = #{bcGrade,jdbcType=INTEGER},
+      </if>
+      <if test="bcType != null" >
+        bc_type = #{bcType,jdbcType=INTEGER},
+      </if>
+      <if test="bcIsdel != null" >
+        bc_isDel = #{bcIsdel,jdbcType=BIT},
+      </if>
+      <if test="bcCreatedate != null" >
+        bc_createDate = #{bcCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bcUpdatedate != null" >
+        bc_updateDate = #{bcUpdatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bcReserved1 != null" >
+        bc_reserved1 = #{bcReserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="bcReserved2 != null" >
+        bc_reserved2 = #{bcReserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="bcGraduated != null" >
+        bc_graduated = #{bcGraduated,jdbcType=TINYINT},
+      </if>
+    </set>
+    where bc_id = #{bcId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyou.ops.zybd.entity.bizbase.Classes" >
+    update base_classes
+    set bc_companyId = #{bcCompanyid,jdbcType=BIGINT},
+      bc_name = #{bcName,jdbcType=VARCHAR},
+      bc_grade = #{bcGrade,jdbcType=INTEGER},
+      bc_type = #{bcType,jdbcType=INTEGER},
+      bc_isDel = #{bcIsdel,jdbcType=BIT},
+      bc_createDate = #{bcCreatedate,jdbcType=TIMESTAMP},
+      bc_updateDate = #{bcUpdatedate,jdbcType=TIMESTAMP},
+      bc_reserved1 = #{bcReserved1,jdbcType=VARCHAR},
+      bc_reserved2 = #{bcReserved2,jdbcType=VARCHAR},
+      bc_graduated = #{bcGraduated,jdbcType=TINYINT}
+    where bc_id = #{bcId,jdbcType=BIGINT}
+  </update>
+</mapper>

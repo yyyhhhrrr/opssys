@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyou.ops.zybd.mapper.sys.AreaMapper" >
+  <resultMap id="BaseResultMap" type="com.zyou.ops.zybd.entity.sys.Area" >
+    <id column="sa_id" property="saId" jdbcType="INTEGER" />
+    <result column="sa_parentId" property="saParentid" jdbcType="INTEGER" />
+    <result column="sa_parentIds" property="saParentids" jdbcType="VARCHAR" />
+    <result column="sa_name" property="saName" jdbcType="VARCHAR" />
+    <result column="sa_number" property="saNumber" jdbcType="VARCHAR" />
+    <result column="sa_level" property="saLevel" jdbcType="INTEGER" />
+    <result column="sa_isDel" property="saIsdel" jdbcType="BIT" />
+    <result column="sa_createDate" property="saCreatedate" jdbcType="TIMESTAMP" />
+    <result column="sa_updateDate" property="saUpdatedate" jdbcType="TIMESTAMP" />
+    <result column="sa_reserved1" property="saReserved1" jdbcType="VARCHAR" />
+    <result column="sa_reserved2" property="saReserved2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sa_id, sa_parentId, sa_parentIds, sa_name, sa_number, sa_level, sa_isDel, sa_createDate, 
+    sa_updateDate, sa_reserved1, sa_reserved2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_area
+    where sa_id = #{saId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_area
+    where sa_id = #{saId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zyou.ops.zybd.entity.sys.Area" >
+    insert into sys_area (sa_id, sa_parentId, sa_parentIds, 
+      sa_name, sa_number, sa_level, 
+      sa_isDel, sa_createDate, sa_updateDate, 
+      sa_reserved1, sa_reserved2)
+    values (#{saId,jdbcType=INTEGER}, #{saParentid,jdbcType=INTEGER}, #{saParentids,jdbcType=VARCHAR}, 
+      #{saName,jdbcType=VARCHAR}, #{saNumber,jdbcType=VARCHAR}, #{saLevel,jdbcType=INTEGER}, 
+      #{saIsdel,jdbcType=BIT}, #{saCreatedate,jdbcType=TIMESTAMP}, #{saUpdatedate,jdbcType=TIMESTAMP}, 
+      #{saReserved1,jdbcType=VARCHAR}, #{saReserved2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyou.ops.zybd.entity.sys.Area" >
+    insert into sys_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="saId != null" >
+        sa_id,
+      </if>
+      <if test="saParentid != null" >
+        sa_parentId,
+      </if>
+      <if test="saParentids != null" >
+        sa_parentIds,
+      </if>
+      <if test="saName != null" >
+        sa_name,
+      </if>
+      <if test="saNumber != null" >
+        sa_number,
+      </if>
+      <if test="saLevel != null" >
+        sa_level,
+      </if>
+      <if test="saIsdel != null" >
+        sa_isDel,
+      </if>
+      <if test="saCreatedate != null" >
+        sa_createDate,
+      </if>
+      <if test="saUpdatedate != null" >
+        sa_updateDate,
+      </if>
+      <if test="saReserved1 != null" >
+        sa_reserved1,
+      </if>
+      <if test="saReserved2 != null" >
+        sa_reserved2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="saId != null" >
+        #{saId,jdbcType=INTEGER},
+      </if>
+      <if test="saParentid != null" >
+        #{saParentid,jdbcType=INTEGER},
+      </if>
+      <if test="saParentids != null" >
+        #{saParentids,jdbcType=VARCHAR},
+      </if>
+      <if test="saName != null" >
+        #{saName,jdbcType=VARCHAR},
+      </if>
+      <if test="saNumber != null" >
+        #{saNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="saLevel != null" >
+        #{saLevel,jdbcType=INTEGER},
+      </if>
+      <if test="saIsdel != null" >
+        #{saIsdel,jdbcType=BIT},
+      </if>
+      <if test="saCreatedate != null" >
+        #{saCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saUpdatedate != null" >
+        #{saUpdatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saReserved1 != null" >
+        #{saReserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="saReserved2 != null" >
+        #{saReserved2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyou.ops.zybd.entity.sys.Area" >
+    update sys_area
+    <set >
+      <if test="saParentid != null" >
+        sa_parentId = #{saParentid,jdbcType=INTEGER},
+      </if>
+      <if test="saParentids != null" >
+        sa_parentIds = #{saParentids,jdbcType=VARCHAR},
+      </if>
+      <if test="saName != null" >
+        sa_name = #{saName,jdbcType=VARCHAR},
+      </if>
+      <if test="saNumber != null" >
+        sa_number = #{saNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="saLevel != null" >
+        sa_level = #{saLevel,jdbcType=INTEGER},
+      </if>
+      <if test="saIsdel != null" >
+        sa_isDel = #{saIsdel,jdbcType=BIT},
+      </if>
+      <if test="saCreatedate != null" >
+        sa_createDate = #{saCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saUpdatedate != null" >
+        sa_updateDate = #{saUpdatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saReserved1 != null" >
+        sa_reserved1 = #{saReserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="saReserved2 != null" >
+        sa_reserved2 = #{saReserved2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sa_id = #{saId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyou.ops.zybd.entity.sys.Area" >
+    update sys_area
+    set sa_parentId = #{saParentid,jdbcType=INTEGER},
+      sa_parentIds = #{saParentids,jdbcType=VARCHAR},
+      sa_name = #{saName,jdbcType=VARCHAR},
+      sa_number = #{saNumber,jdbcType=VARCHAR},
+      sa_level = #{saLevel,jdbcType=INTEGER},
+      sa_isDel = #{saIsdel,jdbcType=BIT},
+      sa_createDate = #{saCreatedate,jdbcType=TIMESTAMP},
+      sa_updateDate = #{saUpdatedate,jdbcType=TIMESTAMP},
+      sa_reserved1 = #{saReserved1,jdbcType=VARCHAR},
+      sa_reserved2 = #{saReserved2,jdbcType=VARCHAR}
+    where sa_id = #{saId,jdbcType=INTEGER}
+  </update>
+</mapper>

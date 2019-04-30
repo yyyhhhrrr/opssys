@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyou.ops.zybd.mapper.bizbase.CompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.zyou.ops.zybd.entity.bizbase.Company" >
+    <id column="bc_id" property="bcId" jdbcType="BIGINT" />
+    <result column="bc_provinceId" property="bcProvinceid" jdbcType="BIGINT" />
+    <result column="bc_cityId" property="bcCityid" jdbcType="BIGINT" />
+    <result column="bc_areaId" property="bcAreaid" jdbcType="BIGINT" />
+    <result column="bc_number" property="bcNumber" jdbcType="VARCHAR" />
+    <result column="bc_name" property="bcName" jdbcType="VARCHAR" />
+    <result column="bc_manager" property="bcManager" jdbcType="VARCHAR" />
+    <result column="bc_tel" property="bcTel" jdbcType="VARCHAR" />
+    <result column="bc_address" property="bcAddress" jdbcType="VARCHAR" />
+    <result column="bc_type" property="bcType" jdbcType="VARCHAR" />
+    <result column="bc_bizness" property="bcBizness" jdbcType="VARCHAR" />
+    <result column="bc_isDel" property="bcIsdel" jdbcType="BIT" />
+    <result column="bc_createDate" property="bcCreatedate" jdbcType="TIMESTAMP" />
+    <result column="bc_updateDate" property="bcUpdatedate" jdbcType="TIMESTAMP" />
+    <result column="bc_reserved1" property="bcReserved1" jdbcType="VARCHAR" />
+    <result column="bc_reserved2" property="bcReserved2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bc_id, bc_provinceId, bc_cityId, bc_areaId, bc_number, bc_name, bc_manager, bc_tel, 
+    bc_address, bc_type, bc_bizness, bc_isDel, bc_createDate, bc_updateDate, bc_reserved1, 
+    bc_reserved2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from base_company
+    where bc_id = #{bcId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from base_company
+    where bc_id = #{bcId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zyou.ops.zybd.entity.bizbase.Company" >
+    insert into base_company (bc_id, bc_provinceId, bc_cityId, 
+      bc_areaId, bc_number, bc_name, 
+      bc_manager, bc_tel, bc_address, 
+      bc_type, bc_bizness, bc_isDel, 
+      bc_createDate, bc_updateDate, bc_reserved1, 
+      bc_reserved2)
+    values (#{bcId,jdbcType=BIGINT}, #{bcProvinceid,jdbcType=BIGINT}, #{bcCityid,jdbcType=BIGINT}, 
+      #{bcAreaid,jdbcType=BIGINT}, #{bcNumber,jdbcType=VARCHAR}, #{bcName,jdbcType=VARCHAR}, 
+      #{bcManager,jdbcType=VARCHAR}, #{bcTel,jdbcType=VARCHAR}, #{bcAddress,jdbcType=VARCHAR}, 
+      #{bcType,jdbcType=VARCHAR}, #{bcBizness,jdbcType=VARCHAR}, #{bcIsdel,jdbcType=BIT}, 
+      #{bcCreatedate,jdbcType=TIMESTAMP}, #{bcUpdatedate,jdbcType=TIMESTAMP}, #{bcReserved1,jdbcType=VARCHAR}, 
+      #{bcReserved2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyou.ops.zybd.entity.bizbase.Company" >
+    insert into base_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bcId != null" >
+        bc_id,
+      </if>
+      <if test="bcProvinceid != null" >
+        bc_provinceId,
+      </if>
+      <if test="bcCityid != null" >
+        bc_cityId,
+      </if>
+      <if test="bcAreaid != null" >
+        bc_areaId,
+      </if>
+      <if test="bcNumber != null" >
+        bc_number,
+      </if>
+      <if test="bcName != null" >
+        bc_name,
+      </if>
+      <if test="bcManager != null" >
+        bc_manager,
+      </if>
+      <if test="bcTel != null" >
+        bc_tel,
+      </if>
+      <if test="bcAddress != null" >
+        bc_address,
+      </if>
+      <if test="bcType != null" >
+        bc_type,
+      </if>
+      <if test="bcBizness != null" >
+        bc_bizness,
+      </if>
+      <if test="bcIsdel != null" >
+        bc_isDel,
+      </if>
+      <if test="bcCreatedate != null" >
+        bc_createDate,
+      </if>
+      <if test="bcUpdatedate != null" >
+        bc_updateDate,
+      </if>
+      <if test="bcReserved1 != null" >
+        bc_reserved1,
+      </if>
+      <if test="bcReserved2 != null" >
+        bc_reserved2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bcId != null" >
+        #{bcId,jdbcType=BIGINT},
+      </if>
+      <if test="bcProvinceid != null" >
+        #{bcProvinceid,jdbcType=BIGINT},
+      </if>
+      <if test="bcCityid != null" >
+        #{bcCityid,jdbcType=BIGINT},
+      </if>
+      <if test="bcAreaid != null" >
+        #{bcAreaid,jdbcType=BIGINT},
+      </if>
+      <if test="bcNumber != null" >
+        #{bcNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bcName != null" >
+        #{bcName,jdbcType=VARCHAR},
+      </if>
+      <if test="bcManager != null" >
+        #{bcManager,jdbcType=VARCHAR},
+      </if>
+      <if test="bcTel != null" >
+        #{bcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="bcAddress != null" >
+        #{bcAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bcType != null" >
+        #{bcType,jdbcType=VARCHAR},
+      </if>
+      <if test="bcBizness != null" >
+        #{bcBizness,jdbcType=VARCHAR},
+      </if>
+      <if test="bcIsdel != null" >
+        #{bcIsdel,jdbcType=BIT},
+      </if>
+      <if test="bcCreatedate != null" >
+        #{bcCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bcUpdatedate != null" >
+        #{bcUpdatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bcReserved1 != null" >
+        #{bcReserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="bcReserved2 != null" >
+        #{bcReserved2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyou.ops.zybd.entity.bizbase.Company" >
+    update base_company
+    <set >
+      <if test="bcProvinceid != null" >
+        bc_provinceId = #{bcProvinceid,jdbcType=BIGINT},
+      </if>
+      <if test="bcCityid != null" >
+        bc_cityId = #{bcCityid,jdbcType=BIGINT},
+      </if>
+      <if test="bcAreaid != null" >
+        bc_areaId = #{bcAreaid,jdbcType=BIGINT},
+      </if>
+      <if test="bcNumber != null" >
+        bc_number = #{bcNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bcName != null" >
+        bc_name = #{bcName,jdbcType=VARCHAR},
+      </if>
+      <if test="bcManager != null" >
+        bc_manager = #{bcManager,jdbcType=VARCHAR},
+      </if>
+      <if test="bcTel != null" >
+        bc_tel = #{bcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="bcAddress != null" >
+        bc_address = #{bcAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bcType != null" >
+        bc_type = #{bcType,jdbcType=VARCHAR},
+      </if>
+      <if test="bcBizness != null" >
+        bc_bizness = #{bcBizness,jdbcType=VARCHAR},
+      </if>
+      <if test="bcIsdel != null" >
+        bc_isDel = #{bcIsdel,jdbcType=BIT},
+      </if>
+      <if test="bcCreatedate != null" >
+        bc_createDate = #{bcCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bcUpdatedate != null" >
+        bc_updateDate = #{bcUpdatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bcReserved1 != null" >
+        bc_reserved1 = #{bcReserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="bcReserved2 != null" >
+        bc_reserved2 = #{bcReserved2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bc_id = #{bcId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyou.ops.zybd.entity.bizbase.Company" >
+    update base_company
+    set bc_provinceId = #{bcProvinceid,jdbcType=BIGINT},
+      bc_cityId = #{bcCityid,jdbcType=BIGINT},
+      bc_areaId = #{bcAreaid,jdbcType=BIGINT},
+      bc_number = #{bcNumber,jdbcType=VARCHAR},
+      bc_name = #{bcName,jdbcType=VARCHAR},
+      bc_manager = #{bcManager,jdbcType=VARCHAR},
+      bc_tel = #{bcTel,jdbcType=VARCHAR},
+      bc_address = #{bcAddress,jdbcType=VARCHAR},
+      bc_type = #{bcType,jdbcType=VARCHAR},
+      bc_bizness = #{bcBizness,jdbcType=VARCHAR},
+      bc_isDel = #{bcIsdel,jdbcType=BIT},
+      bc_createDate = #{bcCreatedate,jdbcType=TIMESTAMP},
+      bc_updateDate = #{bcUpdatedate,jdbcType=TIMESTAMP},
+      bc_reserved1 = #{bcReserved1,jdbcType=VARCHAR},
+      bc_reserved2 = #{bcReserved2,jdbcType=VARCHAR}
+    where bc_id = #{bcId,jdbcType=BIGINT}
+  </update>
+
+</mapper>
