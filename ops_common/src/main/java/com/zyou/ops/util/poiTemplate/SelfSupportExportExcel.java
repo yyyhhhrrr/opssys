@@ -25,8 +25,8 @@ public class SelfSupportExportExcel {
 
 
         //标题
-        String[] title = {"序号", "幼儿园", "班级名称", "心情", "平均心情", "饮水", "平均饮水", "饮食", "平均饮食", "睡眠", "平均睡眠",
-                "大便", "平均大便", "小便", "平均小便", "洗手", "平均洗手", "总次数","实际打卡","平均次数"};
+        String[] title = {"序号", "幼儿园", "班级名称", "平均心情", "平均饮水", "平均饮食", "平均睡眠",
+                "平均大便","平均小便", "平均洗手","平均打卡总次数"};
 
         //创建Excel工作簿
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -123,7 +123,7 @@ public class SelfSupportExportExcel {
         cell = firstRow.createCell(0);
         cell.setCellValue(mytitle);
         cell.setCellStyle(titleStyle);
-        CellRangeAddress region = new CellRangeAddress(0, 0, 0, 19);//合并单元格
+        CellRangeAddress region = new CellRangeAddress(0, 0, 0, 10);//合并单元格
         sheet.addMergedRegion(region);//加入sheet
         sheet.createFreezePane(0, 2);//设置冻结窗格
 
@@ -165,118 +165,55 @@ public class SelfSupportExportExcel {
             }
             cell2.setCellStyle(titleStyle3);
             cell2 = nextrow.createCell(3);
-            if (resultMap.get(i).get("happy_count") != null) {
-                cell2.setCellValue(resultMap.get(i).get("happy_count").toString());
-            } else {
-                cell2.setCellValue("");
-            }
-            cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(4);
             if (resultMap.get(i).get("happy_avg") != null) {
                 cell2.setCellValue(resultMap.get(i).get("happy_avg").toString());
             } else {
                 cell2.setCellValue("");
             }
             cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(5);
-            if (resultMap.get(i).get("water_count") != null) {
-                cell2.setCellValue(resultMap.get(i).get("water_count").toString());
-            } else {
-                cell2.setCellValue("");
-            }
-            cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(6);
+            cell2 = nextrow.createCell(4);
             if (resultMap.get(i).get("water_avg") != null) {
                 cell2.setCellValue(resultMap.get(i).get("water_avg").toString());
             } else {
                 cell2.setCellValue("");
             }
             cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(7);
-            if (resultMap.get(i).get("food_count") != null) {
-                cell2.setCellValue(resultMap.get(i).get("food_count").toString());
-            } else {
-                cell2.setCellValue("");
-            }
-            cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(8);
+            cell2 = nextrow.createCell(5);
             if (resultMap.get(i).get("food_avg") != null) {
                 cell2.setCellValue(resultMap.get(i).get("food_avg").toString());
             } else {
                 cell2.setCellValue("");
             }
             cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(9);
-            if (resultMap.get(i).get("sleep_count") != null) {
-                cell2.setCellValue(resultMap.get(i).get("sleep_count").toString());
-            } else {
-                cell2.setCellValue("");
-            }
-            cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(10);
+            cell2 = nextrow.createCell(6);
             if (resultMap.get(i).get("sleep_avg") != null) {
                 cell2.setCellValue(resultMap.get(i).get("sleep_avg").toString());
             } else {
                 cell2.setCellValue("");
             }
             cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(11);
-            if (resultMap.get(i).get("shit_count") != null) {
-                cell2.setCellValue(resultMap.get(i).get("shit_count").toString());
-            } else {
-                cell2.setCellValue("");
-            }
-            cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(12);
+            cell2 = nextrow.createCell(7);
             if (resultMap.get(i).get("shit_avg") != null) {
                 cell2.setCellValue(resultMap.get(i).get("shit_avg").toString());
             } else {
                 cell2.setCellValue("");
             }
             cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(13);
-            if (resultMap.get(i).get("urinate_count") != null) {
-                cell2.setCellValue(resultMap.get(i).get("urinate_count").toString());
-            } else {
-                cell2.setCellValue("");
-            }
-            cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(14);
+            cell2 = nextrow.createCell(8);
             if (resultMap.get(i).get("urinate_avg") != null) {
                 cell2.setCellValue(resultMap.get(i).get("urinate_avg").toString());
             } else {
                 cell2.setCellValue("");
             }
             cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(15);
-            if (resultMap.get(i).get("wash_count") != null) {
-                cell2.setCellValue(resultMap.get(i).get("wash_count").toString());
-            } else {
-                cell2.setCellValue("");
-            }
-            cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(16);
+            cell2 = nextrow.createCell(9);
             if (resultMap.get(i).get("wash_avg") != null) {
                 cell2.setCellValue(resultMap.get(i).get("wash_avg").toString());
             } else {
                 cell2.setCellValue("");
             }
             cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(17);
-            if (resultMap.get(i).get("sum") != null) {
-                cell2.setCellValue(resultMap.get(i).get("sum").toString());
-            } else {
-                cell2.setCellValue("");
-            }
-            cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(18);
-            if (resultMap.get(i).get("card_time") != null) {
-                cell2.setCellValue(resultMap.get(i).get("card_time").toString());
-            } else {
-                cell2.setCellValue("");
-            }
-            cell2.setCellStyle(titleStyle3);
-            cell2 = nextrow.createCell(19);
+            cell2 = nextrow.createCell(10);
             if (resultMap.get(i).get("avg") != null) {
                 cell2.setCellValue(resultMap.get(i).get("avg").toString());
             } else {

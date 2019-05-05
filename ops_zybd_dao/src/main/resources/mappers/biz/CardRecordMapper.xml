@@ -486,24 +486,14 @@ FROM
         SELECT
         zz.`幼儿园` as 'company_name',
         zz.`班级名称`as 'class_name',
-        zz.`心情` as 'happy_count',
         zz.`平均心情`as 'happy_avg',
-        zz.`饮水` as 'water_count',
         zz.`平均饮水`as 'water_avg',
-        zz.`饮食` as 'food_count',
         zz.`平均饮食`as 'food_avg',
-        zz.`睡觉` as 'sleep_count',
         zz.`平均睡觉`as 'sleep_avg',
-        zz.`大便` as 'shit_count',
         zz.`平均大便` as 'shit_avg',
-        zz.`小便` as 'urinate_count',
         zz.`平均小便`as 'urinate_avg',
-        zz.`洗手` as 'wash_count',
         zz.`平均洗手`as 'wash_avg',
-        zz.`总次数` as 'sum',
-        zz.`实际打卡`as 'card_time',
         (zz.`平均心情`+zz.`平均饮水`+zz.`平均大便`+zz.`平均小便`+zz.`平均洗手`+zz.`平均睡觉`+zz.`平均饮食`) as 'avg'
-
         from(SELECT
         yy.`幼儿园`,
         yy.`班级名称`,
