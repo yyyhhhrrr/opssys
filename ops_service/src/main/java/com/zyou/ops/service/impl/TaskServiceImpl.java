@@ -33,8 +33,4 @@ public class TaskServiceImpl extends BaseServiceImpl<Task,Integer> implements Ta
     }
 
 
-    @Override
-    public List<Task> queryTaskList() throws DataAccessException {
-        return taskMapper.queryTaskList();
-    }
 }

@@ -41,6 +41,18 @@
         <!-- 显式指定Mapper文件位置 -->
         <property name="mapperLocations" value="classpath*:mappers/**/**.xml"/>
         <!--<property name="configLocation" value="classpath:mybatis/mybatisconf.xml"/>-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>
+                            dialect=mysql
+                            reasonable=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

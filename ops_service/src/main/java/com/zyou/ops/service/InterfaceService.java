@@ -14,5 +14,5 @@ import java.util.List;
  * @Description: ${Description}
  */
 public interface InterfaceService extends BaseService<Interface,Integer> {
-    public List<Interface> selectInterfaceExcpet(Integer id) throws DataAccessException;
+
 }

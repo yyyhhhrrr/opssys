@@ -15,6 +15,5 @@ import java.util.List;
  */
 public interface TaskMapper extends BaseMapper<Task,Integer> {
 
-    public List<Task> queryTaskList() throws DataAccessException;
 
 }

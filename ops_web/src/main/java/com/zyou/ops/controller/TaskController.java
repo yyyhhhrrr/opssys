@@ -1,5 +1,7 @@
 package com.zyou.ops.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zyou.ops.entity.StatusMap;
 import com.zyou.ops.entity.Task;
 import com.zyou.ops.service.TaskService;
@@ -8,13 +10,20 @@ import com.zyou.ops.util.thread.DetectionTask;
 import com.zyou.ops.util.thread.MyThreadFactory;
 import com.zyou.ops.util.thread.ThreadUtil;
 import com.zyou.ops.util.utils.Constants;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.apiguardian.api.API;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +38,9 @@ import java.util.Map;
  * @CreateTime: 2019-02-13 13:42
  * @Description: ${Description}
  */
-@Controller
+@RestController
 @RequestMapping("main")
+@Api(value = "task",description = "检测任务")
 public class TaskController {
 
     @Autowired
@@ -52,20 +62,16 @@ public class TaskController {
     }
 
 
-    @RequestMapping("/getTaskList")
-    @ResponseBody
-    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber) {
+    @RequestMapping(value = "/getTaskList",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ApiOperation(value="检测任务列表")
+    @ApiImplicitParams({@ApiImplicitParam(paramType = "query",name="pageNumber",value="页数",dataType = "Integer"),
+            @ApiImplicitParam(paramType = "query",name="pageSize",value="页面大小",dataType = "Integer")})
+    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber) throws Exception {
         // 查看全部数据执行后端分页查询
-        Map<String,Object> queryMap = new HashMap<>();
-        if (pageNumber <= 1){
-            pageNumber = 1;
-        }
-        int beginNumber = (pageNumber - 1)* pageSize;
-        queryMap.put("beginNumber", beginNumber);
-        queryMap.put("limit", pageSize);
-        //数据库查询信息
-        List<Task> taskList = taskService.getAllByPage(queryMap);
-        int total=taskService.getCount();
+        PageHelper.startPage(pageNumber,pageSize);
+        List<Task> taskList = taskService.searchAll();
+        PageInfo<Task> p=new PageInfo<>(taskList);
+        int total= (int) p.getTotal();
         for (Task task : taskList) {
             task.setTsk_pm_json(task.getTsk_pm_json().replaceAll("\"", "&quot;"));
             task.setTsk_pm_result(task.getTsk_pm_result().replaceAll("\"", "&quot;"));

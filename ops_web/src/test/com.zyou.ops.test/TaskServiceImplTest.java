@@ -32,8 +32,8 @@ public class TaskServiceImplTest {
          Map<String,Object> map=new HashMap<>();
          map.put("beginNumber",1);
          map.put("limit",10);
-         List<Task> tList=taskService.getAllByPage(map);
-         System.out.println(tList);
+
+
 
 
 

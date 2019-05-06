@@ -4,9 +4,16 @@ package com.zyou.ops.controller;
 import com.alibaba.fastjson.JSONObject;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zyou.ops.entity.Interface;
 import com.zyou.ops.service.InterfaceService;
 import com.zyou.ops.util.utils.Constants;
+import com.zyou.ops.util.utils.ValidateUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +34,9 @@ import java.util.*;
  * @Description: ${Description}
  */
 
-@Controller
+@RestController
 @RequestMapping("main")
+@Api(value = "interface",description = "接口")
 public class InterfaceController {
 
     @Autowired
@@ -56,25 +64,31 @@ public class InterfaceController {
 
 
 
-  //表格数据填充
-    @RequestMapping("/getInterfaceList")
-    @ResponseBody
-    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber){
-        // 查看全部数据执行后端分页查询
-        Map<String,Object> queryMap = new HashMap<>();
-        if (pageNumber <= 1){
-            pageNumber = 1;
+  //获得接口列表
+    @RequestMapping(value = "/getInterfaceList",method=RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ApiOperation(value="接口列表")
+    @ApiImplicitParams({@ApiImplicitParam(paramType = "query",name="pageNumber",value="页数",dataType = "Integer"),
+            @ApiImplicitParam(paramType = "query",name="pageSize",value="页面大小",dataType = "Integer")})
+    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber) throws Exception {
+        Map<String, Object> responseMap = new HashMap<>();
+        if(ValidateUtil.isAllEmpty(pageSize,pageNumber)){
+            //不分页
+            List<Interface> serverIpList=new ArrayList<Interface>();
+            serverIpList=interfaceService.searchAll();
+            responseMap.put("list",serverIpList);
         }
-        int beginNumber = (pageNumber - 1)* pageSize;
-        queryMap.put("beginNumber", beginNumber);
-        queryMap.put("limit", pageSize);
-        List<Interface> interfaceList = interfaceService.getAllByPage(queryMap);
-        int total = interfaceService.getCount();
-        Map<String,Object> responseMap = new HashMap<>();
-        //key需要与js中 dataField对应，bootStrap默认值为rows
-        responseMap.put("rows", interfaceList);
-        // 需要返回到前台，用于计算分页导航栏
-        responseMap.put("total", total);
+        else {
+            // 查看全部数据执行后端分页查询
+            PageHelper.startPage(pageNumber, pageSize);
+            List<Interface> interfaceList = interfaceService.searchAll();
+            PageInfo<Interface> p = new PageInfo<>(interfaceList);
+            int total = (int) p.getTotal();
+            //key需要与js中 dataField对应，bootStrap默认值为rows
+            responseMap.put("rows", interfaceList);
+            // 需要返回到前台，用于计算分页导航栏
+            responseMap.put("total", total);
+            System.out.println(responseMap);
+        }
         return responseMap;
     }
 
@@ -103,32 +117,12 @@ public class InterfaceController {
         }
     }
 
-    //接口地址下拉菜单
-    @RequestMapping(value="queryInterface",produces ="application/json;charset=UTF-8" )
-    public @ResponseBody
-    ArrayList<Interface> queryServerPOST(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
-        ArrayList<Interface> interfaceList=new ArrayList<Interface>();
-        interfaceList.addAll(interfaceService.searchAll());
 
-        return interfaceList;
-    }
-
-    //修改接口地址下拉菜单
-    @RequestMapping(value="queryInterfaceExcept",produces ="application/json;charset=UTF-8" )
-    public @ResponseBody
-    ArrayList<Interface> queryServerExceptPOST(@RequestBody JSONObject data) throws Exception{
-
-        ArrayList<Interface> interfaceExceptList=new ArrayList<Interface>();
-        Integer it_id=Integer.valueOf(data.getString("it_id"));
-        interfaceExceptList.addAll(interfaceService.selectInterfaceExcpet(it_id));
-        return interfaceExceptList;
-    }
-
-    @RequestMapping("queryInterfaceById")
-    public @ResponseBody
-    Interface queryInterfaceById(HttpServletRequest request) throws Exception{
-        Integer it_id=Integer.valueOf(request.getParameter("it_id"));
+    @RequestMapping(value="interface/{id}",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ApiOperation(value="根据id获取接口")
+    public Interface queryInterfaceById(@PathVariable("id")String id) throws Exception{
+        Integer it_id=Integer.valueOf(id);
         Interface itc=interfaceService.searchById(it_id);
         return itc;
     }

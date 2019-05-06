@@ -1,18 +1,23 @@
 package com.zyou.ops.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zyou.ops.entity.ServerIp;
 import com.zyou.ops.service.ServerIpService;
 
 import com.zyou.ops.util.utils.Constants;
+import com.zyou.ops.util.utils.ValidateUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,17 +32,19 @@ import java.util.Map;
  * @BelongsPackage: controller
  * @Author: yang
  * @CreateTime: 2019-02-11 11:25
- * @Description: ${Description}
+ * @Description: 服务器信息控制层
  */
-@Controller
+@RestController
 @RequestMapping("main")
+@Api(value = "ip",description = "服务器")
 public class IPListController {
 
 
     @Autowired
     ServerIpService serverIpService;
 
-    @RequestMapping(value="/saveIP",produces = "text/html;charset=UTF-8")
+    @RequestMapping(value="/saveIP",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @ApiOperation(value="服务器列表")
     public ResponseEntity<String> save(Model model, HttpServletRequest request, ServerIp serverIp) throws Exception{
         Long result = 0L;
         result=serverIpService.create(serverIp);
@@ -57,30 +64,36 @@ public class IPListController {
     }
 
 
-    //表格数据填充
-    @RequestMapping("/getIPList")
-    @ResponseBody
-    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber){
-        // 查看全部数据执行后端分页查询
-        Map<String,Object> queryMap = new HashMap<>();
-        if (pageNumber <= 1){
-            pageNumber = 1;
+    //获得服务器列表
+    @RequestMapping(value="/getIPList",method= RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ApiOperation(value="服务器列表")
+    @ApiImplicitParams({@ApiImplicitParam(paramType = "query",name="pageNumber",value="页数",dataType = "Integer"),
+            @ApiImplicitParam(paramType = "query",name="pageSize",value="页面大小",dataType = "Integer")})
+    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber) throws Exception {
+        Map<String, Object> responseMap = new HashMap<>();
+        if(ValidateUtil.isAllEmpty(pageSize,pageNumber)){
+            //不分页
+            List<ServerIp> serverIpList=new ArrayList<ServerIp>();
+            serverIpList=serverIpService.searchAll();
+            responseMap.put("list",serverIpList);
         }
-        int beginNumber = (pageNumber - 1)* pageSize;
-        queryMap.put("beginNumber", beginNumber);
-        queryMap.put("limit", pageSize);
-        List<ServerIp> ipList = serverIpService.getAllByPage(queryMap);
-        int total = serverIpService.getCount();
-        Map<String,Object> responseMap = new HashMap<>();
-        //key需要与js中 dataField对应，bootStrap默认值为rows
-        responseMap.put("rows",ipList );
-        // 需要返回到前台，用于计算分页导航栏
-        responseMap.put("total", total);
+        else {
+            // 查看全部数据执行后端分页查询
+            PageHelper.startPage(pageNumber, pageSize);
+            List<ServerIp> ipList = serverIpService.searchAll();
+            PageInfo<ServerIp> p = new PageInfo<>(ipList);
+            int total = (int) p.getTotal();
+            //key需要与js中 dataField对应，bootStrap默认值为rows
+            responseMap.put("rows", ipList);
+            // 需要返回到前台，用于计算分页导航栏
+            responseMap.put("total", total);
+            System.out.println(responseMap);
+        }
         return responseMap;
     }
 
-
     @RequestMapping(value="updateIP",produces ="text/html;charset=UTF-8")
+    @ApiOperation("新增服务器")
     public ResponseEntity<String> update(Model model, HttpServletRequest request, ServerIp serverIp) throws Exception{
         Long result=0L;
         result=serverIpService.update(serverIp);
@@ -104,41 +117,10 @@ public class IPListController {
         }
     }
 
-
-    //服务器下拉菜单
-    @RequestMapping(value="queryServer",produces ="application/json;charset=UTF-8" )
-    public @ResponseBody
-    ArrayList<ServerIp> queryServerPOST(HttpServletRequest request, HttpServletResponse response) throws Exception{
-
-        ArrayList<ServerIp> serverIpList=new ArrayList<ServerIp>();
-        serverIpList.addAll(serverIpService.searchAll());
-
-        return serverIpList;
-    }
-
-
-    //修改服务器下拉菜单
-    @RequestMapping(value="queryServerExcept",produces ="application/json;charset=UTF-8" )
-    public @ResponseBody
-    ArrayList<ServerIp> queryServerExcpetPOST(@RequestBody JSONObject data) throws Exception{
-
-        ArrayList<ServerIp> serverIpExcpetList=new ArrayList<ServerIp>();
-        Integer sv_id=Integer.valueOf(data.getString("sv_id"));
-//        Integer sv_id=Integer.valueOf(request.getParameter("sv_id"));
-//
-        serverIpExcpetList.addAll(serverIpService.selcetServerExcpet(sv_id));
-
-//        serverIpExcpetList=(ArrayList<ServerIp>) serverIpService.selcetServerExcpet(sv_id);
-
-
-        return serverIpExcpetList;
-    }
-
-
-    @RequestMapping(value="queryServerIPById")
-    public @ResponseBody
-    ServerIp queryServerIPById(HttpServletRequest request) throws  Exception{
-        Integer sv_id=Integer.valueOf(request.getParameter("sv_id"));
+    @RequestMapping(value="server/{id}",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ApiOperation(value="根据id获取服务器")
+    public ServerIp queryServerIPById(@PathVariable("id") String id) throws  Exception{
+        Integer sv_id=Integer.valueOf(id);
         ServerIp serverIp=serverIpService.searchById(sv_id);
         return serverIp;
     }

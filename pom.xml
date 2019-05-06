@@ -125,18 +125,19 @@
       <artifactId>mybatis</artifactId>
       <version>${mybatis.version}</version>
     </dependency>
+      <dependency>
+          <groupId>com.github.pagehelper</groupId>
+          <artifactId>pagehelper</artifactId>
+          <version>5.0.1</version>
+      </dependency>
+
+
     <!-- mybatis/spring包 -->
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
       <version>1.2.2</version>
     </dependency>
-    <!-- 导入java ee jar 包 -->
-    <!--<dependency>-->
-    <!--<groupId>javax</groupId>-->
-    <!--<artifactId>javaee-api</artifactId>-->
-    <!--<version>7.0</version>-->
-    <!--</dependency>-->
     <!-- 导入Mysql数据库链接jar包 -->
     <dependency>
       <groupId>mysql</groupId>
@@ -296,8 +297,8 @@
     <!--javax.serlvet-->
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
       <scope>provided</scope>
     </dependency>
 
@@ -349,6 +350,19 @@
       <version>1.6.1</version>
     </dependency>
     <!--poiTemplate 结束 -->
+
+   <!--swagger2 配置 -->
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>2.7.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>2.7.0</version>
+    </dependency>
+
 
   </dependencies>
 

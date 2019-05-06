@@ -34,8 +34,4 @@ public class ServerIpServiceImpl extends BaseServiceImpl<ServerIp,Integer> imple
     }
 
 
-    @Override
-    public List<ServerIp> selcetServerExcpet(Integer id) throws DataAccessException {
-        return serverIpMapper.selectServerExcpet(id);
-    }
 }

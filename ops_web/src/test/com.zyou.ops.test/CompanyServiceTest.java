@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +24,8 @@ import java.util.Map;
  * @CreateTime: 2019-04-17 17:10
  * @Description: ${Description}
  */
+
+@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:spring/applicationContext.xml"})
 public class CompanyServiceTest {
@@ -32,6 +35,6 @@ public class CompanyServiceTest {
 
     @Test
     public void test() throws Exception {
-
+      System.out.println("111");
     }
 }

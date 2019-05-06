@@ -26,26 +26,19 @@
     </delete>
 
     <select id="selectAll" resultType="ServerIp">
-        select * from t_server_ip;
+        select
+        sv_id,sv_ip,sv_ip_private,sv_os,sv_cpu,
+         sv_memory,sv_disk,sv_bandwidth,sv_detail,sv_create_time,sv_update_time
+         from t_server_ip
     </select>
 
     <select id="selectById" parameterType="Integer" resultType="ServerIp">
-        select * from t_server_ip where t_server_ip.sv_id=#{sv_id};
-    </select>
-    <select id="selectServerExcpet" parameterType="Integer" resultMap="ExceptServerMap">
-      SELECT sv_id,sv_ip FROM t_server_ip WHERE sv_id!=#{sv_id};
-    </select>
-
-    <select id="getAllByPage" resultType="ServerIp" parameterType="java.util.Map">
-        SELECT * FROM t_server_ip
-        <if test="null !=beginNumber and null !=limit">
-            LIMIT #{beginNumber},#{limit}
-        </if>
+        select
+         sv_id,sv_ip,sv_ip_private,sv_os,sv_cpu,
+         sv_memory,sv_disk,sv_bandwidth,sv_detail,sv_create_time,sv_update_time
+         from t_server_ip where t_server_ip.sv_id=#{sv_id}
     </select>
 
-    <select id="getCount" resultType="int">
-  	SELECT COUNT(1) FROM t_server_ip
-  </select>
 
     <update id="update" parameterType="ServerIp" >
         UPDATE t_server_ip

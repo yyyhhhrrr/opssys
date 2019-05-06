@@ -13,7 +13,7 @@
 
     <select id="selectAll" resultType="User">
 
-        select * from t_user;
+        select us_id,us_username,us_password from t_user
 
 
     </select>
@@ -21,7 +21,7 @@
     <select id="selectByUsername"  parameterType="java.lang.String"  resultType="User">
 
 
-       select * from t_user where us_username=#{username}
+       select us_id,us_username,us_password from t_user where us_username=#{username}
 
     </select>
 

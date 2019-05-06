@@ -15,5 +15,4 @@ import java.util.List;
  */
 public interface ServerIpMapper extends BaseMapper<ServerIp, Integer> {
 
-    public List<ServerIp> selectServerExcpet(final Integer id) throws DataAccessException;
 }

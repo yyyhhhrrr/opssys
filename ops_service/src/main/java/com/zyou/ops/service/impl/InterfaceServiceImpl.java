@@ -34,8 +34,5 @@ public class InterfaceServiceImpl extends BaseServiceImpl<Interface,Integer> imp
         return interfaceMapper;
     }
 
-    @Override
-    public List<Interface> selectInterfaceExcpet(Integer id) throws DataAccessException {
-        return interfaceMapper.selectInterfaceExcpet(id);
-    }
+
 }

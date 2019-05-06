@@ -34,7 +34,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#"><i class="fa fa-sitemap"></i>报表管理<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-table"></i>报表管理<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="${ctx}/export/index">数据导出</a>
@@ -51,4 +51,19 @@
 </nav>
 
 </body>
+<script>
+    function loadPage(url) {
+        $.ajax({
+            type: "POST",
+            url: url,
+            async: true,
+            dataType: "html",
+            contentType: 'application/json; charset=utf-8',
+            success: function (html) {
+                $('#right').html(html);
+                //$('#right').load(url);//load函数同样能实现效果
+            }
+        });
+    }
+</script>
 </html>

@@ -27,28 +27,12 @@
 
 
     <select id="selectAll" resultType="interface">
-            SELECT * FROM t_interface
+            SELECT it_id,it_port,it_address,it_detail,it_create_time,it_update_time FROM t_interface
     </select>
 
     <select id="selectById" parameterType="Integer" resultType="interface">
-         SELECT * from t_interface WHERE it_id=#{it_id}
+         SELECT it_id,it_port,it_address,it_detail,it_create_time,it_update_time from t_interface WHERE it_id=#{it_id}
     </select>
-
-    <select id="selectInterfaceExcpet" parameterType="Integer" resultMap="interfaceExceptMap">
-     SELECT it_id,it_port,it_address FROM t_interface WHERE it_id!=#{it_id};
-    </select>
-
-
-    <select id="getAllByPage" resultType="Interface" parameterType="java.util.Map">
-           SELECT * FROM t_interface
-           <if test="null !=beginNumber and null !=limit">
-                 LIMIT #{beginNumber},#{limit}
-           </if>
-    </select>
-
-    <select id="getCount" resultType="int">
-  	SELECT COUNT(1) FROM t_interface
-  </select>
 
 
 

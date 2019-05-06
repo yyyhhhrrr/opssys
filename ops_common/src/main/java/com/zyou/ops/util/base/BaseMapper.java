@@ -81,22 +81,6 @@ public interface BaseMapper<T extends Object,PK extends Serializable>  {
     List<T> selectAll() throws  DataAccessException;
 
 
-    /**
-     * 分页获取总数
-     * @param
-     * @return
-     * @throws DataAccessException
-     */
-    Integer getCount() throws  DataAccessException;
-
-
-    /**
-     * 分页获取对象
-     * @param map
-     * @return
-     * @throws DataAccessException
-     */
-    List<T> getAllByPage(Map<String, Object> map) throws DataAccessException;
 
 
 }

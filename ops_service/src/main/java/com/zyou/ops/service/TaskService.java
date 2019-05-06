@@ -15,5 +15,4 @@ import java.util.List;
  */
 public interface TaskService extends BaseService<Task,Integer> {
 
-    public List<Task> queryTaskList() throws DataAccessException;
 }

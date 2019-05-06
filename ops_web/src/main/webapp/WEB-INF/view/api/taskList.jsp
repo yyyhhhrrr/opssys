@@ -316,7 +316,7 @@
 
         $('#table_server').bootstrapTable('destroy');
         $('#table_server').bootstrapTable({
-            method: 'POST',
+            method: 'GET',
             // 若以post方式提交，需要补充contentType信息，否则分页参数无法传递到controller
             //contentType: "application/x-www-form-urlencoded",
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -527,31 +527,32 @@
         if(isFirst) {
             $.ajax({
                 contentType: "application/json;charset=utf-8",
-                type: "POST",
-                url: "queryServerExcept",
-                dataType: "json",
-                data: JSON.stringify(data1),
+                type: "GET",
+                url: "getIPList",
                 success: function (data) {
-                    $.each(data, function (i, serverIp) {
-                        $('#update_serverIpList').append(
-                            $('<option>').text(serverIp.sv_ip).attr('value',
-                                serverIp.sv_id));
-                    });
+                    var list=data.list;
+                    $.each(list, function (i, serverIp) {
+                        if($('#update_serverIpList option:selected').text()!=serverIp.sv_ip) {
+                            $('#update_serverIpList').append(
+                                $('<option>').text(serverIp.sv_ip).attr('value',
+                                    serverIp.sv_id));
+                        }});
                 }
             });
 
             $.ajax({
                 contentType: "application/json;charset=utf-8",
-                type: "POST",
-                url: "queryInterfaceExcept",
-                dataType: "json",
-                data: JSON.stringify(data2),
+                type: "GET",
+                url: "getInterfaceList",
                 success: function (data) {
-                    $.each(data, function (i, itc) {
-                        $('#update_interfaceList').append(
-                            $('<option>').text(itc.it_port + itc.it_address).attr('value',
-                                itc.it_id));
-                    });
+                    var list=data.list;
+                    $.each(list, function (i, itc) {
+                        var it_message=itc.it_port+itc.it_address;
+                        if($('#update_interfaceList option:selected').text()!=it_message) {
+                            $('#update_interfaceList').append(
+                                $('<option>').text(itc.it_port + itc.it_address).attr('value',
+                                    itc.it_id));
+                        }});
                 }
             });
 
@@ -564,11 +565,12 @@
     $(document).ready(function(){
         $.ajax({
             contentType : "application/json;charset=utf-8",
-            type : "POST",
-            url : "queryServer",
+            type : "GET",
+            url : "getIPList",
             dataType : "json",
             success : function(data) {
-                $.each(data, function(i, serverIp) {
+                var list=data.list;
+                $.each(list, function(i, serverIp) {
                     $('#serverIpList').append(
                         $('<option>').text(serverIp.sv_ip).attr('value',
                             serverIp.sv_id));
@@ -583,11 +585,12 @@
     $(document).ready(function(){
         $.ajax({
             contentType : "application/json;charset=utf-8",
-            type : "POST",
-            url : "queryInterface",
+            type : "GET",
+            url : "getInterfaceList",
             dataType : "json",
             success : function(data) {
-                $.each(data, function(i, itc) {
+                var list=data.list;
+                $.each(list, function(i, itc) {
                     $('#interfaceList').append(
                         $('<option>').text(itc.it_port+itc.it_address).attr('value',
                             itc.it_id));

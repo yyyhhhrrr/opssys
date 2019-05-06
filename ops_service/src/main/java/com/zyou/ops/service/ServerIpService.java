@@ -15,5 +15,5 @@ import java.util.List;
  */
 public interface ServerIpService extends BaseService<ServerIp,Integer> {
 
-    public List<ServerIp> selcetServerExcpet(Integer id) throws DataAccessException;
+
 }

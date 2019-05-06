@@ -229,7 +229,7 @@
 
         $('#table_server').bootstrapTable('destroy');
         $('#table_server').bootstrapTable({
-            method: 'POST',
+            method: 'GET',
             // 若以post方式提交，需要补充contentType信息，否则分页参数无法传递到controller
             //contentType: "application/x-www-form-urlencoded",
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',

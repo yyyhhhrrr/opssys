@@ -14,5 +14,5 @@ import java.util.List;
  * @Description: ${Description}
  */
 public interface InterfaceMapper extends BaseMapper<Interface, Integer> {
-    public List<Interface> selectInterfaceExcpet(final Integer id) throws DataAccessException;
+
 }

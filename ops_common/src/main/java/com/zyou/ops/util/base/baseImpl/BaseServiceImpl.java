@@ -38,13 +38,7 @@ public abstract class BaseServiceImpl<T extends Object, PK extends Serializable>
         return this.getBaseMapper().delByIds(pks);
     }
 
-    public Integer getCount() throws  DataAccessException{
-        return  this.getBaseMapper().getCount();
-    }
 
-    public List<T> getAllByPage(Map<String,Object> map ) throws DataAccessException{
-        return  this.getBaseMapper().getAllByPage(map);
-    }
 
 
 }
