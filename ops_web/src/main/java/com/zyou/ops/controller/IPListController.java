@@ -93,7 +93,6 @@ public class IPListController {
     }
 
     @RequestMapping(value="updateIP",produces ="text/html;charset=UTF-8")
-    @ApiOperation("新增服务器")
     public ResponseEntity<String> update(Model model, HttpServletRequest request, ServerIp serverIp) throws Exception{
         Long result=0L;
         result=serverIpService.update(serverIp);

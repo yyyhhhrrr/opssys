@@ -23,6 +23,8 @@
     <mvc:resources location="/assets/bootstrap/" mapping="/assets/bootstrap/**" />
     <mvc:resources location="/assets/ico/" mapping="/assets/ico/**" />
     <mvc:resources location="/assets/img/" mapping="/assets/img/**" />
+    <mvc:resources location="/assets/layui/" mapping="/assets/layui/**" />
+
 
     <context:component-scan base-package="com.zyou.ops.controller,com.zyou.ops.swagger"/>
     <!--swagger -->

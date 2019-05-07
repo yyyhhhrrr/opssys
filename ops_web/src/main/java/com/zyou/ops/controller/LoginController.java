@@ -26,6 +26,15 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    //页面
+    @RequestMapping("/index")
+    public ModelAndView index(HttpServletRequest request) throws Exception{
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
+
     @RequestMapping("/successLogin")
     public ModelAndView login(HttpServletRequest request, ModelAndView model){
 

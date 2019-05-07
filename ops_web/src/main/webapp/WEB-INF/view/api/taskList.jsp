@@ -9,10 +9,6 @@
 <html>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../common/taglib.jsp"%>
-<!-- 上部导航栏 -->
-<%@ include file="../common/top.jsp"%>
-<!--  左侧导航栏 -->
-<%@ include file="../common/left.jsp"%>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -35,7 +31,6 @@
 
 </head>
 <body>
-<div id="wrapper">
     <!-- 站点  -->
 
     <div id="page-wrapper" >
@@ -283,10 +278,8 @@
             <!-- /. ROW  -->
 
         </div>
-        <footer><p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p></footer>
     </div>
     <!-- /. PAGE INNER  -->
-</div>
 <!-- /. PAGE WRAPPER  -->
 <!-- /. WRAPPER  -->
 <!-- JS Scripts-->
