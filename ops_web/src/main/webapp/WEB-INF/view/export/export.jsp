@@ -27,6 +27,8 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <!-- bootstrap table -->
     <link href="${ctx}/assets/css/bootstrap-table.min.css" rel="stylesheet" />
+    <!-- datetime组件-->
+    <link href="${ctx}/assets/css/bootstrap-datetimepicker.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -41,7 +43,35 @@
                     </h1>
                 </div>
             </div>
-            <!-- /. ROW  -->
+
+
+            <div class="row">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <label>选择开始时间：</label>
+                        <!--指定 date标记-->
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <label>选择结束时间：</label>
+                        <!--指定 date标记-->
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
 
 
@@ -51,9 +81,9 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <!-- 模态框-->
-                            <button class="btn btn-primary btn-lg" onclick="exportExcel();">宁夏数据导出</button>
-                            <button class="btn btn-primary btn-lg" onclick="exportSelfExcel();">自营数据导出</button>
-                            <button class="btn btn-primary btn-lg" onclick="exportReturnVisitExcel();">回访数据导出</button>
+                            <button class="btn btn-primary btn-lg" onclick="post(this);">数据导出</button>
+                            <%--<button class="btn btn-primary btn-lg" onclick="exportSelfExcel();">自营数据导出</button>--%>
+                            <%--<button class="btn btn-primary btn-lg" onclick="exportReturnVisitExcel();">回访数据导出</button>--%>
 
                     </div>
                     <!--End Advanced Tables -->
@@ -84,7 +114,34 @@
 <script src="${ctx}/assets/js/bootstrap-table-zh-CN.js"></script>
 <!-- Custom Js -->
 <script src="${ctx}/assets/js/custom-scripts.js"></script>
+        <script src="${ctx}/assets/js/moment-with-locales.min.js"></script>
+        <script src="${ctx}/assets/js/bootstrap-datetimepicker.js"></script>
+        <script src="${ctx}/assets/js/bootstrap-datetimepicker.zh-CN.js"></script>
+
+
 <script>
+    $(function () {
+        var picker1 = $('#datetimepicker1').datetimepicker({
+            format: 'YYYY-MM-DD',
+            locale: moment.locale('zh-cn'),
+            //minDate: '2016-7-1'
+        });
+        var picker2 = $('#datetimepicker2').datetimepicker({
+            format: 'YYYY-MM-DD',
+            locale: moment.locale('zh-cn')
+        });
+        //动态设置最小值
+        picker1.on('dp.change', function (e) {
+            picker2.data('DateTimePicker').minDate(e.date);
+        });
+        //动态设置最大值
+        picker2.on('dp.change', function (e) {
+            picker1.data('DateTimePicker').maxDate(e.date);
+        });
+    });
+
+
+
     function exportExcel(){
         var province_id=3354;
         var province_name="宁夏";

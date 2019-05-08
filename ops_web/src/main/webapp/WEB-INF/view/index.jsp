@@ -80,7 +80,16 @@
                 <a class="site-demo-active leftdaohang" data-url="${ctx}/swagger-ui.html" mytitle="swagger文档">swagger文档</a>
             </dd>
         </dl>
-    </li>             
+    </li>  
+    <li class="layui-nav-item">
+        <a href="javascript:;">服务器连接</a>
+        <dl class="layui-nav-child">
+            <dd>
+                <!--linux 安装 shellinabox 可以在web端访问linux 终端 具体安装见"https://blog.csdn.net/qq_16224495/article/details/81871308" -->
+                <a class="site-demo-active leftdaohang" data-url="http://120.78.169.172:6175/" mytitle="mycloud">mycloud</a>
+            </dd>
+        </dl>
+    </li>                      
 </ul>
                 </div>
               </div>

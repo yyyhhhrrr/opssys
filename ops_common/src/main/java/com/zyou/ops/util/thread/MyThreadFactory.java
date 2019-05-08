@@ -3,6 +3,7 @@ package com.zyou.ops.util.thread;
 import com.zyou.ops.entity.Interface;
 import com.zyou.ops.entity.ServerIp;
 import com.zyou.ops.entity.Task;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
