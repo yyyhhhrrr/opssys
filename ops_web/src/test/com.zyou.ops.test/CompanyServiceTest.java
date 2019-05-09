@@ -3,6 +3,7 @@ package com.zyou.ops.test;
 import com.zyou.ops.entity.Interface;
 import com.zyou.ops.service.InterfaceService;
 import com.zyou.ops.zybd.entity.bizbase.Company;
+import com.zyou.ops.zybd.entity.sys.Province;
 import com.zyou.ops.zybd.mapper.bizbase.CompanyMapper;
 import com.zyou.ops.zybd.service.CompanyService;
 import org.junit.Test;
@@ -35,6 +36,8 @@ public class CompanyServiceTest {
 
     @Test
     public void test() throws Exception {
-      System.out.println("111");
+        List<Province> provinces = companyService.selectProvince();
+        System.out.println(provinces.get(0).getProvinceId());
+
     }
 }

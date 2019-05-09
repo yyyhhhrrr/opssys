@@ -222,4 +222,15 @@
     where bc_id = #{bcId,jdbcType=BIGINT}
   </update>
 
+  <select id="selectProvince" resultType="com.zyou.ops.zybd.entity.sys.Province">
+    SELECT
+	a.bc_provinceId as 'province_id',
+	b.sa_name as 'name'
+    FROM
+	base_company a
+    LEFT JOIN sys_area b ON a.bc_provinceId = b.sa_id
+    GROUP BY
+	a.bc_provinceId
+  </select>
+
 </mapper>

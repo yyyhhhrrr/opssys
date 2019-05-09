@@ -69,7 +69,7 @@
         <a href="javascript:;">报表管理</a>
         <dl class="layui-nav-child">
             <dd>
-                <a class="site-demo-active leftdaohang" data-url="${ctx}/export/index" mytitle="数据导出">数据导出</a>
+                <a class="site-demo-active leftdaohang" data-url="${ctx}/export/index" mytitle="成长报告导出">成长报告导出</a>
             </dd>
         </dl>
     </li>  
@@ -105,14 +105,12 @@
                 </div> 
               </div>
 
-               <!--4.底部固定区域-->
-              <div class="layui-footer">
-                <!-- 底部固定区域 -->
-                © layui.com - 底部固定区域
-              </div>
+              
             </div>
 <script src="${ctx}/assets/layui/layui.all.js"></script>
 <script>
+
+
     layui.use('element', function(){
         var $ = layui.jquery
             ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
@@ -141,7 +139,7 @@
 //                      alert("遍历的没有相同tab："+mytitle);
                     element.tabAdd('demo', {
                         title:mytitle //用于演示
-                        ,content: '<iframe style="width: 100%;height: 500%;" scrolling="no" src='+htmlurl+' ></iframe>'
+                        ,content: '<iframe id="iframe"  style="width: 100%;height: 500%;" scrolling="yes" src='+htmlurl+' ></iframe>'
                         ,id: mytitle //实际使用一般是规定好的id，这里以时间戳模拟下
                     })
                     element.tabChange('demo', mytitle); //切换到当前点击的页面
@@ -158,6 +156,9 @@
         });
 
     });
+
+
+
 </script>   
 </body>
 </html>

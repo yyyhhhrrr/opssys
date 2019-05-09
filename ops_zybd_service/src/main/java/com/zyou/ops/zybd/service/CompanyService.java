@@ -2,6 +2,10 @@ package com.zyou.ops.zybd.service;
 
 import com.zyou.ops.util.base.BaseService;
 import com.zyou.ops.zybd.entity.bizbase.Company;
+import com.zyou.ops.zybd.entity.sys.Province;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @BelongsProject: opssys
@@ -11,5 +15,5 @@ import com.zyou.ops.zybd.entity.bizbase.Company;
  * @Description: ${Description}
  */
 public interface CompanyService extends BaseService<Company,Integer> {
-
+    List<Province> selectProvince();
 }
