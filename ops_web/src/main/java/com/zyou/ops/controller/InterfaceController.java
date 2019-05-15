@@ -67,8 +67,8 @@ public class InterfaceController {
   //获得接口列表
     @RequestMapping(value = "/getInterfaceList",method=RequestMethod.GET,produces = "application/json;charset=UTF-8")
     @ApiOperation(value="接口列表")
-    @ApiImplicitParams({@ApiImplicitParam(paramType = "query",name="pageNumber",value="页数",dataType = "Integer"),
-            @ApiImplicitParam(paramType = "query",name="pageSize",value="页面大小",dataType = "Integer")})
+    @ApiImplicitParams({@ApiImplicitParam(paramType = "query",name="pageNumber",value="页数",dataType = "int"),
+            @ApiImplicitParam(paramType = "query",name="pageSize",value="页面大小",dataType = "int")})
     public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber) throws Exception {
         Map<String, Object> responseMap = new HashMap<>();
         if(ValidateUtil.isAllEmpty(pageSize,pageNumber)){

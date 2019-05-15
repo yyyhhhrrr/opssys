@@ -1,8 +1,9 @@
 package com.zyou.ops.zybd.entity.biz;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class StudentReport {
+public class StudentReport implements Serializable {
     private Integer ssId;
 
     private String ssDate;

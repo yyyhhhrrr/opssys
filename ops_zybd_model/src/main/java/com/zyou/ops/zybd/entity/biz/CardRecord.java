@@ -1,8 +1,9 @@
 package com.zyou.ops.zybd.entity.biz;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CardRecord {
+public class CardRecord implements Serializable {
     private Long bcId;
 
     private Long bcCompanyid;

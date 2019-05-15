@@ -5,7 +5,9 @@ import com.zyou.ops.entity.ServerIp;
 import com.zyou.ops.entity.Task;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadFactory;
 
@@ -64,14 +66,16 @@ public class MyThreadFactory implements ThreadFactory {
         itc.setIt_port(7001);
         itc.setIt_address("/card/cardValidate");
 
+        List<String> emailList=new ArrayList<>();
+        emailList.add("562605133@qq.com");
         task.setAnInterface(itc);
         task.setServerIp(serverIp);
         task.setTsk_pm_header("{Content-Type=application/json,token=2951314e0796466EE5c36ae737566128}");
         task.setTsk_pm_json("{\"cardNum\":\"2787504611\",\"companyId\":\"181\"}");
         //    DetectionTask detectionTask = new DetectionTask(task);
         MyThreadFactory factory = new MyThreadFactory();
-        Thread taskThread1=factory.newThread(new DetectionTask(task,true));
-        Thread taskThread2=factory.newThread(new DetectionTask(task,true));
+        Thread taskThread1=factory.newThread(new DetectionTask(task,true,emailList));
+        Thread taskThread2=factory.newThread(new DetectionTask(task,true,emailList));
         taskThread1.start();
         taskThread2.start();
         System.out.println("********"+taskThread1.getId());

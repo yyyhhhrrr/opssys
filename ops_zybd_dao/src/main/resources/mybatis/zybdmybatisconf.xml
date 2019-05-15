@@ -4,7 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-
+    <!--&lt;!&ndash; 开启驼峰 ops 里面没开&ndash;&gt;-->
+    <!--<settings>-->
+        <!--<setting name="mapUnderscoreToCamelCase" value="true"/>-->
+    <!--</settings>-->
 
     <!-- 别名定义 -->
     <typeAliases>
@@ -13,6 +16,8 @@
         <package name="com.zyou.ops.zybd.entity.bizbase"/>
 
     </typeAliases>
+
+
 
 
 

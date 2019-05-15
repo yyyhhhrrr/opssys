@@ -14,5 +14,5 @@ import java.util.List;
  * @Description: ${Description}
  */
 public interface TaskService extends BaseService<Task,Integer> {
-
+   List<Task> getTaskListNotInByEmail(Integer email_id);
 }

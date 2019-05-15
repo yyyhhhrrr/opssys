@@ -1,8 +1,9 @@
 package com.zyou.ops.zybd.entity.sys;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Area {
+public class Area implements Serializable {
     private Integer saId;
 
     private Integer saParentid;

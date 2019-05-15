@@ -1,8 +1,9 @@
 package com.zyou.ops.zybd.entity.bizbase;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Classes {
+public class Classes implements Serializable {
     private Long bcId;
 
     private Long bcCompanyid;

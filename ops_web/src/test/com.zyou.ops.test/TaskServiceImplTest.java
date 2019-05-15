@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,8 +21,9 @@ import java.util.Map;
  * @CreateTime: 2019-02-13 17:33
  * @Description: ${Description}
  */
+@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:spring/applicationContext-datasource.xml"})
+@ContextConfiguration(locations = {"classpath*:spring/applicationContext.xml"})
 public class TaskServiceImplTest {
 
     @Autowired
@@ -29,12 +31,8 @@ public class TaskServiceImplTest {
 
     @Test
     public void test() throws Exception {
-         Map<String,Object> map=new HashMap<>();
-         map.put("beginNumber",1);
-         map.put("limit",10);
-
-
-
+        List<Task> taskListNotInByEmail = taskService.getTaskListNotInByEmail(1);
+        System.out.println(taskListNotInByEmail);
 
 
     }

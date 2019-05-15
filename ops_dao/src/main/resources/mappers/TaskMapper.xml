@@ -96,4 +96,26 @@
         WHERE tsk_id=#{tsk_id}
 
     </update>
+
+    <select id="getTaskListNotInByEmail" parameterType="java.lang.Integer" resultMap="taskMap">
+      select tsk_id,tsk_pm_method, tsk_pm_header, tsk_pm_json,
+        tsk_pm_result, tsk_time,
+        tsk_detail, tsk_create_time, tsk_update_time,
+        sv_id,sv_ip,it_id,it_port, it_address
+      from t_task left join t_server_ip tsi on t_task.tsk_ip_id = tsi.sv_id
+      left join t_interface ti on t_task.tsk_it_id = ti.it_id WHERE tsk_id not in(
+      SELECT
+    tsk_id
+
+    FROM
+        t_email a
+    INNER JOIN ref_email_task b ON a.email_id = b.ref_email_id
+    INNER JOIN t_task c on b.ref_task_id=c.tsk_id
+    INNER JOIN t_interface d on c.tsk_it_id=d.it_id
+    INNER JOIN t_server_ip e on c.tsk_ip_id=e.sv_id
+
+    where email_id=#{email_id})
+
+    </select>
+
 </mapper>

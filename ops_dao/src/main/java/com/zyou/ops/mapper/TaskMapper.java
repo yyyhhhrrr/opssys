@@ -2,6 +2,7 @@ package com.zyou.ops.mapper;
 
 import com.zyou.ops.entity.Task;
 import com.zyou.ops.util.base.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
@@ -15,5 +16,5 @@ import java.util.List;
  */
 public interface TaskMapper extends BaseMapper<Task,Integer> {
 
-
+   List<Task> getTaskListNotInByEmail(@Param("email_id")Integer email_id);
 }

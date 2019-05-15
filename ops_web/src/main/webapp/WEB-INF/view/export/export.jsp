@@ -157,14 +157,14 @@
             format: 'YYYY-MM-DD',
             locale: moment.locale('zh-cn')
         });
-        //动态设置最小值
-        picker1.on('dp.change', function (e) {
-            picker2.data('DateTimePicker').minDate(e.date);
-        });
-        //动态设置最大值
-        picker2.on('dp.change', function (e) {
-            picker1.data('DateTimePicker').maxDate(e.date);
-        });
+        // //动态设置最小值
+        // picker1.on('dp.change', function (e) {
+        //     picker2.data('DateTimePicker').minDate(e.date);
+        // });
+        // //动态设置最大值
+        // picker2.on('dp.change', function (e) {
+        //     picker1.data('DateTimePicker').maxDate(e.date);
+        // });
     });
 
 
@@ -192,13 +192,13 @@
         var startDate=$('#startDate').val();
         var endDate=$('#endDate').val();
         if(type=="option1"){
-            if(id==null&&name==null){
+            if((id==null&&name==null)||name=="请选择"){
                alert("请选择所要导出的省份!");
             }
             else if(startDate!=endDate){
                 alert("目前省份数据只能导出当天！");
             }
-            else{
+            else {
                 exportProvinceExcel(id,name,startDate);
             }
         }

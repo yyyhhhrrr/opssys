@@ -60,18 +60,28 @@ public class ExportController {
     /**
      * 省份打卡
      * @param response
-     * @param request
+     * @param province_id
+     * @param province_name
+     * @param date
      * @return
      * @throws DataAccessException
      * @throws UnsupportedEncodingException
+     * @throws ParseException
      */
-    @RequestMapping(value = "/province",method = RequestMethod.GET)
-    public  String export(HttpServletResponse response, HttpServletRequest request
-                                       ) throws DataAccessException, UnsupportedEncodingException, ParseException {
+    @RequestMapping(value = "/province",method = RequestMethod.GET,produces = "applcation/json;charset=UTF-8")
+    @ApiOperation("省份成长报告导出")
+    @ApiImplicitParams(
+           {@ApiImplicitParam(paramType = "query",name="province_id",value="省份id",dataType = "int"),
+            @ApiImplicitParam(paramType = "query",name="province_name",value="省份名称",dataType = "String"),
+            @ApiImplicitParam(paramType = "query",name="date",value="时间",dataType = "String")})
+    public  String export(HttpServletResponse response,
+                          Integer province_id,
+                          String province_name,
+                          String date) throws DataAccessException, UnsupportedEncodingException, ParseException {
         response.setContentType("application/x-download;charset=UTF-8");
-        Integer province_id=Integer.valueOf(request.getParameter("province_id"));
-        String province_name=new String(request.getParameter("province_name").getBytes("ISO8859-1"),"utf-8");
-        String date=new String(request.getParameter("date").getBytes("ISO8859-1"),"utf-8");
+//        Integer province_id=Integer.valueOf(request.getParameter("province_id"));
+        province_name=new String(province_name.getBytes("ISO8859-1"),"utf-8");
+        date=new String(date.getBytes("ISO8859-1"),"utf-8");
         Date mydate=simpleDateFormat2.parse(date);
         String date_format=simpleDateFormat.format(mydate);
         String date_format2=simpleDateFormat2.format(mydate);
@@ -99,21 +109,29 @@ public class ExportController {
         return modelAndView;
     }
 
+
     /**
      * 自营园打卡
      * @param response
-     * @param request
+     * @param company_name
+     * @param date
      * @return
      * @throws DataAccessException
      * @throws UnsupportedEncodingException
+     * @throws ParseException
      */
-    @RequestMapping(value = "/selfExport",method = RequestMethod.GET)
-    public  String selfExport(HttpServletResponse response, HttpServletRequest request
+    @RequestMapping(value = "/selfExport",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ApiOperation("自营园成长报告导出")
+    @ApiImplicitParams(
+           {@ApiImplicitParam(paramType = "query",name="company_name",value="园所名称",dataType = "String"),
+            @ApiImplicitParam(paramType = "query",name="date",value="时间",dataType = "String")})
+    public  String selfExport(HttpServletResponse response,
+                              String company_name,
+                              String date
     ) throws DataAccessException, UnsupportedEncodingException, ParseException {
         response.setContentType("application/x-download;charset=UTF-8");
-
-        String company_name=new String(request.getParameter("company_name").getBytes("ISO8859-1"),"utf-8");
-        String date=new String(request.getParameter("date").getBytes("ISO8859-1"),"utf-8");
+        company_name=new String(company_name.getBytes("ISO8859-1"),"utf-8");
+        date=new String(date.getBytes("ISO8859-1"),"utf-8");
         Date mydate=simpleDateFormat2.parse(date);
         String date_format=simpleDateFormat.format(mydate);
         String date_format2=simpleDateFormat2.format(mydate);
@@ -135,14 +153,32 @@ public class ExportController {
         }
     }
 
-    @RequestMapping(value = "/returnVisitExport",method = RequestMethod.GET)
-    public  String ReturnVisitExport(HttpServletResponse response, HttpServletRequest request
+    /**
+     * 回访园所打卡
+     * @param response
+     * @param company_name
+     * @param start_date
+     * @param end_date
+     * @return
+     * @throws DataAccessException
+     * @throws UnsupportedEncodingException
+     * @throws ParseException
+     */
+    @RequestMapping(value = "/returnVisitExport",method = RequestMethod.GET,produces = "applcation/json;charset=UTF-8")
+    @ApiOperation("回访园成长报告导出")
+    @ApiImplicitParams(
+           {@ApiImplicitParam(paramType = "query",name="company_name",value="园所名称",dataType = "String"),
+            @ApiImplicitParam(paramType = "query",name="start_date",value="开始时间",dataType = "String"),
+            @ApiImplicitParam(paramType = "query",name="end_date",value="结束时间",dataType = "String"),})
+    public  String ReturnVisitExport(HttpServletResponse response,
+                                     String company_name,
+                                     String start_date,
+                                     String end_date
     ) throws DataAccessException, UnsupportedEncodingException, ParseException {
         response.setContentType("application/x-download;charset=UTF-8");
-
-        String company_name=new String(request.getParameter("company_name").getBytes("ISO8859-1"),"utf-8");
-        String start_date=new String(request.getParameter("start_date").getBytes("ISO8859-1"),"utf-8");
-        String end_date=new String(request.getParameter("end_date").getBytes("ISO8859-1"),"utf-8");
+        company_name=new String(company_name.getBytes("ISO8859-1"),"utf-8");
+        start_date=new String(start_date.getBytes("ISO8859-1"),"utf-8");
+        end_date=new String(end_date.getBytes("ISO8859-1"),"utf-8");
         String start_format=simpleDateFormat.format(simpleDateFormat2.parse(start_date));
         String end_format=simpleDateFormat.format(simpleDateFormat2.parse(end_date));
         try {

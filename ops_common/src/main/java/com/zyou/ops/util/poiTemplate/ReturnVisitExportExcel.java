@@ -1,6 +1,8 @@
 package com.zyou.ops.util.poiTemplate;
 
 import com.zyou.ops.util.utils.StringMatchUtil;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
@@ -30,25 +32,25 @@ public class ReturnVisitExportExcel {
                 "大便", "平均大便", "小便", "平均小便", "洗手", "平均洗手","离园","平均离园", "总次数","实际打卡","平均次数","状态"};
 
         //创建Excel工作簿
-        XSSFWorkbook workbook = new XSSFWorkbook();
+        HSSFWorkbook workbook = new HSSFWorkbook();
 
         //创建一个工作表sheet
-        XSSFSheet sheet = workbook.createSheet();
+        HSSFSheet sheet = workbook.createSheet();
 
         //创建题目行
-        XSSFRow firstRow = sheet.createRow(0);
-        XSSFCell cell = null;
+        HSSFRow firstRow = sheet.createRow(0);
+        HSSFCell cell = null;
         firstRow.setHeightInPoints(50);
 
 
         //创建标题行
-        XSSFRow row = sheet.createRow(1);
-        XSSFCell cell1 = null;
+        HSSFRow row = sheet.createRow(1);
+        HSSFCell cell1 = null;
         row.setHeightInPoints(50);//设置单元格高度
 
 
         //设置标题单元 样式
-        XSSFCellStyle titleStyle = workbook.createCellStyle();
+        HSSFCellStyle titleStyle = workbook.createCellStyle();
         titleStyle.setBorderRight(BorderStyle.THIN); //右边实线
         titleStyle.setBorderLeft(BorderStyle.THIN);//左边实线
         titleStyle.setBorderTop(BorderStyle.THIN);//上边实线
@@ -56,9 +58,11 @@ public class ReturnVisitExportExcel {
         titleStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);//设置背景色必须要写
         titleStyle.setVerticalAlignment(VerticalAlignment.CENTER);//设置上下居中
         titleStyle.setAlignment(HorizontalAlignment.CENTER);//设置左右居中
-        titleStyle.setFillForegroundColor(new XSSFColor(new Color(233, 198, 129)));//设置单元格背景色
+        titleStyle.setFillForegroundColor(HSSFColor.HSSFColorPredefined.LIME.getIndex());//设置单元格背景色
+        HSSFPalette customPalette = workbook.getCustomPalette();
+        customPalette.setColorAtIndex(HSSFColor.HSSFColorPredefined.LIME.getIndex(),(byte) 233, (byte) 198, (byte) 129);
         //标题字体 样式1
-        XSSFFont titleFont = workbook.createFont();
+        HSSFFont titleFont = workbook.createFont();
         titleFont.setFontHeightInPoints((short) 20);//设置字体大小
         titleFont.setFontName("宋体");//设置字体
         titleFont.setBold(true);//加粗
@@ -66,7 +70,7 @@ public class ReturnVisitExportExcel {
 
 
         //设置标题单元 样式1
-        XSSFCellStyle titleStyle1 = workbook.createCellStyle();
+        HSSFCellStyle titleStyle1 = workbook.createCellStyle();
         titleStyle1.setBorderRight(BorderStyle.THIN);
         titleStyle1.setBorderLeft(BorderStyle.THIN);
         titleStyle1.setBorderTop(BorderStyle.THIN);
@@ -74,9 +78,11 @@ public class ReturnVisitExportExcel {
         titleStyle1.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         titleStyle1.setVerticalAlignment(VerticalAlignment.CENTER);
         titleStyle1.setAlignment(HorizontalAlignment.CENTER);
-        titleStyle1.setFillForegroundColor(new XSSFColor(new Color(193, 236, 216)));
+        titleStyle1.setFillForegroundColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());//设置单元格背景色
+        HSSFPalette customPalette2 = workbook.getCustomPalette();
+        customPalette2.setColorAtIndex(HSSFColor.HSSFColorPredefined.GREEN.getIndex(),(byte) 193, (byte) 236, (byte) 216);
         //标题字体 样式1
-        XSSFFont titleFont1 = workbook.createFont();
+        HSSFFont titleFont1 = workbook.createFont();
         titleFont1.setFontHeightInPoints((short) 12);
         titleFont1.setFontName("宋体");
         titleFont1.setBold(true);
@@ -84,7 +90,7 @@ public class ReturnVisitExportExcel {
 
 
         //设置标题单元 样式2
-        XSSFCellStyle titleStyle2 = workbook.createCellStyle();
+        HSSFCellStyle titleStyle2 = workbook.createCellStyle();
         titleStyle2.setBorderRight(BorderStyle.THIN);
         titleStyle2.setBorderLeft(BorderStyle.THIN);
         titleStyle2.setBorderTop(BorderStyle.THIN);
@@ -92,18 +98,20 @@ public class ReturnVisitExportExcel {
         titleStyle2.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         titleStyle2.setVerticalAlignment(VerticalAlignment.CENTER);
         titleStyle2.setAlignment(HorizontalAlignment.CENTER);
-        titleStyle2.setFillForegroundColor(new XSSFColor(new Color(233, 198, 129)));
+        titleStyle2.setFillForegroundColor(HSSFColor.HSSFColorPredefined.LIME.getIndex());//设置单元格背景色
+        HSSFPalette customPalette3 = workbook.getCustomPalette();
+        customPalette3.setColorAtIndex(HSSFColor.HSSFColorPredefined.LIME.getIndex(),(byte) 233, (byte) 198, (byte) 129);
         titleStyle2.setWrapText(true);
 
         //标题字体 样式2
-        XSSFFont titleFont2 = workbook.createFont();
+        HSSFFont titleFont2 = workbook.createFont();
         titleFont2.setFontHeightInPoints((short) 12);
         titleFont2.setFontName("宋体");
         titleFont2.setBold(true);
         titleStyle2.setFont(titleFont2);
 
         //设置标题单元 样式3
-        XSSFCellStyle titleStyle3 = workbook.createCellStyle();
+        HSSFCellStyle titleStyle3 = workbook.createCellStyle();
         titleStyle3.setBorderRight(BorderStyle.THIN);
         titleStyle3.setBorderLeft(BorderStyle.THIN);
         titleStyle3.setBorderTop(BorderStyle.THIN);
@@ -113,7 +121,7 @@ public class ReturnVisitExportExcel {
         titleStyle3.setAlignment(HorizontalAlignment.CENTER);
         titleStyle3.setWrapText(true); //设置内容换行
         //标题字体 样式3
-        XSSFFont titleFont3 = workbook.createFont();
+        HSSFFont titleFont3 = workbook.createFont();
         titleFont3.setFontHeightInPoints((short) 12);
         titleFont3.setFontName("宋体");
         titleStyle3.setFont(titleFont3);
@@ -146,8 +154,8 @@ public class ReturnVisitExportExcel {
         int j=0;//添加空行
         int k=1;//添加序号
         for (int i = 0; i < size; i++) {
-            XSSFRow nextrow = sheet.createRow(j + 2);
-            XSSFCell cell2 = nextrow.createCell(0);
+            HSSFRow nextrow = sheet.createRow(j + 2);
+            HSSFCell cell2 = nextrow.createCell(0);
             cell2.setCellValue(k);
             cell2.setCellStyle(titleStyle3);
             cell2 = nextrow.createCell(1);

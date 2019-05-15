@@ -40,7 +40,7 @@
         <property name="typeAliasesPackage" value="com.zyou.ops.entity,com.zyou.ops.zybd.entity"/>
         <!-- 显式指定Mapper文件位置 -->
         <property name="mapperLocations" value="classpath*:mappers/**/**.xml"/>
-        <!--<property name="configLocation" value="classpath:mybatis/mybatisconf.xml"/>-->
+        <property name="configLocation" value="classpath:mybatis/zybdmybatisconf.xml"/>
         <property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageHelper">

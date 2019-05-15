@@ -2,10 +2,13 @@ package com.zyou.ops.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zyou.ops.entity.Email;
 import com.zyou.ops.entity.StatusMap;
 import com.zyou.ops.entity.Task;
+import com.zyou.ops.service.EmailService;
 import com.zyou.ops.service.TaskService;
 
+import com.zyou.ops.util.mail.SendMail;
 import com.zyou.ops.util.thread.DetectionTask;
 import com.zyou.ops.util.thread.MyThreadFactory;
 import com.zyou.ops.util.thread.ThreadUtil;
@@ -27,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +49,11 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private EmailService emailService;
+    @Autowired
+    private SendMail sendMail;
+
 
     private Map<Integer, Boolean> statusMap = new StatusMap().getStatusMap();
 
@@ -64,8 +73,8 @@ public class TaskController {
 
     @RequestMapping(value = "/getTaskList",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
     @ApiOperation(value="检测任务列表")
-    @ApiImplicitParams({@ApiImplicitParam(paramType = "query",name="pageNumber",value="页数",dataType = "Integer"),
-            @ApiImplicitParam(paramType = "query",name="pageSize",value="页面大小",dataType = "Integer")})
+    @ApiImplicitParams({@ApiImplicitParam(paramType = "query",name="pageNumber",value="页数",dataType = "int"),
+            @ApiImplicitParam(paramType = "query",name="pageSize",value="页面大小",dataType = "int")})
     public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber) throws Exception {
         // 查看全部数据执行后端分页查询
         PageHelper.startPage(pageNumber,pageSize);
@@ -149,7 +158,11 @@ public class TaskController {
         String state = request.getParameter("state");
         Task task=new Task();
         task=taskService.searchById(tsk_id);
-
+        List<Email> emailListByTask = emailService.getEmailListByTask(tsk_id);
+        List<String> emailList=new ArrayList<>();
+        for (Email email : emailListByTask) {
+            emailList.add(email.getEmail_address());
+        }
 
         //关闭线程
         if (state.equals("true")) {
@@ -165,7 +178,7 @@ public class TaskController {
         }
         //启动线程
         else if(state.equals("false")) {
-            Thread taskThread=taskThreadFactory.newThread(new DetectionTask(task,true));
+            Thread taskThread=taskThreadFactory.newThread(new DetectionTask(task,true,emailList,sendMail));
             taskThread.start();
             taskThreadMap.put(tsk_id,taskThread.getId());
             statusMap.put(tsk_id, true);

@@ -233,4 +233,8 @@
 	a.bc_provinceId
   </select>
 
+
+  <select id="selectAll" resultType="com.zyou.ops.zybd.entity.bizbase.Company">
+select *from base_company
+  </select>
 </mapper>

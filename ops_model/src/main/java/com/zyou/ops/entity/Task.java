@@ -146,5 +146,23 @@ public class Task implements Serializable {
 
     private Interface anInterface;
 
-
+    @Override
+    public String toString() {
+        return "Task{" +
+                "tsk_id=" + tsk_id +
+                ", tsk_ip_id=" + tsk_ip_id +
+                ", tsk_it_id=" + tsk_it_id +
+                ", tsk_pm_method='" + tsk_pm_method + '\'' +
+                ", tsk_pm_header='" + tsk_pm_header + '\'' +
+                ", tsk_pm_json='" + tsk_pm_json + '\'' +
+                ", tsk_pm_result='" + tsk_pm_result + '\'' +
+                ", tsk_time=" + tsk_time +
+                ", tsk_detail='" + tsk_detail + '\'' +
+                ", tsk_create_time=" + tsk_create_time +
+                ", tsk_update_time=" + tsk_update_time +
+                ", status=" + status +
+                ", serverIp=" + serverIp +
+                ", anInterface=" + anInterface +
+                '}';
+    }
 }

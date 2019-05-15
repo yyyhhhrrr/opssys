@@ -1,5 +1,7 @@
 package com.zyou.ops.zybd.entity.sys;
 
+import java.io.Serializable;
+
 /**
  * @BelongsProject: opssys
  * @BelongsPackage: com.zyou.ops.zybd.entity.sys
@@ -7,7 +9,7 @@ package com.zyou.ops.zybd.entity.sys;
  * @CreateTime: 2019-05-09 14:44
  * @Description: ${Description}
  */
-public class Province {
+public class Province implements Serializable {
 
     private Integer province_id;
     private String name;
