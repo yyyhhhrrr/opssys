@@ -31,10 +31,13 @@
 
 </head>
 <body>
-    <!-- 站点  -->
-
     <div id="page-wrapper" >
         <div id="page-inner">
+            <!-- 站点  -->
+
+            <div class="col-sm-4">
+                <div id="tree"  style="height: 400px;overflow-y :scroll;"></div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
@@ -45,7 +48,6 @@
             <!-- /. ROW  -->
 
 
-
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -53,7 +55,41 @@
                         <div class="panel-heading">
                             <!-- 模态框-->
                             <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">添加检测任务</button>
+                            <button  id="select"class="btn btn-primary btn-lg" ><i class="fa fa-search fa-large"></i>查询</button>
+                            <button  id="reset" class="btn btn-primary btn-lg"><i class="fa fa-undo fa-large"></i>重置</button>
                         </div>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        IP:<input id="select_ip" class="form-control" name="svIp" placeholder="请输入ip...">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        操作系统:<input id="select_os" class="form-control" name="svOs" placeholder="请输入操作系统...">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        端口:<input id="select_port" class="form-control" name="itPort" placeholder="请输入端口...">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        地址:<input id="select_address" class="form-control" name="itAddress" placeholder="请输入地址...">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        详细信息:<input id="select_detail" class="form-control" name="tskDetail" placeholder="请输入详细信息...">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
                         <div class="panel-body">
                             <div class="table-responsive">
 
@@ -279,6 +315,7 @@
 
         </div>
     </div>
+
     <!-- /. PAGE INNER  -->
 <!-- /. PAGE WRAPPER  -->
 <!-- /. WRAPPER  -->
@@ -300,9 +337,46 @@
 <script src="${ctx}/assets/js/bootstrap-table-zh-CN.js"></script>
 
 <script>
+    function getTree() {
+        var tree = [
+            {
+                text:"Parent 1",
+                nodes: [
+                    {
+                        text:"Child 1",
+                        nodes: [
+                            {
+                                text:"Grandchild 1"
+                            },
+                            {
+                                text:"Grandchild 2"
+                            }
+                        ]
+                    },
+                    {
+                        text:"Child 2"
+                    }
+                ]
+            },
+            {
+                text:"Parent 2"
+            },
+            {
+                text:"Parent 3"
+            },
+            {
+                text:"Parent 4"
+            },
+            {
+                text:"Parent 5"
+            }
+        ];
+        return tree;
+    }
+
     $(function () {
         initTable();
-
+        $('#tree').treeview({data: getTree()});
     })
 
     function initTable(){
@@ -333,7 +407,7 @@
             queryParamsType:'', // 设置为 ''  在这种情况下传给服务器的参数为：pageSize,pageNumber
 
             // 直接把pageSize,pageNumber，调用queryParamsByBegin函数
-            queryParames:queryParamsByBegin,
+            queryParams:queryParamsByBegin,
             columns : [
                 {
                     align : "center",
@@ -478,9 +552,28 @@
     function queryParamsByBegin(params){
         return{
             pageSize: params.pageSize,
-            pageNumber: params.pageNumber
+            pageNumber: params.pageNumber,
+            svIp: $("#select_ip").val(),
+            svOs: $("#select_os").val(),
+            itPort:$('#select_port').val(),
+            itAddress:$('#select_address').val(),
+            tskDetail:$('#select_detail').val()
         }
     }
+    $('#select').click(function () {
+        $('#table_server').bootstrapTable('refresh');//url为后台action
+
+    })
+
+    $('#reset').click(function () {
+        $("#select_ip").val("");
+        $("#select_os").val("");
+        $("#select_port").val("");
+        $("#select_address").val("");
+        $("#select_detail").val("");
+        $('#table_server').bootstrapTable('refresh');//url为后台action
+    })
+
 
     // 补充操作栏按钮信息（value：当前字段值，row：当前行信息，index：序列索引）
     function operateFormatter(value, row, index) {
@@ -756,7 +849,7 @@
 
 <!-- Custom Js -->
 <script src="${ctx}/assets/js/custom-scripts.js"></script>
-
+<script src="https://cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
 
 
 </body>

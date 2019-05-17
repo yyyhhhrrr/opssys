@@ -57,8 +57,29 @@
                         <div class="panel-heading">
                             <!-- 模态框-->
                             <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">添加接口地址</button>
-
+                            <button  id="select"class="btn btn-primary btn-lg" ><i class="fa fa-search fa-large"></i>查询</button>
+                            <button  id="reset" class="btn btn-primary btn-lg"><i class="fa fa-undo fa-large"></i>重置</button>
                         </div>
+
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        端口:<input id="select_port" class="form-control" name="itPort" placeholder="请输入端口...">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        地址:<input id="select_address" class="form-control" name="itAddress" placeholder="请输入地址...">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        详细信息:<input id="select_detail" class="form-control" name="itDetail" placeholder="请输入详细信息...">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                         <div class="panel-body">
                             <div class="table-responsive">
 
@@ -249,7 +270,7 @@
             queryParamsType:'', // 设置为 ''  在这种情况下传给服务器的参数为：pageSize,pageNumber
 
             // 直接把pageSize,pageNumber，调用queryParamsByBegin函数
-            queryParames:queryParamsByBegin,
+            queryParams:queryParamsByBegin,
             columns : [
                 {
                     align : "center",
@@ -315,9 +336,24 @@
     function queryParamsByBegin(params){
         return{
             pageSize: params.pageSize,
-            pageNumber: params.pageNumber
+            pageNumber: params.pageNumber,
+            itPort:$('#select_port').val(),
+            itAddress:$('#select_address').val(),
+            itDetail:$('#select_detail').val()
         }
     }
+
+    $('#select').click(function () {
+        $('#table_server').bootstrapTable('refresh');//url为后台action
+
+    })
+
+    $('#reset').click(function () {
+        $("#select_port").val("");
+        $("#select_address").val("");
+        $("#select_detail").val("");
+        $('#table_server').bootstrapTable('refresh');//url为后台action
+    })
 
     // 补充操作栏按钮信息（value：当前字段值，row：当前行信息，index：序列索引）
     function operateFormatter(value, row, index) {

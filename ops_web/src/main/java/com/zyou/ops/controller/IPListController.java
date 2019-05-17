@@ -69,8 +69,19 @@ public class IPListController {
     @ApiOperation(value="服务器列表")
     @ApiImplicitParams({@ApiImplicitParam(paramType = "query",name="pageNumber",value="页数",dataType = "int"),
             @ApiImplicitParam(paramType = "query",name="pageSize",value="页面大小",dataType = "int")})
-    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber) throws Exception {
+    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber,String svIp,String svOs,String svDetail) throws Exception {
         Map<String, Object> responseMap = new HashMap<>();
+        ServerIp serverIp=new ServerIp();
+        if(ValidateUtil.isNotEmpty(svIp)){
+            serverIp.setSv_ip(svIp);
+        }
+        if(ValidateUtil.isNotEmpty(svOs)){
+            serverIp.setSv_os(svOs);
+        }
+        if(ValidateUtil.isNotEmpty(svDetail)){
+            svDetail=new String(svDetail.getBytes("ISO8859-1"),"utf-8");
+            serverIp.setSv_detail(svDetail);
+        }
         if(ValidateUtil.isAllEmpty(pageSize,pageNumber)){
             //不分页
             List<ServerIp> serverIpList=new ArrayList<ServerIp>();
@@ -80,14 +91,13 @@ public class IPListController {
         else {
             // 查看全部数据执行后端分页查询
             PageHelper.startPage(pageNumber, pageSize);
-            List<ServerIp> ipList = serverIpService.searchAll();
+            List<ServerIp> ipList = serverIpService.searchAll(serverIp);
             PageInfo<ServerIp> p = new PageInfo<>(ipList);
             int total = (int) p.getTotal();
             //key需要与js中 dataField对应，bootStrap默认值为rows
             responseMap.put("rows", ipList);
             // 需要返回到前台，用于计算分页导航栏
             responseMap.put("total", total);
-            System.out.println(responseMap);
         }
         return responseMap;
     }

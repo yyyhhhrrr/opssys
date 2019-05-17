@@ -9,6 +9,7 @@ import com.zyou.ops.zybd.entity.sys.Province;
 import com.zyou.ops.zybd.mapper.bizbase.CompanyMapper;
 import com.zyou.ops.zybd.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,4 +39,6 @@ public class CompanyServiceImpl extends BaseServiceImpl<Company,Integer> impleme
     public List<Province> selectProvince() {
         return companyMapper.selectProvince();
     }
+
+
 }

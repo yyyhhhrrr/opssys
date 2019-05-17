@@ -78,9 +78,8 @@ public interface BaseMapper<T extends Object,PK extends Serializable>  {
 //    List<T> selectByParam(Map<Object, Object> map) throws DataAccessException;
 
 
+    List<T> selectAll(T e) throws  DataAccessException;
+
     List<T> selectAll() throws  DataAccessException;
-
-
-
 
 }

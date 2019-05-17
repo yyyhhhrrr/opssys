@@ -2,9 +2,7 @@ package com.zyou.ops.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zyou.ops.entity.Email;
-import com.zyou.ops.entity.StatusMap;
-import com.zyou.ops.entity.Task;
+import com.zyou.ops.entity.*;
 import com.zyou.ops.service.EmailService;
 import com.zyou.ops.service.TaskService;
 
@@ -13,10 +11,12 @@ import com.zyou.ops.util.thread.DetectionTask;
 import com.zyou.ops.util.thread.MyThreadFactory;
 import com.zyou.ops.util.thread.ThreadUtil;
 import com.zyou.ops.util.utils.Constants;
+import com.zyou.ops.util.utils.ValidateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.poi.ss.formula.functions.T;
 import org.apiguardian.api.API;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -75,10 +75,31 @@ public class TaskController {
     @ApiOperation(value="检测任务列表")
     @ApiImplicitParams({@ApiImplicitParam(paramType = "query",name="pageNumber",value="页数",dataType = "int"),
             @ApiImplicitParam(paramType = "query",name="pageSize",value="页面大小",dataType = "int")})
-    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber) throws Exception {
+    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber,String svIp,String svOs,String itPort,String itAddress,String tskDetail) throws Exception {
         // 查看全部数据执行后端分页查询
+        Task mytask=new Task();
+        ServerIp serverIp=new ServerIp();
+        Interface anInterface=new Interface();
+        if(ValidateUtil.isNotEmpty(svIp)){
+            serverIp.setSv_ip(svIp);
+        }
+        if(ValidateUtil.isNotEmpty(svOs)){
+            serverIp.setSv_os(svOs);
+        }
+        if(ValidateUtil.isNotEmpty(itPort)){
+            anInterface.setIt_port(Integer.valueOf(itPort));
+        }
+        if(ValidateUtil.isNotEmpty(itAddress)){
+           anInterface.setIt_address(itAddress);
+        }
+        if(ValidateUtil.isNotEmpty(tskDetail)){
+            tskDetail=new String(tskDetail.getBytes("ISO8859-1"),"utf-8");
+            mytask.setTsk_detail(tskDetail);
+        }
+        mytask.setServerIp(serverIp);
+        mytask.setAnInterface(anInterface);
         PageHelper.startPage(pageNumber,pageSize);
-        List<Task> taskList = taskService.searchAll();
+        List<Task> taskList = taskService.searchAll(mytask);
         PageInfo<Task> p=new PageInfo<>(taskList);
         int total= (int) p.getTotal();
         for (Task task : taskList) {

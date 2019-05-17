@@ -71,9 +71,10 @@ public interface BaseService<T extends Object,PK extends Serializable> {
      * 查询列表
      */
 
+    List<T> searchAll(T e) throws DataAccessException,Exception;
+
+
     List<T> searchAll() throws DataAccessException,Exception;
-
-
 
 
 }

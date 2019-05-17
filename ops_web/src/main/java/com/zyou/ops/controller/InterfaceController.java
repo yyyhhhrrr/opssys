@@ -69,8 +69,20 @@ public class InterfaceController {
     @ApiOperation(value="接口列表")
     @ApiImplicitParams({@ApiImplicitParam(paramType = "query",name="pageNumber",value="页数",dataType = "int"),
             @ApiImplicitParam(paramType = "query",name="pageSize",value="页面大小",dataType = "int")})
-    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber) throws Exception {
+    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber,String itPort,String itAddress,String itDetail) throws Exception {
         Map<String, Object> responseMap = new HashMap<>();
+        Interface anInterface=new Interface();
+        if(ValidateUtil.isNotEmpty(itPort)){
+            anInterface.setIt_port(Integer.valueOf(itPort));
+        }
+        if(ValidateUtil.isNotEmpty(itAddress)){
+            anInterface.setIt_address(itAddress);
+        }
+        if(ValidateUtil.isNotEmpty(itDetail)){
+            itDetail=new String(itDetail.getBytes("ISO8859-1"),"utf-8");
+            anInterface.setIt_detail(itDetail);
+        }
+
         if(ValidateUtil.isAllEmpty(pageSize,pageNumber)){
             //不分页
             List<Interface> serverIpList=new ArrayList<Interface>();
@@ -80,7 +92,7 @@ public class InterfaceController {
         else {
             // 查看全部数据执行后端分页查询
             PageHelper.startPage(pageNumber, pageSize);
-            List<Interface> interfaceList = interfaceService.searchAll();
+            List<Interface> interfaceList = interfaceService.searchAll(anInterface);
             PageInfo<Interface> p = new PageInfo<>(interfaceList);
             int total = (int) p.getTotal();
             //key需要与js中 dataField对应，bootStrap默认值为rows

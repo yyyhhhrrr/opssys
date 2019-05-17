@@ -28,6 +28,17 @@
 
     <select id="selectAll" resultType="interface">
             SELECT it_id,it_port,it_address,it_detail,it_create_time,it_update_time FROM t_interface
+        <where>
+            <if test="it_port!=null and it_port !=''">
+                it_port LIKE "%${it_port}%"
+            </if>
+            <if test="it_address!=null and it_address !=''">
+                AND   it_address LIKE "%"#{it_address}"%"
+            </if>
+            <if test="it_detail!=null and it_detail !=''">
+                AND   it_detail LIKE "%"#{it_detail}"%"
+            </if>
+        </where>
     </select>
 
     <select id="selectById" parameterType="Integer" resultType="interface">

@@ -1,5 +1,7 @@
 package com.zyou.ops.test;
 
+import com.zyou.ops.entity.Interface;
+import com.zyou.ops.entity.ServerIp;
 import com.zyou.ops.entity.Task;
 import com.zyou.ops.service.TaskService;
 import org.junit.Test;
@@ -31,9 +33,13 @@ public class TaskServiceImplTest {
 
     @Test
     public void test() throws Exception {
-        List<Task> taskListNotInByEmail = taskService.getTaskListNotInByEmail(1);
-        System.out.println(taskListNotInByEmail);
-
+        Task task=new Task();
+        Interface anInterface=new Interface();
+        anInterface.setIt_port(7001);
+        anInterface.setIt_address("/card/cardValidate");
+        task.setAnInterface(anInterface);
+        List<Task> taskList = taskService.searchAll(task);
+        System.out.println(taskList);
 
     }
 

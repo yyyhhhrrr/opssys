@@ -28,9 +28,21 @@
     <select id="selectAll" resultType="ServerIp">
         select
         sv_id,sv_ip,sv_ip_private,sv_os,sv_cpu,
-         sv_memory,sv_disk,sv_bandwidth,sv_detail,sv_create_time,sv_update_time
-         from t_server_ip
+        sv_memory,sv_disk,sv_bandwidth,sv_detail,sv_create_time,sv_update_time
+        from t_server_ip
+        <where>
+            <if test="sv_ip!=null and sv_ip !=''">
+                sv_ip LIKE "%"#{sv_ip}"%"
+            </if>
+            <if test="sv_os!=null and sv_os !=''">
+                AND   sv_os LIKE "%"#{sv_os}"%"
+            </if>
+            <if test="sv_detail!=null and sv_detail !=''">
+                AND   sv_detail LIKE "%"#{sv_detail}"%"
+            </if>
+        </where>
     </select>
+
 
     <select id="selectById" parameterType="Integer" resultType="ServerIp">
         select

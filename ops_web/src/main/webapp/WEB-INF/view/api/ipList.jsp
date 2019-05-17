@@ -52,7 +52,30 @@
                         <div class="panel-heading">
                             <!-- 模态框-->
                             <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">添加服务器</button>
-                        </div>
+                            <button  id="select"class="btn btn-primary btn-lg" ><i class="fa fa-search fa-large"></i>查询</button>
+                            <button  id="reset" class="btn btn-primary btn-lg"><i class="fa fa-undo fa-large"></i>重置</button>
+                            </div>
+                        <table class="table table-bordered">
+                            <tr>
+                            <td>
+                                <div class="form-group">
+                                    IP:<input id="select_ip" class="form-control" name="svIp" placeholder="请输入ip...">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    操作系统:<input id="select_os" class="form-control" name="svOs" placeholder="请输入操作系统...">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    详细信息:<input id="select_detail" class="form-control" name="svDetail" placeholder="请输入详细信息...">
+                                </div>
+                            </td>
+                            </tr>
+                        </table>
+
+
                         <div class="panel-body">
                             <div class="table-responsive">
 
@@ -254,10 +277,6 @@
     </div>
     <!-- /. PAGE INNER  -->
 
-<!-- /. PAGE WRAPPER  -->
-<!-- /. WRAPPER  -->
-<!-- JS Scripts-->
-<!-- jQuery Js -->
 <script src="${ctx}/assets/js/jquery-1.10.2.js"></script>
 <!-- Bootstrap Js -->
 <script src="${ctx}/assets/js/bootstrap.min.js"></script>
@@ -274,7 +293,7 @@
 <script>
     $(function () {
         initTable();
-    })
+    });
 
     function initTable(){
 
@@ -303,7 +322,7 @@
             queryParamsType:'', // 设置为 ''  在这种情况下传给服务器的参数为：pageSize,pageNumber
 
             // 直接把pageSize,pageNumber，调用queryParamsByBegin函数
-            queryParames:queryParamsByBegin,
+            queryParams:queryParamsByBegin,
             columns : [
                 {
                     align : "center",
@@ -400,14 +419,34 @@
         $('#table_server').bootstrapTable('hideColumn', 'sv_memory');
         $('#table_server').bootstrapTable('hideColumn', 'sv_disk');
         $('#table_server').bootstrapTable('hideColumn', 'sv_bandwidth');
+
+
+
+
     }
     // 以起始页码方式传入参数,params为table组装参数
     function queryParamsByBegin(params){
         return{
             pageSize: params.pageSize,
-            pageNumber: params.pageNumber
+            pageNumber: params.pageNumber,
+            svIp: $("#select_ip").val(),
+            svOs: $("#select_os").val(),
+            svDetail:$("#select_detail").val()
         }
     }
+
+    $('#select').click(function () {
+        $('#table_server').bootstrapTable('refresh');//url为后台action
+
+    })
+
+    $('#reset').click(function () {
+        $("#select_ip").val("")
+        $("#select_os").val("")
+        $("#select_detail").val("")
+        $('#table_server').bootstrapTable('refresh');//url为后台action
+    })
+
 
     // 补充操作栏按钮信息（value：当前字段值，row：当前行信息，index：序列索引）
     function operateFormatter(value, row, index) {
@@ -436,15 +475,15 @@
                 }else{
                     alert('提交失败，请重试');
                 }
-                 $("#ip").val("");
-                 $("#ip_private").val("");
-                 $("#os").val("");
-                 $("#cpu").val("");
-                 $("#memory").val("");
-                 $("#disk").val("");
-                 $("#bandwidth").val("");
-                 $("#detail").val("");
-                 $("#myModal").modal('hide');
+                $("#ip").val("");
+                $("#ip_private").val("");
+                $("#os").val("");
+                $("#cpu").val("");
+                $("#memory").val("");
+                $("#disk").val("");
+                $("#bandwidth").val("");
+                $("#detail").val("");
+                $("#myModal").modal('hide');
 
             }
         );
@@ -454,15 +493,15 @@
     $("#updateModal").modal("hide");
     function show_update(sv_id,sv_ip,sv_ip_private,sv_os,sv_cpu,sv_memory,sv_disk,sv_bandwidth,sv_detail){
 
-                $('#update_id').val(sv_id);
-                $('#update_ip').val(sv_ip);
-                $('#update_ip_private').val(sv_ip_private);
-                $('#update_os').val(sv_os);
-                $('#update_cpu').val(sv_cpu);
-                $('#update_memory').val(sv_memory);
-                $('#update_disk').val(sv_disk);
-                $('#update_bandwidth').val(sv_bandwidth);
-                $('#update_detail').val(sv_detail);
+        $('#update_id').val(sv_id);
+        $('#update_ip').val(sv_ip);
+        $('#update_ip_private').val(sv_ip_private);
+        $('#update_os').val(sv_os);
+        $('#update_cpu').val(sv_cpu);
+        $('#update_memory').val(sv_memory);
+        $('#update_disk').val(sv_disk);
+        $('#update_bandwidth').val(sv_bandwidth);
+        $('#update_detail').val(sv_detail);
 
 
     }
@@ -517,15 +556,8 @@
         $('#detail_update_time').html(sv_update_time);
     }
 
-
-
 </script>
-
-
-
 <!-- Custom Js -->
 <script src="${ctx}/assets/js/custom-scripts.js"></script>
-
-
 </body>
 </html>

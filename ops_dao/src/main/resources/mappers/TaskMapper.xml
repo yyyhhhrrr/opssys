@@ -48,6 +48,23 @@
         sv_id,sv_ip,it_id,it_port, it_address
       from t_task left join t_server_ip tsi on t_task.tsk_ip_id = tsi.sv_id
       left join t_interface ti on t_task.tsk_it_id = ti.it_id
+      <where>
+        <if test="serverIp!=null and serverIp!=''and serverIp.sv_ip!=null and serverIp.sv_ip!=''">
+                sv_ip LIKE "%"#{serverIp.sv_ip}"%"
+        </if>
+        <if test="serverIp!=null and serverIp!='' and serverIp.sv_os!=null and serverIp.sv_os !=''">
+            AND   sv_os LIKE "%"#{serverIp.sv_os}"%"
+        </if>
+        <if test="anInterface!=null and anInterface!=''and anInterface.it_port!=null and anInterface.it_port !=''">
+             AND  it_port LIKE "%${anInterface.it_port}%"
+        </if>
+        <if test="anInterface!=null and anInterface!='' and anInterface.it_address!=null and anInterface.it_address !=''">
+            AND it_address LIKE "%"#{anInterface.it_address}"%"
+        </if>
+        <if test="tsk_detail!=null and tsk_detail !=''">
+            AND   tsk_detail LIKE "%"#{tsk_detail}"%"
+        </if>
+      </where>
 
     </select>
 

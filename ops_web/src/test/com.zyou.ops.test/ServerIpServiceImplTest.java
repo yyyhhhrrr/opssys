@@ -32,11 +32,11 @@ public class ServerIpServiceImplTest {
 
     @Test
     public void test() throws Exception {
-        PageHelper.startPage(1,2);
-        List<ServerIp> list=serverIpService.searchAll();
-        PageInfo<ServerIp> p=new PageInfo<>(list);
-        System.out.println(p.getList());
-        System.out.println(list);
+       ServerIp serverIp=new ServerIp();
+       serverIp.setSv_os("Centos");
+       serverIp.setSv_ip("137");
+        List<ServerIp> serverIpList = serverIpService.searchAll(serverIp);
+        System.out.println(serverIpList);
 
     }
 

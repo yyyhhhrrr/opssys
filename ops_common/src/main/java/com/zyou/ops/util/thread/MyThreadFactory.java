@@ -58,28 +58,28 @@ public class MyThreadFactory implements ThreadFactory {
 
 
     public static void main(String args[]){
-        MyThreadFactory myThreadFactory=MyThreadFactory.getInstance();
-        Task task=new Task();
-        ServerIp serverIp=new ServerIp();
-        serverIp.setSv_ip("39.104.13.49");
-        Interface itc=new Interface();
-        itc.setIt_port(7001);
-        itc.setIt_address("/card/cardValidate");
-
-        List<String> emailList=new ArrayList<>();
-        emailList.add("562605133@qq.com");
-        task.setAnInterface(itc);
-        task.setServerIp(serverIp);
-        task.setTsk_pm_header("{Content-Type=application/json,token=2951314e0796466EE5c36ae737566128}");
-        task.setTsk_pm_json("{\"cardNum\":\"2787504611\",\"companyId\":\"181\"}");
-        //    DetectionTask detectionTask = new DetectionTask(task);
-        MyThreadFactory factory = new MyThreadFactory();
-        Thread taskThread1=factory.newThread(new DetectionTask(task,true,emailList));
-        Thread taskThread2=factory.newThread(new DetectionTask(task,true,emailList));
-        taskThread1.start();
-        taskThread2.start();
-        System.out.println("********"+taskThread1.getId());
-        System.out.println("********"+taskThread2.getId());
+//        MyThreadFactory myThreadFactory=MyThreadFactory.getInstance();
+//        Task task=new Task();
+//        ServerIp serverIp=new ServerIp();
+//        serverIp.setSv_ip("39.104.13.49");
+//        Interface itc=new Interface();
+//        itc.setIt_port(7001);
+//        itc.setIt_address("/card/cardValidate");
+//
+//        List<String> emailList=new ArrayList<>();
+//        emailList.add("562605133@qq.com");
+//        task.setAnInterface(itc);
+//        task.setServerIp(serverIp);
+//        task.setTsk_pm_header("{Content-Type=application/json,token=2951314e0796466EE5c36ae737566128}");
+//        task.setTsk_pm_json("{\"cardNum\":\"2787504611\",\"companyId\":\"181\"}");
+//        //    DetectionTask detectionTask = new DetectionTask(task);
+//        MyThreadFactory factory = new MyThreadFactory();
+//        Thread taskThread1=factory.newThread(new DetectionTask(task,true,emailList,));
+//        Thread taskThread2=factory.newThread(new DetectionTask(task,true,emailList));
+//        taskThread1.start();
+//        taskThread2.start();
+//        System.out.println("********"+taskThread1.getId());
+//        System.out.println("********"+taskThread2.getId());
 
 
 

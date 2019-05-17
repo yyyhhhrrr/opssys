@@ -7,6 +7,7 @@ import com.zyou.ops.util.base.BaseMapper;
 import com.zyou.ops.util.base.baseImpl.BaseServiceImpl;
 import com.zyou.ops.util.datasource.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,4 +51,6 @@ public class EmailServiceImpl extends BaseServiceImpl<Email,Integer> implements 
     public List<Email> getEmailListByTask(Integer id) {
         return emailMapper.getEmailListByTask(id);
     }
+
+
 }

@@ -29,9 +29,8 @@ public class InterfaceServiceImplTest {
     @Test
     public void test() throws Exception {
 
-        List<Interface> itcList=interfaceService.searchAll();
-        System.out.println(itcList);
-
+        List<Interface> interfaceList = interfaceService.searchAll();
+        System.out.println(interfaceList);
     }
 
 }

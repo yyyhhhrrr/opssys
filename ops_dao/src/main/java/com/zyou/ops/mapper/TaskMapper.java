@@ -17,4 +17,6 @@ import java.util.List;
 public interface TaskMapper extends BaseMapper<Task,Integer> {
 
    List<Task> getTaskListNotInByEmail(@Param("email_id")Integer email_id);
+
+
 }

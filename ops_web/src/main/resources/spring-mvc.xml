@@ -26,6 +26,7 @@
     <mvc:resources location="/assets/layui/" mapping="/assets/layui/**" />
 
 
+
     <context:component-scan base-package="com.zyou.ops.controller,com.zyou.ops.swagger"/>
     <!--swagger -->
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>

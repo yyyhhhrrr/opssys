@@ -36,8 +36,8 @@ public class CompanyServiceTest {
 
     @Test
     public void test() throws Exception {
-        List<Company> companies = companyService.searchAll();
-        System.out.println(companies);
+//        List<Company> companies = companyService.searchAll();
+//        System.out.println(companies);
 
     }
 }

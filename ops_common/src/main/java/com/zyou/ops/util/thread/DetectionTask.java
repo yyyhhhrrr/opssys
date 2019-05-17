@@ -55,18 +55,14 @@ public class DetectionTask  implements Runnable {
                                     if(result.contains(task.getTsk_pm_result())){
                                        infoLogger.info("[访问成功] - [url:"+url+ "]");
                                      }
-                                    else if(result.contains("404")){
-                                        errorLogger.error("[访问失败,404] - [url:"+url+ "]");
-                                        sendMail.getContext(task.getTsk_detail(),url,emailList,"404");
-                                    }
-                                    else if(result.contains("500")){
-                                        errorLogger.error("[访问失败,500] - [url:"+url+ "]");
-                                        sendMail.getContext(task.getTsk_detail(),url,emailList,"500");
+                                    else{
+                                        errorLogger.error("[访问失败] - [url:"+url+ "]");
+                                        sendMail.getContext(task.getTsk_detail(),url,emailList,result);
                                     }
                                 }
                                 else{
                                         errorLogger.error("[访问失败] - [url:"+url+ "]");
-                                    sendMail.getContext(task.getTsk_detail(),url,emailList,"访问失败");
+                                    sendMail.getContext(task.getTsk_detail(),url,emailList,"http无响应");
                                 }
 
                     Thread.sleep(task.getTsk_time());

@@ -7,6 +7,7 @@ import com.zyou.ops.zybd.entity.biz.CardRecord;
 import com.zyou.ops.zybd.mapper.biz.CardRecordMapper;
 import com.zyou.ops.zybd.service.CardRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,4 +41,6 @@ public class CardRecordServiceImpl extends BaseServiceImpl<CardRecord,Integer> i
     public List<Map> selectSelfSupportReport(String startDate, String endDate) {
         return cardRecordMapper.selectSelfSupportReport(startDate,endDate);
     }
+
+
 }

@@ -37,4 +37,6 @@ public class TaskServiceImpl extends BaseServiceImpl<Task,Integer> implements Ta
     public List<Task> getTaskListNotInByEmail(Integer email_id) {
         return taskMapper.getTaskListNotInByEmail(email_id);
     }
+
+
 }

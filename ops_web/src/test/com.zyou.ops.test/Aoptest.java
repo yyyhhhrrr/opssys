@@ -18,9 +18,9 @@ public class Aoptest {
 
 
         public static void main(String[] args) {
-            ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
-            InterfaceServiceImpl companyService= (InterfaceServiceImpl) ctx.getBean("interfaceServiceImpl");
-            List<Interface> interfaceList = companyService.searchAll();
-            System.out.println(interfaceList);
+//            ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+//            InterfaceServiceImpl companyService= (InterfaceServiceImpl) ctx.getBean("interfaceServiceImpl");
+//            List<Interface> interfaceList = companyService.searchAll();
+//            System.out.println(interfaceList);
         }
 }

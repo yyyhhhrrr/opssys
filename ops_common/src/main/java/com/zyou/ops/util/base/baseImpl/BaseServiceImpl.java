@@ -26,6 +26,10 @@ public abstract class BaseServiceImpl<T extends Object, PK extends Serializable>
         return this.getBaseMapper().selectById(pk);
     }
 
+    public List<T> searchAll(T e) throws DataAccessException{
+        return this.getBaseMapper().selectAll(e);
+    }
+
     public List<T> searchAll() throws DataAccessException{
         return this.getBaseMapper().selectAll();
     }

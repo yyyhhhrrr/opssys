@@ -1,5 +1,6 @@
 package com.zyou.ops.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -66,8 +67,12 @@ public class EmailController {
     @ApiOperation(value="报警人列表")
     @ApiImplicitParams({@ApiImplicitParam(paramType = "query",name="pageNumber",value="页数",dataType = "int"),
             @ApiImplicitParam(paramType = "query",name="pageSize",value="页面大小",dataType = "int")})
-    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber) throws Exception {
+    public Map<String,Object> getAllByBeginNumber(Integer pageSize, Integer pageNumber,String emailUsername) throws Exception {
         Map<String, Object> responseMap = new HashMap<>();
+        Email email=new Email();
+        if(ValidateUtil.isNotEmpty(emailUsername)) {
+            email.setEmail_username(emailUsername);
+        }
         if(ValidateUtil.isAllEmpty(pageSize,pageNumber)){
             //不分页
             List<Email> serverIpList=new ArrayList<>();
@@ -77,7 +82,7 @@ public class EmailController {
         else {
             // 查看全部数据执行后端分页查询
             PageHelper.startPage(pageNumber, pageSize);
-            List<Email> emailList = emailService.searchAll();
+            List<Email> emailList = emailService.searchAll(email);
             PageInfo<Email> p = new PageInfo<>(emailList);
             int total = (int) p.getTotal();
             //key需要与js中 dataField对应，bootStrap默认值为rows
@@ -162,29 +167,24 @@ public class EmailController {
         return responseMap;
     }
 
-    @RequestMapping(value = "/addTaskByEmail/{id}",method = RequestMethod.POST,produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/addTaskByEmail",method = RequestMethod.POST,produces = "text/html;charset=UTF-8")
     @ApiOperation("根据email_id 新增检测任务")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "path",name="email_id",value="报警人id",dataType = "int"),
-            @ApiImplicitParam(paramType = "query",name="tsk_id",value="任务id",dataType = "int")})
-    public ResponseEntity<String> addTaskByEmail(HttpServletRequest request,@PathVariable("id")Integer email_id) {
-         Map<String,Integer> map=new HashMap<>();
-         List<String> list=Arrays.asList((request.getParameter("list").replace("[","").replace("]","")).split(","));
-         map.put("ref_email_id",email_id);
-         Long result=0L;
-        try{
-        for (String s : list) {
-            Integer tsk_id=Integer.valueOf(s);
-            map.put("ref_task_id",tsk_id);
-            result=emailService.addTaskByEmail(map);
-            map.put("ref_task_id",0);
-
-          }
-        }catch(Exception e){
+    public ResponseEntity<String> addTaskByEmail(
+            //HttpServletRequest request,@PathVariable("id")Integer email_id
+   @RequestBody List<String> list) {
+        Long result=0L;
+        try {
+            for (String s : list) {
+                Map map = JSONObject.parseObject(s);
+                map.put("ref_email_id", ((JSONObject) map).getInteger("ref_email_id"));
+                System.out.println(map);
+                result = emailService.addTaskByEmail(map);
+            }
+        }catch (Exception e){
             return new ResponseEntity<String>(Constants.SUBMIT_ERROR,HttpStatus.BAD_REQUEST);
         }
-
         return new ResponseEntity<String>(Constants.SUBMIT_OK,HttpStatus.OK);
+
     }
 
 

@@ -549,36 +549,25 @@
        var list=[];
        for (var i = 0; i < a.length; i++) {//循环读取选中行数据
            var tsk_id = a[i].tsk_id;//获取选择行的值
-           list.push(tsk_id);
+           list.push(JSON.stringify({"ref_email_id":email_id,"ref_task_id":tsk_id}));
        }
-       $.post("addTaskByEmail/"+email_id+"/",{list:JSON.stringify(list)},
-           function(result){
+       $.ajax({
+           type: "POST",
+           url: "addTaskByEmail",
+           dataType: 'text',
+           data: JSON.stringify(list),
+           contentType:"application/json;charset=UTF-8",
+           traditional: true,
+           success: function(result){
                if(result == "提交成功"){
                    alert("提交成功");
                    window.location.replace("${ctx}/email/emailList");
                }else{
                    alert("提交失败，请联系管理员");
                }
-           });
+           }
 
-
-       <%--$.ajax({--%>
-           <%--contentType: "application/json;charset=utf-8",--%>
-           <%--type: "POST",--%>
-           <%--url: "addTaskByEmail",--%>
-           <%--dataType: 'json',--%>
-           <%--data: "list="+JSON.stringify(list),--%>
-           <%--traditional: true,--%>
-           <%--success: function(result){--%>
-               <%--if(result == "提交成功"){--%>
-                   <%--alert('提交成功');--%>
-                   <%--window.location.replace("${ctx}/email/emailList");--%>
-               <%--}else{--%>
-                   <%--alert('提交失败，请联系管理员');--%>
-               <%--}--%>
-           <%--}--%>
-
-       <%--});--%>
+       });
    }
 </script>
 <!-- Custom Js -->

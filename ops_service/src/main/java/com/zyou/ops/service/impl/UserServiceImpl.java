@@ -8,6 +8,7 @@ import com.zyou.ops.mapper.UserMapper;
 import com.zyou.ops.util.base.baseImpl.BaseServiceImpl;
 import com.zyou.ops.util.datasource.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,6 +48,8 @@ public class UserServiceImpl extends BaseServiceImpl<User,Integer> implements Us
     public void insertUser(User user){
         userMapper.insertUser(user);
     }
+
+
 
 //    @Override
 //    public void insertMongoUser(User user) throws DataAccessException {
