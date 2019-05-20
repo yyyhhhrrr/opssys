@@ -1,15 +1,20 @@
 package com.zyou.ops.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zyou.ops.entity.*;
 import com.zyou.ops.service.EmailService;
+import com.zyou.ops.service.ServerIpService;
 import com.zyou.ops.service.TaskService;
 
 import com.zyou.ops.util.mail.SendMail;
 import com.zyou.ops.util.thread.DetectionTask;
 import com.zyou.ops.util.thread.MyThreadFactory;
 import com.zyou.ops.util.thread.ThreadUtil;
+import com.zyou.ops.util.tree.TreeNode;
 import com.zyou.ops.util.utils.Constants;
 import com.zyou.ops.util.utils.ValidateUtil;
 import io.swagger.annotations.Api;
@@ -53,6 +58,8 @@ public class TaskController {
     private EmailService emailService;
     @Autowired
     private SendMail sendMail;
+    @Autowired
+    private ServerIpService serverIpService;
 
 
     private Map<Integer, Boolean> statusMap = new StatusMap().getStatusMap();
@@ -147,7 +154,7 @@ public class TaskController {
         }
     }
 
-    @RequestMapping(value = "updateTask", produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/updateTask", produces = "text/html;charset=UTF-8")
     public ResponseEntity<String> update(Model model, HttpServletRequest request, Task task) throws Exception {
         Long result = 0L;
         result = taskService.update(task);
@@ -208,5 +215,37 @@ public class TaskController {
             return new ResponseEntity<String>(Constants.ERROR, HttpStatus.OK);
         }
         return new ResponseEntity<String>(Constants.SUCCESS, HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/getTreeNode",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ApiOperation("获取树节点")
+    public String getTreeNode() throws Exception {
+        List<TreeNode> nodeList=new ArrayList<>();
+        ServerIp serverIp=new ServerIp();
+        serverIp.setSv_detail("快乐唷唷");
+        List<ServerIp> serverIpList = serverIpService.searchAll(serverIp);
+        List<TreeNode> linuxTreeList=new ArrayList<>();
+        for (ServerIp server : serverIpList) {
+            TreeNode treeNode = new TreeNode(server.getSv_ip(), null);
+            linuxTreeList.add(treeNode);
+        }
+        TreeNode linux =new TreeNode("快乐唷唷",linuxTreeList);
+        ServerIp serverIp2=new ServerIp();
+        serverIp2.setSv_detail("脑科学");
+        List<ServerIp> serverIpList1 = serverIpService.searchAll(serverIp2);
+        List<TreeNode> windowsTreeList=new ArrayList<>();
+        for (ServerIp server : serverIpList1) {
+            TreeNode treeNode = new TreeNode(server.getSv_ip(), null);
+            windowsTreeList.add(treeNode);
+        }
+        TreeNode windows =new TreeNode("脑科学",windowsTreeList);
+        nodeList.add(linux);
+        nodeList.add(windows);
+        TreeNode p1 =new TreeNode("服务器",nodeList);
+        List<TreeNode> nodeListp=new ArrayList<>();
+        nodeListp.add(p1);
+        JSONArray jsonArray=JSONArray.parseArray(JSON.toJSONString(nodeListp));
+        return jsonArray.toString();
     }
 }

@@ -31,13 +31,11 @@
 
 </head>
 <body>
+
+
     <div id="page-wrapper" >
         <div id="page-inner">
             <!-- 站点  -->
-
-            <div class="col-sm-4">
-                <div id="tree"  style="height: 400px;overflow-y :scroll;"></div>
-            </div>
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
@@ -46,8 +44,6 @@
                 </div>
             </div>
             <!-- /. ROW  -->
-
-
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -300,10 +296,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <span>
+                                    <div class="col-sm-2" style="float: left;">
+                                        <div id="tree"></div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div id="tree2">
+                                            <table class="table table-striped table-bordered table-hover" style="table-layout: fixed;" id="table_server">
+                                            </table>
+                                        </div>
+                                    </div>
+                                </span>
 
 
-                                <table class="table table-striped table-bordered table-hover" style="table-layout: fixed;" id="table_server">
-                                </table>
                             </div>
 
                         </div>
@@ -337,46 +342,31 @@
 <script src="${ctx}/assets/js/bootstrap-table-zh-CN.js"></script>
 
 <script>
-    function getTree() {
-        var tree = [
-            {
-                text:"Parent 1",
-                nodes: [
-                    {
-                        text:"Child 1",
-                        nodes: [
-                            {
-                                text:"Grandchild 1"
-                            },
-                            {
-                                text:"Grandchild 2"
-                            }
-                        ]
-                    },
-                    {
-                        text:"Child 2"
-                    }
-                ]
-            },
-            {
-                text:"Parent 2"
-            },
-            {
-                text:"Parent 3"
-            },
-            {
-                text:"Parent 4"
-            },
-            {
-                text:"Parent 5"
-            }
-        ];
-        return tree;
-    }
-
     $(function () {
         initTable();
-        $('#tree').treeview({data: getTree()});
+        $.ajax({
+            type:"get",
+            dataType:"json",
+            url:"getTreeNode",
+            success:function(data){
+                $('#tree').treeview({
+                    data:data,
+                    showBorder:false,
+                    onNodeSelected:function (event,node) {
+                        if(node.nodes==null){
+                            $("#select_ip").val(node.text);
+                            $("#table_server").bootstrapTable('refresh');
+                            $("#select_ip").val("");
+                        }else{
+                            $("#select_detail").val(node.text);
+                            $("#table_server").bootstrapTable('refresh');
+                            $("#select_detail").val("");
+                        }
+
+                    }
+                });
+            }
+        })
     })
 
     function initTable(){
@@ -503,19 +493,21 @@
                         }
                     },
                     formatter:paramsMatter
-                }, {
-                    align : "center",
-                    halign : "center",
-                    valign : "middle",
-                    field : 'tsk_create_time',
-                    title : '创建时间'
-                },{
-                    align : "center",
-                    halign : "center",
-                    valign : "middle",
-                    field : 'tsk_update_time',
-                    title : '更新时间'
-                }, {
+                },
+                // {
+                //     align : "center",
+                //     halign : "center",
+                //     valign : "middle",
+                //     field : 'tsk_create_time',
+                //     title : '创建时间'
+                // },{
+                //     align : "center",
+                //     halign : "center",
+                //     valign : "middle",
+                //     field : 'tsk_update_time',
+                //     title : '更新时间'
+                // },
+                {
                     align : "center",
                     halign : "center",
                     valign : "middle",
@@ -849,7 +841,7 @@
 
 <!-- Custom Js -->
 <script src="${ctx}/assets/js/custom-scripts.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+<script src="${ctx}/assets/js/bootstrap-treeview.min.js"></script>
 
 
 </body>
