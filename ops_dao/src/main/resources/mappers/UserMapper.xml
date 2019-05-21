@@ -11,29 +11,45 @@
 
 
 
-    <select id="selectAll" resultType="User">
+    <!--<select id="selectAll" resultType="User">-->
 
-        select us_id,us_username,us_password from t_user
+        <!--select us_id,us_username,us_password from t_user-->
 
 
+    <!--</select>-->
+
+    <!--<select id="selectByUsername"  parameterType="java.lang.String"  resultType="User">-->
+
+
+       <!--select us_id,us_username,us_password from t_user where us_username=#{username}-->
+
+    <!--</select>-->
+
+
+    <!--<select id="selectUser" resultType="User" statementType="CALLABLE" >-->
+            <!--{call selectUser}-->
+    <!--</select>-->
+
+    <!--<insert id="insertUser" parameterType="User" statementType="CALLABLE">-->
+     <!--{call insertUser(-->
+           <!--#{us_username,mode=IN},-->
+           <!--#{us_password,mode=IN})}-->
+    <!--</insert>-->
+
+    <select id="getUserByUserName" resultType="com.zyou.ops.entity.User">
+        select * FROM t_user
+        WHERE us_username= #{username}
     </select>
 
-    <select id="selectByUsername"  parameterType="java.lang.String"  resultType="User">
-
-
-       select us_id,us_username,us_password from t_user where us_username=#{username}
-
+    <select id="getUserRoleByUserId" resultType="int">
+        SELECT roleid FROM user_role
+        where userid = #{user_id}
     </select>
 
-
-    <select id="selectUser" resultType="User" statementType="CALLABLE" >
-            {call selectUser}
+    <select id="getPermissionsByRoleId" resultType="com.zyou.ops.entity.Permission">
+        SELECT a.id,a.url,a.roleid as roleId,a.description FROM permission a
+        WHERE roleid = #{role_id}
     </select>
 
-    <insert id="insertUser" parameterType="User" statementType="CALLABLE">
-     {call insertUser(
-           #{us_username,mode=IN},
-           #{us_password,mode=IN})}
-    </insert>
 
 </mapper>

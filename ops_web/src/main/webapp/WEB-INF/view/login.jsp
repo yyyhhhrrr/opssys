@@ -89,7 +89,9 @@
                                         <div class="hidden text-center" id="pwdMsg"><span class="glyphicon glyphicon-exclamation-sign"></span>用户名密码错误</div>
                                     </div>
 			                        <button id="btn_login" class="btn" type="button" >登录</button>
-
+                                    <div class="form-group-lg">
+                                        <input id="checkbox" type="checkbox" name="rememberMe">下次自动登录
+                                    </div>
 			                    </form>
 		                    </div>
                         </div>
@@ -103,14 +105,20 @@
 
         <script type="text/javascript">
             $("#btn_login").click(function(){
-                var loginObj = new Object();
-                loginObj.username= $("#inputAccount").val();
-                loginObj.pwd= $("#inputPassword").val();
-                var loginJson = JSON.stringify(loginObj); //将JSON对象转化为JSON字符
-                $.post('validateLogin',
-                    {"loginObj":loginJson},
-                    function(e){
-                        e=JSON.parse(e); //由JSON字符串转换为JSON对象
+                var username= $("#inputAccount").val();
+                var pwd= $("#inputPassword").val();
+                var rememberme=null;
+                if($('#checkbox').is(':checked')) {
+                    rememberme=true;
+                }else{
+                    rememberme=false;
+                }
+                console.log(rememberme)
+                $.ajax({
+                    dataType:'json',
+                    url:'validateLogin',
+                    data:{username:username,pwd:pwd,rememberMe:rememberme},
+                    success:function(e){
                         if(e.accountMsg){
                             $("#accountDiv").addClass("has-error");
                             $("#accountMsg").removeClass("hidden");
@@ -124,10 +132,11 @@
                             $("#pwdDiv").addClass("has-error");
                             $("#pwdMsg").removeClass("hidden");
                         }else if (e.user){
-                            location.href="successLogin";
+                            location.href="index";
                             $("#loginForm").submit();
                         }
-                    });
+                    }
+                })
             });
         </script>
 

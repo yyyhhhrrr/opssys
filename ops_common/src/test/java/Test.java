@@ -19,17 +19,22 @@ import java.util.Map;
 public class Test {
 
     public static void main(String[] args) {
-        List<TreeNode> nodeList=new ArrayList<>();
-        TreeNode node1 =new TreeNode("c1",null);
-        TreeNode node2 =new TreeNode("c2",null);
-        nodeList.add(node1);
-        nodeList.add(node2);
 
-        TreeNode p1 =new TreeNode("p1",nodeList);
-        List<TreeNode> nodeListp=new ArrayList<>();
-        nodeListp.add(p1);
-        JSONArray jsonArray=JSONArray.parseArray(JSON.toJSONString(nodeListp));
-        System.out.println(jsonArray.toString());
+        String loginObj="{\"pwd\":\"123\",\"username\":\"123\"}";
+        JSONObject loginJson=JSONObject.parseObject(loginObj);
+        System.out.println(loginJson);
+        System.out.println(loginJson.getString("username"));
+//        List<TreeNode> nodeList=new ArrayList<>();
+//        TreeNode node1 =new TreeNode("c1",null);
+//        TreeNode node2 =new TreeNode("c2",null);
+//        nodeList.add(node1);
+//        nodeList.add(node2);
+//
+//        TreeNode p1 =new TreeNode("p1",nodeList);
+//        List<TreeNode> nodeListp=new ArrayList<>();
+//        nodeListp.add(p1);
+//        JSONArray jsonArray=JSONArray.parseArray(JSON.toJSONString(nodeListp));
+//        System.out.println(jsonArray.toString());
 
 //        JSONObject json=new JSONObject();
 //        List<String> list= new ArrayList<>();

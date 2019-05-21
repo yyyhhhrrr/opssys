@@ -1,6 +1,7 @@
 package com.zyou.ops.service.impl;
 
 
+import com.zyou.ops.entity.Permission;
 import com.zyou.ops.entity.User;
 import com.zyou.ops.service.UserService;
 import com.zyou.ops.util.base.BaseMapper;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,9 +28,30 @@ public class UserServiceImpl extends BaseServiceImpl<User,Integer> implements Us
 
     @Autowired
     private UserMapper userMapper;
-//    @Autowired
-//    private MongoTemplate mongoTemplate;
 
+    @Override
+    public User getUserByUserName(String username) {
+        //根据账号获取账号密码
+        User userByUserName = userMapper.getUserByUserName(username);
+        return userByUserName;
+    }
+
+    @Override
+    public List<Permission> getPermissionsByUser(User user) {
+        //获取到用户角色userRole
+        List<Integer> roleId = userMapper.getUserRoleByUserId(user.getUs_id());
+        List<Permission> perArrary = new ArrayList<>();
+
+        if (roleId!=null&&roleId.size()!=0) {
+            //根据roleid获取peimission
+            for (Integer i : roleId) {
+                perArrary.addAll(userMapper.getPermissionsByRoleId(i));
+            }
+        }
+
+        System.out.println(perArrary);
+        return perArrary;
+    }
 
     @Override
     public BaseMapper<User, Integer> getBaseMapper() {
@@ -36,18 +59,28 @@ public class UserServiceImpl extends BaseServiceImpl<User,Integer> implements Us
     }
 
 
-    public User selectByUsername(String username){
-        return userMapper.selectByUsername(username);
+//    @Autowired
+//    private MongoTemplate mongoTemplate;
 
-    }
-
-    public List<User> selectUser() {
-        return  userMapper.selectUser();
-    }
-
-    public void insertUser(User user){
-        userMapper.insertUser(user);
-    }
+//
+//    @Override
+//    public BaseMapper<User, Integer> getBaseMapper() {
+//        return userMapper;
+//    }
+//
+//
+//    public User selectByUsername(String username){
+//        return userMapper.selectByUsername(username);
+//
+//    }
+//
+//    public List<User> selectUser() {
+//        return  userMapper.selectUser();
+//    }
+//
+//    public void insertUser(User user){
+//        userMapper.insertUser(user);
+//    }
 
 
 

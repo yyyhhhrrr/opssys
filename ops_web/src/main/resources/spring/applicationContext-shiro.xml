@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+				http://www.springframework.org/schema/context
+				 http://www.springframework.org/schema/context/spring-context-3.2.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+				 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" /> <!--加载管理器-->
+		<property name="loginUrl" value="/Login" />    <!--没有登录的时候，跳转到这个页面-->
+		<!--<property name="unauthorizedUrl" value="/nopermission" /> &lt;!&ndash;当没有权限的时候，跳转到这个url&ndash;&gt;-->
+		 
+		<property name="filterChainDefinitions">
+			<value>
+				/Login = anon <!--可以不需要登录-->
+				/index = authc
+				/main/interfaceList = authc, perms[/interfaceList]  <!-- perms 表示需要该权限才能访问的页面 -->
+				/main/ipList = authc, perms[/ipList]
+				/main/taskList = authc, perms[/taskList]
+				/main/* = authc <!-- authc 表示需要认证才能访问的页面 -->
+				/dashboard = anon
+			</value>
+		</property>
+	</bean>
+
+	<!-- 自定义Realm -->
+	<bean id="myShiroRealm" class="com.zyou.ops.shiro.MyShiroRealm">
+		<property name="credentialsMatcher">
+			<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+				<property name="hashAlgorithmName" value="MD5"></property> <!-- 加密算法的名称 -->
+				<property name="hashIterations" value="1024"></property> <!-- 配置加密的次数 -->
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!-- 注入realm -->
+		<property name="realm" ref="myShiroRealm"/>
+		<!-- 定义RememberMe的管理器 -->
+		<property name="rememberMeManager" ref="rememberMeManager"/>
+	</bean>
+
+	<!-- rememberMe管理器 -->
+	<bean id="rememberMeManager"
+		  class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+		<property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
+		<property name="cookie" ref="rememberMeCookie"/>
+	</bean>
+
+	<!-- 会话Cookie模板 -->
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="sid"/>
+		<property name="httpOnly" value="true"/>
+		<property name="maxAge" value="-1"/>
+	</bean>
+
+	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="rememberMe"/>
+		<property name="httpOnly" value="true"/>
+		<property name="maxAge" value="2592000"/><!-- 30天 -->
+	</bean>
+
+</beans>

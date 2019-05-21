@@ -14,7 +14,7 @@
     <!-- ******************************************************************** -->
     <import resource="applicationContext-datasource.xml"/>
     <import resource="applicationContext-transaction.xml"/>
-
+    <import resource="applicationContext-shiro.xml"/>
 
     <!-- 扫描注解Bean,Controller 除外 -->
     <context:component-scan base-package="com.zyou.ops">

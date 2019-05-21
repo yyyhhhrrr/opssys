@@ -369,6 +369,13 @@
       <version>1.4</version>
     </dependency>
 
+    <!--shiro -->
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-all</artifactId>
+      <version>1.2.4</version>
+    </dependency>
+
   </dependencies>
 
 
