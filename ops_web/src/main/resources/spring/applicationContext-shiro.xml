@@ -21,7 +21,7 @@
 				/main/ipList = authc, perms[/ipList]
 				/main/taskList = authc, perms[/taskList]
 				/main/* = authc <!-- authc 表示需要认证才能访问的页面 -->
-				/dashboard = anon
+				/studentTask/* =authc
 			</value>
 		</property>
 	</bean>

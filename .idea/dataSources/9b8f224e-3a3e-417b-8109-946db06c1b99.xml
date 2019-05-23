@@ -990,295 +990,410 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="255" parent="14" name="ref_email_task"/>
-    <table id="256" parent="14" name="t_email"/>
-    <table id="257" parent="14" name="t_interface"/>
-    <table id="258" parent="14" name="t_server_ip"/>
-    <table id="259" parent="14" name="t_task"/>
-    <table id="260" parent="14" name="t_user"/>
-    <routine id="261" parent="14" name="insertUser">
+    <table id="255" parent="14" name="permission"/>
+    <table id="256" parent="14" name="ref_email_task"/>
+    <table id="257" parent="14" name="role"/>
+    <table id="258" parent="14" name="t_email"/>
+    <table id="259" parent="14" name="t_interface"/>
+    <table id="260" parent="14" name="t_server_ip"/>
+    <table id="261" parent="14" name="t_student_task"/>
+    <table id="262" parent="14" name="t_task"/>
+    <table id="263" parent="14" name="t_user"/>
+    <table id="264" parent="14" name="user_role"/>
+    <routine id="265" parent="14" name="insertUser">
       <SourceTextLength>76</SourceTextLength>
       <RoutineKind>procedure</RoutineKind>
     </routine>
-    <routine id="262" parent="14" name="selectUser">
+    <routine id="266" parent="14" name="selectUser">
       <SourceTextLength>59</SourceTextLength>
       <RoutineKind>procedure</RoutineKind>
     </routine>
-    <column id="263" parent="255" name="ref_et_id">
+    <column id="267" parent="255" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="264" parent="255" name="ref_email_id">
+    <column id="268" parent="255" name="url">
       <Position>2</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="265" parent="255" name="ref_task_id">
+    <column id="269" parent="255" name="roleid">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="266" parent="255" name="email_id">
+    <column id="270" parent="255" name="description">
+      <Position>4</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="271" parent="255" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="272" parent="256" name="ref_et_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="273" parent="256" name="ref_email_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="274" parent="256" name="ref_task_id">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="275" parent="256" name="email_id">
       <ColNames>ref_email_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="267" parent="255" name="task_id">
+    <index id="276" parent="256" name="task_id">
       <ColNames>ref_task_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="268" parent="255" name="PRIMARY">
+    <key id="277" parent="256" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ref_et_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="269" parent="255" name="email_id">
+    <foreign-key id="278" parent="256" name="email_id">
       <ColNames>ref_email_id</ColNames>
       <RefSchemaName>ops_sys</RefSchemaName>
       <RefTableName>t_email</RefTableName>
       <RefColNames>email_id</RefColNames>
     </foreign-key>
-    <foreign-key id="270" parent="255" name="task_id">
+    <foreign-key id="279" parent="256" name="task_id">
       <ColNames>ref_task_id</ColNames>
       <RefSchemaName>ops_sys</RefSchemaName>
       <RefTableName>t_task</RefTableName>
       <RefColNames>tsk_id</RefColNames>
     </foreign-key>
-    <column id="271" parent="256" name="email_id">
+    <column id="280" parent="257" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="272" parent="256" name="email_address">
+    <column id="281" parent="257" name="role">
+      <Position>2</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="282" parent="257" name="description">
+      <Position>3</Position>
+      <DataType>varchar(120)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="283" parent="257" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="284" parent="258" name="email_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="285" parent="258" name="email_address">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="273" parent="256" name="email_username">
+    <column id="286" parent="258" name="email_username">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="274" parent="256" name="PRIMARY">
+    <key id="287" parent="258" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>email_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="275" parent="257" name="it_id">
+    <column id="288" parent="259" name="it_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="276" parent="257" name="it_port">
+    <column id="289" parent="259" name="it_port">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="277" parent="257" name="it_address">
+    <column id="290" parent="259" name="it_address">
       <Position>3</Position>
       <DataType>varchar(32)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="278" parent="257" name="it_detail">
+    <column id="291" parent="259" name="it_detail">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="279" parent="257" name="it_create_time">
+    <column id="292" parent="259" name="it_create_time">
       <Position>5</Position>
       <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="280" parent="257" name="it_update_time">
+    <column id="293" parent="259" name="it_update_time">
       <Position>6</Position>
       <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
       <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
     </column>
-    <key id="281" parent="257" name="PRIMARY">
+    <key id="294" parent="259" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>it_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="282" parent="258" name="sv_id">
+    <column id="295" parent="260" name="sv_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="283" parent="258" name="sv_ip">
+    <column id="296" parent="260" name="sv_ip">
       <Position>2</Position>
       <DataType>varchar(32)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="284" parent="258" name="sv_ip_private">
+    <column id="297" parent="260" name="sv_ip_private">
       <Position>3</Position>
       <DataType>varchar(32)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="285" parent="258" name="sv_os">
+    <column id="298" parent="260" name="sv_os">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="258" name="sv_cpu">
+    <column id="299" parent="260" name="sv_cpu">
       <Position>5</Position>
       <DataType>varchar(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="287" parent="258" name="sv_memory">
+    <column id="300" parent="260" name="sv_memory">
       <Position>6</Position>
       <DataType>varchar(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="288" parent="258" name="sv_disk">
+    <column id="301" parent="260" name="sv_disk">
       <Position>7</Position>
       <DataType>varchar(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="289" parent="258" name="sv_bandwidth">
+    <column id="302" parent="260" name="sv_bandwidth">
       <Position>8</Position>
       <DataType>varchar(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="258" name="sv_detail">
+    <column id="303" parent="260" name="sv_detail">
       <Position>9</Position>
       <DataType>varchar(64)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="258" name="sv_create_time">
+    <column id="304" parent="260" name="sv_create_time">
       <Position>10</Position>
       <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="292" parent="258" name="sv_update_time">
+    <column id="305" parent="260" name="sv_update_time">
       <Position>11</Position>
       <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
       <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
     </column>
-    <key id="293" parent="258" name="PRIMARY">
+    <key id="306" parent="260" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>sv_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="294" parent="259" name="tsk_id">
+    <column id="307" parent="261" name="st_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="295" parent="259" name="tsk_ip_id">
+    <column id="308" parent="261" name="st_type">
+      <Position>2</Position>
+      <Comment>1（生活习惯） 2（学习习惯） 3（行为习惯） 4（其他）</Comment>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="309" parent="261" name="st_class_type">
+      <Position>3</Position>
+      <Comment>1（小班） 2（中班） 3（大班）4（所有）</Comment>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="310" parent="261" name="st_name">
+      <Position>4</Position>
+      <Comment>任务目标</Comment>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="311" parent="261" name="st_content">
+      <Position>5</Position>
+      <Comment>任务详情</Comment>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="312" parent="261" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>st_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="313" parent="262" name="tsk_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="314" parent="262" name="tsk_ip_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="296" parent="259" name="tsk_it_id">
+    <column id="315" parent="262" name="tsk_it_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="297" parent="259" name="tsk_pm_method">
+    <column id="316" parent="262" name="tsk_pm_method">
       <Position>4</Position>
       <DataType>varchar(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="298" parent="259" name="tsk_pm_header">
+    <column id="317" parent="262" name="tsk_pm_header">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="299" parent="259" name="tsk_pm_json">
+    <column id="318" parent="262" name="tsk_pm_json">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="300" parent="259" name="tsk_pm_result">
+    <column id="319" parent="262" name="tsk_pm_result">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="301" parent="259" name="tsk_time">
+    <column id="320" parent="262" name="tsk_time">
       <Position>8</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="302" parent="259" name="tsk_detail">
+    <column id="321" parent="262" name="tsk_detail">
       <Position>9</Position>
       <DataType>varchar(64)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="303" parent="259" name="tsk_create_time">
+    <column id="322" parent="262" name="tsk_create_time">
       <Position>10</Position>
       <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="304" parent="259" name="tsk_update_time">
+    <column id="323" parent="262" name="tsk_update_time">
       <Position>11</Position>
       <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
       <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
     </column>
-    <index id="305" parent="259" name="FK_sv_id">
+    <index id="324" parent="262" name="FK_sv_id">
       <ColNames>tsk_ip_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="306" parent="259" name="FK_it_Id">
+    <index id="325" parent="262" name="FK_it_Id">
       <ColNames>tsk_it_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="307" parent="259" name="PRIMARY">
+    <key id="326" parent="262" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>tsk_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="308" parent="259" name="FK_sv_id">
+    <foreign-key id="327" parent="262" name="FK_sv_id">
       <ColNames>tsk_ip_id</ColNames>
       <RefSchemaName>ops_sys</RefSchemaName>
       <RefTableName>t_server_ip</RefTableName>
       <RefColNames>sv_id</RefColNames>
     </foreign-key>
-    <foreign-key id="309" parent="259" name="FK_it_Id">
+    <foreign-key id="328" parent="262" name="FK_it_Id">
       <ColNames>tsk_it_id</ColNames>
       <RefSchemaName>ops_sys</RefSchemaName>
       <RefTableName>t_interface</RefTableName>
       <RefColNames>it_id</RefColNames>
     </foreign-key>
-    <column id="310" parent="260" name="us_id">
+    <column id="329" parent="263" name="us_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="311" parent="260" name="us_username">
+    <column id="330" parent="263" name="us_username">
       <Position>2</Position>
       <DataType>varchar(32)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="312" parent="260" name="us_password">
+    <column id="331" parent="263" name="us_password">
       <Position>3</Position>
       <DataType>varchar(32)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="313" parent="260" name="PRIMARY">
+    <key id="332" parent="263" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>us_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <argument id="314" parent="261" name="name">
+    <column id="333" parent="264" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="334" parent="264" name="userid">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="335" parent="264" name="roleid">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="336" parent="264" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <argument id="337" parent="265" name="name">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
     </argument>
-    <argument id="315" parent="261" name="password">
+    <argument id="338" parent="265" name="password">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
     </argument>

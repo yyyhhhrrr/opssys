@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>OpsManage</title>
+    <title>OpsManage v1.0</title>
     <script src="${ctx}/assets/js/jquery-1.10.2.js"></script>
     <link rel="shortcut icon" href="${ctx}/assets/ico/apple-touch-icon-114-precomposed.png" type="image/x-icon">
     <link rel="stylesheet" href="${ctx}/assets/layui/css/layui.css">
@@ -21,7 +21,7 @@
       <div class="layui-layout layui-layout-admin">
               <!--1.头部区域-->
               <div class="layui-header">
-                <div class="layui-logo">OpsManage</div>
+                <div class="layui-logo">OpsManage v1.0</div>
                 <!-- 头部区域（可配合layui已有的水平导航） -->
                 <ul class="layui-nav layui-layout-left">
                 </ul>
@@ -98,7 +98,16 @@
                 <a class="site-demo-active leftdaohang" data-url="${ctx}/email/emailList" mytitle="邮件管理">邮件管理</a>
             </dd>
         </dl>
-    </li>                                    
+    </li>  
+    <li class="layui-nav-item">
+        <a href="javascript:;">任务管理</a>
+        <dl class="layui-nav-child">
+            <dd>
+                <!--linux 安装 shellinabox 可以在web端访问linux 终端 具体安装见"https://blog.csdn.net/qq_16224495/article/details/81871308" -->
+                <a class="site-demo-active leftdaohang" data-url="${ctx}/studentTask/index" mytitle="任务发布">任务发布</a>
+            </dd>
+        </dl>
+    </li>                                             
 </ul>
                 </div>
               </div>
