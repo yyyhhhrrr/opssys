@@ -164,7 +164,7 @@ public class QuartzScheduler {
         // TriggerBuilder 用于构建触发器实例
         CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("job1", "group1")
                 .withSchedule(CronScheduleBuilder
-                                     .cronSchedule("0/20 * * * * ? "))
+                                     .cronSchedule("0 10 9 ? * FRI"))
                 .build();
         scheduler.scheduleJob(jobDetail, cronTrigger);
         logger.debug("任务已开启");

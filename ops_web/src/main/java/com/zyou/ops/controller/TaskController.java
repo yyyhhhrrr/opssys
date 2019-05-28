@@ -238,6 +238,7 @@ public class TaskController {
         for (ServerIp server : serverIpList1) {
             TreeNode treeNode = new TreeNode(server.getSv_ip(), null);
             windowsTreeList.add(treeNode);
+
         }
         TreeNode windows =new TreeNode("脑科学",windowsTreeList);
         nodeList.add(linux);
