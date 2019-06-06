@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyou.ops.mapper.StudentTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.zyou.ops.entity.StudentTask" >
+    <id column="st_id" property="st_id" jdbcType="INTEGER" />
+    <result column="st_type" property="st_type" jdbcType="INTEGER" />
+    <result column="st_class_type" property="st_class_type" jdbcType="INTEGER" />
+    <result column="st_name" property="st_name" jdbcType="VARCHAR" />
+    <result column="st_content" property="st_content" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    st_id, st_type, st_class_type, st_name, st_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_student_task
+    where st_id = #{stId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_student_task
+    where st_id = #{stId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zyou.ops.entity.StudentTask" >
+    insert into t_student_task (st_id, st_type, st_class_type, 
+      st_name, st_content)
+    values (#{stId,jdbcType=INTEGER}, #{stType,jdbcType=INTEGER}, #{stClassType,jdbcType=INTEGER}, 
+      #{stName,jdbcType=VARCHAR}, #{stContent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyou.ops.entity.StudentTask" >
+    insert into t_student_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stId != null" >
+        st_id,
+      </if>
+      <if test="stType != null" >
+        st_type,
+      </if>
+      <if test="stClassType != null" >
+        st_class_type,
+      </if>
+      <if test="stName != null" >
+        st_name,
+      </if>
+      <if test="stContent != null" >
+        st_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stId != null" >
+        #{stId,jdbcType=INTEGER},
+      </if>
+      <if test="stType != null" >
+        #{stType,jdbcType=INTEGER},
+      </if>
+      <if test="stClassType != null" >
+        #{stClassType,jdbcType=INTEGER},
+      </if>
+      <if test="stName != null" >
+        #{stName,jdbcType=VARCHAR},
+      </if>
+      <if test="stContent != null" >
+        #{stContent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyou.ops.entity.StudentTask" >
+    update t_student_task
+    <set >
+      <if test="stType != null" >
+        st_type = #{stType,jdbcType=INTEGER},
+      </if>
+      <if test="stClassType != null" >
+        st_class_type = #{stClassType,jdbcType=INTEGER},
+      </if>
+      <if test="stName != null" >
+        st_name = #{stName,jdbcType=VARCHAR},
+      </if>
+      <if test="stContent != null" >
+        st_content = #{stContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where st_id = #{stId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyou.ops.entity.StudentTask" >
+    update t_student_task
+    set st_type = #{stType,jdbcType=INTEGER},
+      st_class_type = #{stClassType,jdbcType=INTEGER},
+      st_name = #{stName,jdbcType=VARCHAR},
+      st_content = #{stContent,jdbcType=VARCHAR}
+    where st_id = #{stId,jdbcType=INTEGER}
+  </update>
+
+  <select id="getStudentTaskListByClassType" parameterType="Integer" resultType="com.zyou.ops.entity.StudentTask">
+    select st_type,st_class_type,st_name,st_content from t_student_task  a where a.st_class_type=#{st_class_type} or a.st_class_type=4
+  </select>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyou.ops.mapper.SShMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.zyou.ops.entity.SShMessage" >
+    <id column="ssh_id" property="ssh_id" jdbcType="INTEGER" />
+    <result column="ssh_ip_id" property="ssh_ip_id" jdbcType="INTEGER" />
+    <result column="ssh_username" property="ssh_username" jdbcType="VARCHAR" />
+    <result column="ssh_pwd" property="ssh_pwd" jdbcType="VARCHAR" />
+    <result column="ssh_create_time" property="ssh_create_time" jdbcType="TIMESTAMP" />
+    <result column="ssh_update_time" property="ssh_update_time" jdbcType="TIMESTAMP" />
+    <association property="serverIp" javaType="ServerIp" >
+      <id column="sv_id" property="sv_id" />
+      <result column="sv_ip" property="sv_ip"/>
+    </association>
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ssh_id, ssh_ip_id, ssh_username, ssh_pwd, ssh_create_time, ssh_update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ssh_message
+    where ssh_id = #{sshId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_ssh_message
+    where ssh_id = #{sshId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zyou.ops.entity.SShMessage" >
+    insert into t_ssh_message (ssh_id, ssh_ip_id, ssh_username, 
+      ssh_pwd, ssh_create_time, ssh_update_time
+      )
+    values (#{sshId,jdbcType=INTEGER}, #{sshIpId,jdbcType=INTEGER}, #{sshUsername,jdbcType=VARCHAR}, 
+      #{sshPwd,jdbcType=VARCHAR}, #{sshCreateTime,jdbcType=TIMESTAMP}, #{sshUpdateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyou.ops.entity.SShMessage" >
+    insert into t_ssh_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sshId != null" >
+        ssh_id,
+      </if>
+      <if test="sshIpId != null" >
+        ssh_ip_id,
+      </if>
+      <if test="sshUsername != null" >
+        ssh_username,
+      </if>
+      <if test="sshPwd != null" >
+        ssh_pwd,
+      </if>
+      <if test="sshCreateTime != null" >
+        ssh_create_time,
+      </if>
+      <if test="sshUpdateTime != null" >
+        ssh_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sshId != null" >
+        #{sshId,jdbcType=INTEGER},
+      </if>
+      <if test="sshIpId != null" >
+        #{sshIpId,jdbcType=INTEGER},
+      </if>
+      <if test="sshUsername != null" >
+        #{sshUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="sshPwd != null" >
+        #{sshPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sshCreateTime != null" >
+        #{sshCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sshUpdateTime != null" >
+        #{sshUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyou.ops.entity.SShMessage" >
+    update t_ssh_message
+    <set >
+      <if test="sshIpId != null" >
+        ssh_ip_id = #{sshIpId,jdbcType=INTEGER},
+      </if>
+      <if test="sshUsername != null" >
+        ssh_username = #{sshUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="sshPwd != null" >
+        ssh_pwd = #{sshPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sshCreateTime != null" >
+        ssh_create_time = #{sshCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sshUpdateTime != null" >
+        ssh_update_time = #{sshUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ssh_id = #{sshId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyou.ops.entity.SShMessage" >
+    update t_ssh_message
+    set ssh_ip_id = #{sshIpId,jdbcType=INTEGER},
+      ssh_username = #{sshUsername,jdbcType=VARCHAR},
+      ssh_pwd = #{sshPwd,jdbcType=VARCHAR},
+      ssh_create_time = #{sshCreateTime,jdbcType=TIMESTAMP},
+      ssh_update_time = #{sshUpdateTime,jdbcType=TIMESTAMP}
+    where ssh_id = #{sshId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAll" resultType="com.zyou.ops.entity.SShMessage">
+    SELECT ssh_id,ssh_ip_id,ssh_username,ssh_pwd,ssh_create_time,ssh_update_time FROM t_ssh_message
+    <where>
+      <if test="ssh_ip_id !=null and ssh_ip_id!=''">
+        ssh_ip_id LIKE "%"#{ssh_ip_id}"%"
+      </if>
+      <if test="ssh_username !=null and ssh_username!=''">
+        ssh_username LIKE "%"#{ssh_username}"%"
+      </if>
+      <if test="ssh_pwd !=null and ssh_pwd!=''">
+        ssh_pwd LIKE "%"#{ssh_pwd}"%"
+      </if>
+
+
+    </where>
+
+
+  </select>
+
+  <select id="selectByServer" resultMap="BaseResultMap">
+select a.ssh_id,a.ssh_ip_id,a.ssh_username,a.ssh_pwd,a.ssh_create_time,a.ssh_update_time,b.sv_ip
+ from t_ssh_message a left join t_server_ip b on a.ssh_ip_id=b.sv_id
+
+
+  </select>
+
+</mapper>

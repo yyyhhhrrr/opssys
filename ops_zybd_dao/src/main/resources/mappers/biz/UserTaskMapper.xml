@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyou.ops.zybd.mapper.biz.UserTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.zyou.ops.zybd.entity.biz.UserTask" >
+    <id column="bu_id" property="buId" jdbcType="BIGINT" />
+    <result column="bu_type" property="bu_type" jdbcType="VARCHAR" />
+    <result column="bu_name" property="bu_name" jdbcType="VARCHAR" />
+    <result column="bu_modelId" property="bu_modelId" jdbcType="BIGINT" />
+    <result column="bu_gold" property="bu_gold" jdbcType="INTEGER" />
+    <result column="bu_taskSource" property="bu_taskSource" jdbcType="INTEGER" />
+    <result column="bu_classId" property="bu_classId" jdbcType="BIGINT" />
+    <result column="bu_sender" property="bu_sender" jdbcType="BIGINT" />
+    <result column="bu_endDate" property="bu_endDate" jdbcType="DATE" />
+    <result column="bu_isDel" property="bu_isDel" jdbcType="BIT" />
+    <result column="bu_createDate" property="bu_createDate" jdbcType="TIMESTAMP" />
+    <result column="bu_updateDate" property="bu_updateDate" jdbcType="TIMESTAMP" />
+    <result column="bu_reserved1" property="bu_reserved1" jdbcType="VARCHAR" />
+    <result column="bu_reserved2" property="bu_reserved2" jdbcType="VARCHAR" />
+    <result column="bu_studentId" property="bu_studentId" jdbcType="BIGINT" />
+    <result column="bu_grade" property="bu_grade" jdbcType="INTEGER" />
+    <result column="bu_day" property="bu_day" jdbcType="INTEGER" />
+    <result column="bu_taskURL" property="bu_taskURL" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zyou.ops.zybd.entity.biz.UserTask" extends="BaseResultMap" >
+    <result column="bu_content" property="buContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bu_id, bu_type, bu_name, bu_modelId, bu_gold, bu_taskSource, bu_classId, bu_sender, 
+    bu_endDate, bu_isDel, bu_createDate, bu_updateDate, bu_reserved1, bu_reserved2, bu_studentId, 
+    bu_grade, bu_day, bu_taskURL
+  </sql>
+  <sql id="Blob_Column_List" >
+    bu_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from biz_usertask
+    where bu_id = #{buId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from biz_usertask
+    where bu_id = #{buId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zyou.ops.zybd.entity.biz.UserTask" >
+    INSERT INTO biz_usertask (
+	bu_type,
+	bu_name,
+	bu_gold,
+	bu_content,
+	bu_taskSource,
+	bu_sender,
+	bu_endDate,
+	bu_isDel,
+	bu_createDate,
+	bu_updateDate,
+	bu_grade,
+	bu_day
+)
+values (#{bu_type},#{bu_name},2,#{bu_content},1,102,DATE_ADD(now(),INTERVAL 6 day),0,now(),now(),#{bu_grade},7)
+</insert>
+
+</mapper>

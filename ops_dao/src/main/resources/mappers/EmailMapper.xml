@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyou.ops.mapper.EmailMapper" >
+  <resultMap id="BaseResultMap" type="com.zyou.ops.entity.Email" >
+    <id column="email_id" property="email_id" />
+      <result column="email_address" property="email_address" />
+      <result column="email_username" property="email_username"/>
+  </resultMap>
+
+  <resultMap id="EmailResultMap" extends="BaseResultMap" type="com.zyou.ops.entity.Email">
+    <collection property="taskList" ofType="Task" >
+      <id column="tsk_id" property="tsk_id" />
+      <association property="serverIp" javaType="ServerIp" >
+        <id column="sv_id" property="sv_id" />
+        <result column="sv_ip" property="sv_ip"/>
+      </association>
+      <association property="anInterface" javaType="Interface">
+        <id column="it_id" property="it_id" />
+        <result column="it_port" property="it_port"/>
+        <result column="it_address" property="it_address"/>
+      </association>
+    </collection>
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    email_id, email_address, email_username
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_email
+    where email_id = #{emailId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_email
+    where email_id = #{emailId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="Email" useGeneratedKeys="true" keyProperty="email_id">
+      INSERT INTO t_email(email_address,email_username)
+	  VALUES (#{email_address},#{email_username})
+    </insert>
+
+  <insert id="insertSelective" parameterType="com.zyou.ops.entity.Email" >
+    insert into t_email
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="emailId != null" >
+        email_id,
+      </if>
+      <if test="emailAddress != null" >
+        email_address,
+      </if>
+      <if test="emailUsername != null" >
+        email_username,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="emailId != null" >
+        #{emailId,jdbcType=INTEGER},
+      </if>
+      <if test="emailAddress != null" >
+        #{emailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="emailUsername != null" >
+        #{emailUsername,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyou.ops.entity.Email" >
+    update t_email
+    <set >
+      <if test="emailAddress != null" >
+        email_address = #{emailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="emailUsername != null" >
+        email_username = #{emailUsername,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where email_id = #{emailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyou.ops.entity.Email" >
+    update t_email
+    set email_address = #{emailAddress,jdbcType=VARCHAR},
+      email_username = #{emailUsername,jdbcType=VARCHAR}
+    where email_id = #{emailId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAll" resultType="com.zyou.ops.entity.Email">
+      SELECT email_id,email_address,email_username FROM t_email
+    <where>
+      <if test="email_username !=null and email_username!=''">
+         email_username LIKE "%"#{email_username}"%"
+      </if>
+    </where>
+  </select>
+
+  <update id="update" parameterType="Email" >
+    UPDATE t_email
+
+    <set>
+      <if test="email_address !=null and email_address != ''">
+        email_address=#{email_address},
+      </if>
+      <if test="email_username !=null and email_username !=''">
+        email_username=#{email_username}
+      </if>
+    </set>
+    WHERE email_id=#{email_id}
+
+  </update>
+
+  <delete id="delByIds">
+    DELETE FROM t_email WHERE email_id IN
+    <foreach collection="array" item="email_id" open="(" separator="," close=")">
+      #{email_id}
+    </foreach>
+  </delete>
+
+  <select id="getTaskListByEmail" parameterType="java.lang.Integer" resultMap="EmailResultMap">
+    SELECT
+    email_id,
+    email_address,
+    email_username,
+    tsk_id,
+    it_id,
+    it_port,
+    it_address,
+    sv_id,
+    sv_ip
+    FROM
+        t_email a
+    INNER JOIN ref_email_task b ON a.email_id = b.ref_email_id
+    INNER JOIN t_task c on b.ref_task_id=c.tsk_id
+    INNER JOIN t_interface d on c.tsk_it_id=d.it_id
+    INNER JOIN t_server_ip e on c.tsk_ip_id=e.sv_id
+    where a.email_id=#{email_id}
+  </select>
+
+  <select id="getEmailListByTask" parameterType="java.lang.Integer" resultType="com.zyou.ops.entity.Email">
+  SELECT
+    c.email_id,
+	c.email_address,
+    c.email_username
+FROM
+	t_task a
+LEFT JOIN ref_email_task b ON a.tsk_id = b.ref_task_id
+left join t_email c on b.ref_email_id=c.email_id
+    where a.tsk_id=#{tsk_id}
+  </select>
+
+<insert id="addTaskByEmail" useGeneratedKeys="true" keyProperty="ref_et_id">
+  insert into ref_email_task
+  <trim prefix="(" suffix=")" suffixOverrides="," >
+    <if test="ref_email_id != null" >
+      ref_email_id,
+    </if>
+    <if test="ref_task_id != null" >
+      ref_task_id,
+    </if>
+  </trim>
+  <trim prefix="values (" suffix=")" suffixOverrides="," >
+    <if test="ref_email_id != null" >
+      #{ref_email_id,jdbcType=INTEGER},
+    </if>
+    <if test="ref_task_id != null" >
+      #{ref_task_id,jdbcType=VARCHAR},
+    </if>
+  </trim>
+</insert>
+
+    <delete id="deleteTaskByEmail">
+        delete from ref_email_task where ref_task_id=#{ref_task_id} and ref_email_id=#{ref_email_id}
+    </delete>
+
+
+</mapper>
