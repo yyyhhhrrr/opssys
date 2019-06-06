@@ -16,6 +16,7 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/Login = anon <!--可以不需要登录-->
+				/dashboard = authc
 				/index = authc
 				/main/interfaceList = authc, perms[/interfaceList]  <!-- perms 表示需要该权限才能访问的页面 -->
 				/main/ipList = authc, perms[/ipList]

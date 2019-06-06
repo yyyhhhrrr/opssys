@@ -3,10 +3,16 @@ package com.zyou.ops.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zyou.ops.entity.LinuxMessage;
+import com.zyou.ops.entity.SShMessage;
 import com.zyou.ops.entity.ServerIp;
+import com.zyou.ops.service.SShMessageService;
 import com.zyou.ops.service.ServerIpService;
 
+import com.zyou.ops.util.Linux.LinuxStateForShell;
+import com.zyou.ops.util.utils.ByteStringUtil;
 import com.zyou.ops.util.utils.Constants;
+import com.zyou.ops.util.utils.DESUtil;
 import com.zyou.ops.util.utils.ValidateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -41,7 +47,10 @@ public class IPListController {
 
 
     @Autowired
-    ServerIpService serverIpService;
+    private ServerIpService serverIpService;
+
+    @Autowired
+    private SShMessageService sShMessageService;
 
     @RequestMapping(value="/saveIP",method = RequestMethod.POST,produces = "text/html;charset=UTF-8")
     @ApiOperation(value="服务器列表")
@@ -132,6 +141,26 @@ public class IPListController {
         Integer sv_id=Integer.valueOf(id);
         ServerIp serverIp=serverIpService.searchById(sv_id);
         return serverIp;
+    }
+
+    @RequestMapping(value = "serverMessage",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ApiOperation(value="获取服务器实时信息")
+    public List<LinuxMessage> getServerMessage() throws Exception{
+        List<SShMessage> sShMessagesList = sShMessageService.selectByServer();
+        List<LinuxMessage> messageList=new ArrayList<>();
+        for (SShMessage sShMessage : sShMessagesList) {
+            String username=sShMessage.getSsh_username();
+            String password= new String(DESUtil.decrypt(ByteStringUtil.toByteArray(sShMessage.getSsh_pwd()),DESUtil.password));
+            Map<String, Double> systemMessage = LinuxStateForShell.getSystemMessage(username,password,sShMessage.getServerIp().getSv_ip());
+            LinuxMessage linuxMessage=new LinuxMessage(sShMessage.getSsh_id(),systemMessage);
+            messageList.add(linuxMessage);
+        }
+        return messageList;
+
+
+
+
+
     }
 
 

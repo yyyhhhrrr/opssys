@@ -26,108 +26,112 @@
                 <ul class="layui-nav layui-layout-left">
                 </ul>
                 <ul class="layui-nav layui-layout-right">
-                  <li class="layui-nav-item">
-                             <i class="fa fa-user fa-fw fa-lg"></i>
-                    <dl class="layui-nav-child">
-                      <dd><a href="">个人信息</a></dd>             
-                    </dl>
-                  </li>
-    <li class="layui-nav-item">
-        <i class="fa fa-gear fa-fw fa-lg"></i>
+         <li class="layui-nav-item">
+                     <i class="fa fa-user fa-fw fa-lg"></i>
+                <dl class="layui-nav-child">
+                  <dd><a href="">个人信息</a></dd>             
+                </dl>
+         </li>
+               <li class="layui-nav-item">
+                   <i class="fa fa-gear fa-fw fa-lg"></i>
                  <dl class="layui-nav-child">
                   <dd><a href="">设置</a></dd>
                 </dl>
-                 </li>
-    <li class="layui-nav-item">
-    <i class="fa fa-times fa-fw fa-lg"></i>
+            </li>
+              <li class="layui-nav-item">
+                  <i class="fa fa-times fa-fw fa-lg"></i>
                 <dl class="layui-nav-child">
-                          <dd><a href="${ctx}/Login">退出</a></dd>             
-                        </dl>
-</li>
-                </ul>
+                  <dd><a href="${ctx}/Login">退出</a></dd>             
+                </dl>
+              </li>
+         </ul>
               </div>
                 <!--2.左侧导航-->
               <div class="layui-side layui-bg-black">
-                <div class="layui-side-scroll">
-                  <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-<ul class="layui-nav layui-nav-tree "  lay-filter="test">
-    <li class="layui-nav-item ">
-        <a href="javascript:;">监控管理</a>
-        <dl class="layui-nav-child">
-            <dd>
-                <a class="site-demo-active leftdaohang" data-url="${ctx}/main/ipList" mytitle="服务器管理">服务器管理</a>
-            </dd>
-                              <dd>
-            <a class="site-demo-active leftdaohang" data-url="${ctx}/main/interfaceList" mytitle="接口地址管理">接口地址管理</a>
-        </dd>  
-            <dd>
-                <a class="site-demo-active leftdaohang" data-url="${ctx}/main/taskList" mytitle="接口检测任务管理">接口检测任务管理</a>
-            </dd>            
-        </dl>
-    </li>      
-    <li class="layui-nav-item">
-        <a href="javascript:;">报表管理</a>
-        <dl class="layui-nav-child">
-            <dd>
-                <a class="site-demo-active leftdaohang" data-url="${ctx}/export/index" mytitle="成长报告导出">成长报告导出</a>
-            </dd>
-        </dl>
-    </li>  
-    <li class="layui-nav-item">
-        <a href="javascript:;">文档管理</a>
-        <dl class="layui-nav-child">
-            <dd>
-                <a class="site-demo-active leftdaohang" data-url="${ctx}/swagger-ui.html" mytitle="swagger文档">swagger文档</a>
-            </dd>
-        </dl>
-    </li>  
-    <li class="layui-nav-item">
-        <a href="javascript:;">服务器连接</a>
-        <dl class="layui-nav-child">
-            <dd>
-                <!--linux 安装 shellinabox 可以在web端访问linux 终端 具体安装见"https://blog.csdn.net/qq_16224495/article/details/81871308" -->
-                <a class="site-demo-active leftdaohang" data-url="http://120.78.169.172:6175/" mytitle="mycloud">mycloud</a>
-            </dd>
-        </dl>
-    </li>  
-    <li class="layui-nav-item">
-        <a href="javascript:;">报警管理</a>
-        <dl class="layui-nav-child">
-            <dd>
-                <!--linux 安装 shellinabox 可以在web端访问linux 终端 具体安装见"https://blog.csdn.net/qq_16224495/article/details/81871308" -->
-                <a class="site-demo-active leftdaohang" data-url="${ctx}/email/emailList" mytitle="邮件管理">邮件管理</a>
-            </dd>
-        </dl>
-    </li>  
-    <li class="layui-nav-item">
-        <a href="javascript:;">任务管理</a>
-        <dl class="layui-nav-child">
-            <dd>
-                <!--linux 安装 shellinabox 可以在web端访问linux 终端 具体安装见"https://blog.csdn.net/qq_16224495/article/details/81871308" -->
-                <a class="site-demo-active leftdaohang" data-url="${ctx}/studentTask/index" mytitle="任务发布">任务发布</a>
-            </dd>
-        </dl>
-    </li>                                             
-</ul>
-                </div>
+                    
+                      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                                    <ul class="layui-nav layui-nav-tree "  lay-filter="test">
+                                        <li class="layui-nav-item ">
+                                            <a class="site-demo-active leftdaohang" data-url="${ctx}/dashboard" mytitle="仪表盘">仪表盘</a>
+                                        </li>
+                                        <li class="layui-nav-item ">
+                                            <a href="javascript:;">监控管理</a>
+                                            <dl class="layui-nav-child">
+                                                <dd>
+                                                    <a class="site-demo-active leftdaohang" data-url="${ctx}/main/ipList" mytitle="服务器管理">服务器管理</a>
+                                                </dd>
+                                                                  <dd>
+                                                <a class="site-demo-active leftdaohang" data-url="${ctx}/main/interfaceList" mytitle="接口地址管理">接口地址管理</a>
+                                            </dd>  
+                                                <dd>
+                                                    <a class="site-demo-active leftdaohang" data-url="${ctx}/main/taskList" mytitle="接口检测任务管理">接口检测任务管理</a>
+                                                </dd>            
+                                            </dl>
+                                        </li>      
+                                        <li class="layui-nav-item">
+                                            <a href="javascript:;">报表管理</a>
+                                            <dl class="layui-nav-child">
+                                                <dd>
+                                                    <a class="site-demo-active leftdaohang" data-url="${ctx}/export/index" mytitle="成长报告导出">成长报告导出</a>
+                                                </dd>
+                                            </dl>
+                                        </li>  
+                                        <li class="layui-nav-item">
+                                            <a href="javascript:;">文档管理</a>
+                                            <dl class="layui-nav-child">
+                                                <dd>
+                                                    <a class="site-demo-active leftdaohang" data-url="${ctx}/swagger-ui.html" mytitle="swagger文档">swagger文档</a>
+                                                </dd>
+                                            </dl>
+                                        </li>  
+                                        <li class="layui-nav-item">
+                                            <a href="javascript:;">服务器连接</a>
+                                            <dl class="layui-nav-child">
+                                                <dd>
+                                                    <!--linux 安装 shellinabox 可以在web端访问linux 终端 具体安装见"https://blog.csdn.net/qq_16224495/article/details/81871308" -->
+                                                    <a class="site-demo-active leftdaohang" data-url="http://120.78.169.172:6175/" mytitle="mycloud">mycloud</a>
+                                                </dd>
+                                            </dl>
+                                        </li>  
+                                        <li class="layui-nav-item">
+                                            <a href="javascript:;">报警管理</a>
+                                            <dl class="layui-nav-child">
+                                                <dd>
+                                                    <!--linux 安装 shellinabox 可以在web端访问linux 终端 具体安装见"https://blog.csdn.net/qq_16224495/article/details/81871308" -->
+                                                    <a class="site-demo-active leftdaohang" data-url="${ctx}/email/emailList" mytitle="邮件管理">邮件管理</a>
+                                                </dd>
+                                            </dl>
+                                        </li>  
+                                        <li class="layui-nav-item">
+                                            <a href="javascript:;">任务管理</a>
+                                            <dl class="layui-nav-child">
+                                                <dd>
+                                                    <!--linux 安装 shellinabox 可以在web端访问linux 终端 具体安装见"https://blog.csdn.net/qq_16224495/article/details/81871308" -->
+                                                    <a class="site-demo-active leftdaohang" data-url="${ctx}/studentTask/index" mytitle="任务发布">任务发布</a>
+                                                </dd>
+                                            </dl>
+                                        </li>  
+                                        <li class="layui-nav-item">
+                                            <a href="http://127.0.0.1:8093/hb">HeatBeat</a>
+                                        </li>                                                      
+                                    </ul>
+                        
               </div>
+
               <!--3.右侧主体内容区-->
               <div class="layui-body">
-                  <!--tabs标签-->
-                  <div class="layui-tab layui-tab-card" lay-filter="demo" lay-allowclose="true">
-                  <ul class="layui-tab-title">
-                 <!--   <li class="layui-this">角色管理</li>-->
-                  </ul>
-                  <div class="layui-tab-content" style="height: 150px;">            
-                  </div>
-                </div> 
-
-
-              </div>
-
-              
-            </div>
+                          <!--tabs标签-->
+                       <div class="layui-tab layui-tab-card" lay-filter="demo" lay-allowclose="true">
+                          <ul class="layui-tab-title">
+                         <!--   <li class="layui-this">角色管理</li>-->
+                          </ul>
+                            <div class="layui-tab-content" style="height: 150px;">            
+                           </div>
+                      </div> 
+                     </div>
+        </div>
 <script src="${ctx}/assets/layui/layui.all.js"></script>
+<script src="${ctx}/assets/js/echart.js"></script>
 <script>
 
 

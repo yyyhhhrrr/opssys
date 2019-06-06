@@ -1,7 +1,11 @@
 package com.zyou.ops.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zyou.ops.entity.SShMessage;
+import com.zyou.ops.entity.ServerIp;
 import com.zyou.ops.entity.User;
+import com.zyou.ops.service.SShMessageService;
+import com.zyou.ops.service.ServerIpService;
 import com.zyou.ops.service.UserService;
 
 import com.zyou.ops.util.utils.RequestUtils;
@@ -25,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @BelongsProject: opssys
@@ -37,6 +42,8 @@ import javax.servlet.http.HttpSession;
 @Api(value="login",description = "登录")
 public class LoginController {
 
+    @Autowired
+    private SShMessageService sShMessageService;
 
     //页面
     @RequestMapping("/index")
@@ -46,6 +53,16 @@ public class LoginController {
         return modelAndView;
     }
 
+
+    //仪表盘
+    @RequestMapping("/dashboard")
+    public ModelAndView dashboard(HttpServletRequest request) throws Exception{
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("dashboard");
+        List<SShMessage> serverList = sShMessageService.selectByServer();
+        modelAndView.addObject("serverList",serverList);
+        return modelAndView;
+    }
 
 
     @RequestMapping(value = "/validateLogin",produces = "application/json;charset=UTF-8")
@@ -127,8 +144,5 @@ public class LoginController {
         return "regist";
     }
 
-    @RequestMapping("/dashboard")
-    public String dashboard() throws Exception{
-        return "dashboard";
-    }
+
 }
