@@ -23,6 +23,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -63,6 +66,20 @@ public class IPListController {
             return new ResponseEntity<String>(Constants.SUBMIT_ERROR,HttpStatus.BAD_REQUEST);
         }
     }
+
+    @RequestMapping(value="test",method = RequestMethod.POST)
+    @ApiOperation(value="测试")
+    public String test(@Validated ServerIp serverIp, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            List<ObjectError> allErrors = bindingResult.getAllErrors();
+            for (ObjectError allError : allErrors) {
+                System.out.println(allError.getDefaultMessage());
+            }
+            return allErrors.get(0).getDefaultMessage();
+        }
+        return serverIp.getSv_ip();
+    }
+
 
     //页面
     @RequestMapping("/ipList")

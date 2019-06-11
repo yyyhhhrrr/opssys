@@ -2,6 +2,7 @@ package com.zyou.ops.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -121,6 +122,7 @@ public class ServerIp implements Serializable {
 
     private Integer sv_id; // id
 
+    @NotNull(message = "{ip.length.isNull}")
     private String sv_ip; // 服务器外网Ip
 
     private String sv_ip_private; // 服务器内网Ip

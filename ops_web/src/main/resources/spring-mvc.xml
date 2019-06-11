@@ -32,7 +32,7 @@
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
     <!--swagger -->
-    <mvc:annotation-driven /> <!--启用mvc注解 -->
+    <mvc:annotation-driven validator="validator"/>
 
 
 
@@ -50,33 +50,33 @@
 
 
 
-    <!--&lt;!&ndash; 校验器 &ndash;&gt;-->
-    <!--<bean id="validator"-->
-          <!--class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">-->
-        <!--&lt;!&ndash; 校验器&ndash;&gt;-->
-        <!--<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />-->
-        <!--&lt;!&ndash; 指定校验使用的资源文件，在文件中配置校验的错误信息，如果不指定则默认使用classpath下的ValidationMessages.properties &ndash;&gt;-->
-        <!--<property name="validationMessageSource" ref="messageSource" />-->
-    <!--</bean>-->
-    <!--&lt;!&ndash; 校验错误信息配置文件 &ndash;&gt;-->
-    <!--<bean id="messageSource"-->
-          <!--class="org.springframework.context.support.ReloadableResourceBundleMessageSource">-->
-        <!--&lt;!&ndash; 资源文件名,使用basenames，不用加后缀名&ndash;&gt;-->
-        <!--<property name="basenames">-->
-            <!--<list>-->
-                <!--<value>CustomValidationMessages</value>-->
-            <!--</list>-->
-        <!--</property>-->
-        <!--&lt;!&ndash; 资源文件编码格式 &ndash;&gt;-->
-        <!--<property name="fileEncodings" value="utf-8" />-->
-        <!--&lt;!&ndash; 对资源文件内容缓存时间，单位秒 &ndash;&gt;-->
-        <!--<property name="cacheSeconds" value="120" />-->
-    <!--</bean>-->
+    <!-- 校验器 -->
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <!-- 校验器-->
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+        <!-- 指定校验使用的资源文件，在文件中配置校验的错误信息，如果不指定则默认使用classpath下的ValidationMessages.properties -->
+        <property name="validationMessageSource" ref="messageSource" />
+    </bean>
+    <!-- 校验错误信息配置文件 -->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!-- 资源文件名,使用basenames，不用加后缀名-->
+        <property name="basenames">
+            <list>
+                <value>CustomValidationMessages</value>
+            </list>
+        </property>
+        <!-- 资源文件编码格式 -->
+        <property name="fileEncodings" value="utf-8" />
+        <!-- 对资源文件内容缓存时间，单位秒 -->
+        <property name="cacheSeconds" value="120" />
+    </bean>
 
 
 
-    <!--&lt;!&ndash;配置全局异常处理器 &ndash;&gt;-->
-    <!--<bean class="exception.CustomExceptionResolver"></bean>-->
+    <!--配置全局异常处理器 -->
+    <bean class="com.zyou.ops.exception.CustomExceptionResolver"></bean>
 
 
 
@@ -87,31 +87,5 @@
             <value>5242880</value>
         </property>
     </bean>
-
-
-
-
-    <!--&lt;!&ndash; 拦截器&ndash;&gt;-->
-    <!--<mvc:interceptors>-->
-        <!--&lt;!&ndash; 多个拦截器，顺序执行&ndash;&gt;-->
-        <!--<mvc:interceptor>-->
-            <!--&lt;!&ndash; /** 表示所有url包括url子路径 &ndash;&gt;-->
-            <!--<mvc:mappers path="/**"/>-->
-               <!--<bean class="interceptor.LoginInterceptor"></bean>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--&lt;!&ndash; /** 表示所有url包括url子路径 &ndash;&gt;-->
-            <!--<mvc:mappers path="/**"/>-->
-            <!--<bean class="interceptor.HandlerInterceptor1"></bean>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mappers path="/**"/>-->
-            <!--<bean class="interceptor.HandlerInterceptor2"></bean>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
-
-
-
-
 
 </beans>
